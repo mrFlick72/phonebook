@@ -11,21 +11,17 @@
 
   <properties>
       <spring.version>4.0.5.RELEASE</spring.version>
-
-      <apache.tiles.version>2.2.2</apache.tiles.version>
-      <jackson-2-version>2.2.2</jackson-2-version>
       <spring.security>3.2.4.RELEASE</spring.security>
-      <org.thymeleaf.extras.springsecurity3-version>2.1.1.RELEASE</org.thymeleaf.extras.springsecurity3-version>
+      <spring.data.jpa.version>1.5.2.RELEASE</spring.data.jpa.version>
+      <org.thymeleaf-version>2.1.2.RELEASE</org.thymeleaf-version>
+
+      <jackson-2-version>2.2.2</jackson-2-version>
+      <hibernate.version>4.2.7.Final</hibernate.version>
 
       <log4j.version> 1.2.17</log4j.version>
       <junit.version>4.11</junit.version>
       <jdk.version>1.8</jdk.version>
 
-      <org.thymeleaf-version>2.1.2.RELEASE</org.thymeleaf-version>
-      <commons.dbcp.version>20030825.184428</commons.dbcp.version>
-      <org.aspectj-version>1.7.4</org.aspectj-version>
-
-      <hibernate.version>4.2.7.Final</hibernate.version>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -51,41 +47,17 @@
       </dependency>
 
       <dependency>
-          <groupId>javax.servlet.jsp</groupId>
-          <artifactId>jsp-api</artifactId>
-          <version>2.1</version>
-          <scope>provided</scope>
-      </dependency>
-
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>jstl</artifactId>
-          <version>1.2</version>
-      </dependency>
-
-
-      <dependency>
           <groupId>org.thymeleaf</groupId>
           <artifactId>thymeleaf</artifactId>
           <version>${org.thymeleaf-version}</version>
       </dependency>
       <dependency>
           <groupId>org.thymeleaf</groupId>
-          <artifactId>thymeleaf-spring3</artifactId>
+          <artifactId>thymeleaf-spring4</artifactId>
           <version>${org.thymeleaf-version}</version>
       </dependency>
-      <dependency>
-          <groupId>org.thymeleaf.extras</groupId>
-          <artifactId>thymeleaf-extras-springsecurity3</artifactId>
-          <version>${org.thymeleaf.extras.springsecurity3-version}</version>
-      </dependency>
 
-      <!-- AspectJ -->
-      <dependency>
-          <groupId>org.aspectj</groupId>
-          <artifactId>aspectjrt</artifactId>
-          <version>${org.aspectj-version}</version>
-      </dependency>
+
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-web</artifactId>
@@ -126,11 +98,6 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-aop</artifactId>
       </dependency>
-      <dependency>
-          <groupId>cglib</groupId>
-          <artifactId>cglib</artifactId>
-          <version>2.2</version>
-      </dependency>
 
       <dependency>
           <groupId>log4j</groupId>
@@ -159,29 +126,10 @@
           <artifactId>spring-orm</artifactId>
       </dependency>
 
-      <dependency>
-          <groupId>commons-dbcp</groupId>
-          <artifactId>commons-dbcp</artifactId>
-      </dependency>
-
       <!--Spring data-->
       <dependency>
           <groupId>org.springframework.data</groupId>
           <artifactId>spring-data-jpa</artifactId>
-          <version>1.5.2.RELEASE</version>
-      </dependency>
-
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
-        </dependency>
-
-
-      <dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-mongodb</artifactId>
-          <version>1.4.1.RELEASE</version>
       </dependency>
 
       <!--Hibernate-->
@@ -246,12 +194,12 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>commons-dbcp</groupId>
-                <artifactId>commons-dbcp</artifactId>
-                <version>${commons.dbcp.version}</version>
-            </dependency>
 
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${spring.data.jpa.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>log4j</groupId>
@@ -279,7 +227,6 @@
                 <version>${jackson-2-version}</version>
             </dependency>
 
-
             <!--H2-->
             <dependency>
                 <groupId>com.h2database</groupId>
@@ -290,11 +237,4 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <id>spring-milestone</id>
-            <name>Spring Maven MILESTONE Repository</name>
-            <url>http://repo.spring.io/libs-milestone</url>
-        </repository>
-    </repositories>
 </project>

@@ -32,10 +32,10 @@
           p:suffix=".html"/>
 
     <bean id="templateEngine"
-          class="org.thymeleaf.spring3.SpringTemplateEngine"
+          class="org.thymeleaf.spring4.SpringTemplateEngine"
           p:templateResolver-ref="templateResolver"/>
 
-    <bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver"
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver"
           p:templateEngine-ref="templateEngine"/>
 
     <!-- Message .properties sources -->

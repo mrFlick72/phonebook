@@ -3,12 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>it.valeriovaudi</groupId>
-  <artifactId>spring-mvc-restbased</artifactId>
+  <artifactId>phonebook-showcase</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>spring-mvc-restbased</name>
-  <url>http://maven.apache.org</url>
+  <name>phonebook</name>
 
   <properties>
       <spring.version>4.0.5.RELEASE</spring.version>

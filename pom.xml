@@ -46,15 +46,14 @@
           <artifactId>spring-security-core</artifactId>
       </dependency>
 
+      <!--Thymeleaf-->
       <dependency>
           <groupId>org.thymeleaf</groupId>
           <artifactId>thymeleaf</artifactId>
-          <version>${org.thymeleaf-version}</version>
       </dependency>
       <dependency>
           <groupId>org.thymeleaf</groupId>
           <artifactId>thymeleaf-spring4</artifactId>
-          <version>${org.thymeleaf-version}</version>
       </dependency>
 
 
@@ -136,7 +135,6 @@
       <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-entitymanager</artifactId>
-          <version>${hibernate.version}</version>
           <exclusions>
               <exclusion>
                   <groupId>org.jboss.logging</groupId>
@@ -148,7 +146,6 @@
       <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-c3p0</artifactId>
-          <version>${hibernate.version}</version>
       </dependency>
 
       <dependency>
@@ -174,8 +171,20 @@
   </dependencies>
 
     <dependencyManagement>
-
         <dependencies>
+
+            <!--Thymeleaf-->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>${org.thymeleaf-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf-spring4</artifactId>
+                <version>${org.thymeleaf-version}</version>
+            </dependency>
 
             <!--Spring dependency-->
             <dependency>
@@ -225,6 +234,19 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
                 <version>${jackson-2-version}</version>
+            </dependency>
+
+            <!--Hibernate-->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>${hibernate.version}</version>
             </dependency>
 
             <!--H2-->

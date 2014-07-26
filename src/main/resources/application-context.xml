@@ -13,4 +13,6 @@
     <import resource="classpath:spring-security-context.xml"/>
     <import resource="classpath:factory-context.xml"/>
 
+    <import resource="classpath:starter-context.xml"/>
+
 </beans>

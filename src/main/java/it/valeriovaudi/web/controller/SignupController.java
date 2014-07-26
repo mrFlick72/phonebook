@@ -25,7 +25,6 @@ public class SignupController {
 
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
-    private UserDetailsService userDetailsService;
     private UserDetailsManager userDetailsManager;
     private SecurityUserFactory securityUserFactory;
 
@@ -44,11 +43,6 @@ public class SignupController {
         SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(user));
 
         return "redirect:/index";
-    }
-
-    @Autowired
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
     }
 
     @Autowired

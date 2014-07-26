@@ -1,0 +1,98 @@
+<section th:fragment="index">
+    <div class="modal fade" id="insertNewAccountDialogForm" role="dialog" data-toggle="modal" data-backdrop="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 th:text="#{insertNewContactDialogForm.header}">Modal Header</h3>
+                </div>
+                <div class="modal-body">
+                    <ng-form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-lg-2">Nome:</label>
+                                <div class="col-lg-4">
+                                    <input  id="nomeField" class="form-control" type="text" ng-model="persona.nome"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cognomeField" class="col-lg-2">Cognome:</label>
+                                <div class="col-lg-4">
+                                    <input  id="cognomeField" class="form-control" type="text" ng-model="persona.cognome"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nascitaField" class="col-lg-2">Nascita:</label>
+                                <div class="col-lg-4">
+                                    <input id="nascitaField" class="form-control" type="text"  ng-model="persona.nascita" ui-date="dateOptions"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoField" class="col-lg-2">Telefono:</label>
+                                <div class="col-lg-4">
+                                    <input id="telefonoField" class="form-control" type="text" ng-model="persona.telefono" ui-mask="{{'999/9999999'}}"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </ng-form>
+                    <input type="submit" value="submit data" ng-click="submitForm()" class="btn btn-default"/>
+                    </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="popUpContactDialog" role="dialog" data-toggle="modal" data-backdrop="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 th:text="#{popUpContactDialog.header}">Modal Header</h3>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <span class="col-lg-2">Nome:</span>
+                        <span class="col-lg-10">{{contact.nome}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-2">Cognome:</span>
+                        <span class="col-lg-10">{{contact.cognome}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-2">Nascita:</span>
+                        <span class="col-lg-10">{{contact.nascita  | date:dateFormFormatting}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-2">Telefono:</span>
+                        <span class="col-lg-10">{{contact.telefono}}</span>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Telefono</th>
+                    <th>Nascita</th>
+                    <th>Operazioni</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="persona in persone">
+                        <td>{{persona.nome}}</td>
+                        <td>{{persona.cognome}}</td>
+                        <td>{{persona.telefono}}</td>
+                        <td>{{persona.nascita  | date:dateFormFormatting}}</td>
+                        <td><input class="btn btn-default" value="Dettagli" ng-click="shwoContactDetails(persona.id)"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

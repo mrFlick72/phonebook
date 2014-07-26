@@ -4,7 +4,6 @@ package it.valeriovaudi.web.model;
  * Created by Valerio on 26/07/2014.
  */
 public class UserDTO {
-
     private String userName;
     private String password;
 

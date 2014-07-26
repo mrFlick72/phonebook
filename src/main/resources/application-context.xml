@@ -6,5 +6,6 @@
 
     <import resource="classpath:repository-context.xml"/>
     <import resource="classpath:spring-security-context.xml"/>
+    <import resource="classpath:factory-context.xml"/>
 
 </beans>

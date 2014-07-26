@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SigninController {
-	@RequestMapping(value = "signin")
+
+    private static final String SIGNIN_VIEW_NAME = "signin/signin";
+
+    @RequestMapping(value = "signin")
 	public String signin() {
-        return "signin/signin";
+        return SIGNIN_VIEW_NAME;
     }
 }

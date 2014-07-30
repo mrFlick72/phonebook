@@ -16,7 +16,7 @@ public class PhoneBookUserDetailsService implements UserDetailsService {
     private PhonBookUserRepository phonBookUserRepository;
     private SecurityUserFactory securityUserFactory;
 
-    @Autowired
+
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
         this.phonBookUserRepository = phonBookUserRepository;
     }
@@ -28,7 +28,7 @@ public class PhoneBookUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        PhonBookUser phonBookUser = phonBookUserRepository.findOne(username);
+        PhonBookUser phonBookUser = phonBookUserRepository.findByUserName(username);
 
         return securityUserFactory.createUser(phonBookUser);
     }

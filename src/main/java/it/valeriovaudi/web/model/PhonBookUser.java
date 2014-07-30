@@ -1,9 +1,6 @@
 package it.valeriovaudi.web.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Valerio on 26/07/2014.
@@ -11,9 +8,11 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class PhonBookUser {
-
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(unique = true)
     private String userName;
 
     @Column
@@ -30,6 +29,14 @@ public class PhonBookUser {
 
     @Column
     private boolean enabled;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;
@@ -77,5 +84,18 @@ public class PhonBookUser {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "PhonBookUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", autority='" + autority + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

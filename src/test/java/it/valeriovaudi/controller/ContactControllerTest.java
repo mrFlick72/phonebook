@@ -82,7 +82,5 @@ public class ContactControllerTest extends AbstractTest {
         Assert.assertEquals(contact.getCognome(), contactOut.getCognome());
         Assert.assertEquals(contact.getNascita(), contactOut.getNascita());
         Assert.assertEquals(contact.getTelefono(), contactOut.getTelefono());
-
     }
-
 }

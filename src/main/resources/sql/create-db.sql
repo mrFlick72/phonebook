@@ -7,7 +7,8 @@ CREATE TABLE contact(
 );
 
 create table phonBookUser(
-      username varchar_ignorecase(50) not null primary key,
+      id INT IDENTITY NOT NULL PRIMARY KEY ,
+      username varchar_ignorecase(50) not null,
       password varchar_ignorecase(500) not null,
 
       firstName varchar_ignorecase(500) not null,

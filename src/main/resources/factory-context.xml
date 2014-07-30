@@ -7,4 +7,6 @@
     <bean id="securityUserFactory"
           class="it.valeriovaudi.factory.SecurityUserFactoryImpl"/>
 
+    <bean id="bookUserFactory"
+          class="it.valeriovaudi.factory.PhonBookUserFactory"/>
 </beans>

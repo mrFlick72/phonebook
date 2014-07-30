@@ -1,10 +1,10 @@
 package it.valeriovaudi.support;
 
+import it.valeriovaudi.factory.PhonBookUserFactory;
 import it.valeriovaudi.factory.SecurityUserFactory;
+import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.PhonBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.annotation.PostConstruct;
 
@@ -12,27 +12,36 @@ import javax.annotation.PostConstruct;
  * Created by Valerio on 26/07/2014.
  */
 public class DefaultUserStarterSupport {
-    private SecurityUserFactory securityUserFactory;
-    private UserDetailsManager userDetailsManager;
-
-    @Autowired
-    public void setUserDetailsManager(UserDetailsManager userDetailsManager) {
-        this.userDetailsManager = userDetailsManager;
-    }
-
-    @Autowired
-    public void setSecurityUserFactory(SecurityUserFactory securityUserFactory) {
-        this.securityUserFactory = securityUserFactory;
-    }
+    private PhonBookUserFactory phonBookUserFactory;
+    private PhonBookUserRepository phonBookUserRepository;
+    private SecurityUserFactory<PhonBookUser> phonBookUserSecurityUserFactory;
 
     @PostConstruct
     private void initUsers(){
         PhonBookUser phonBookUser = new PhonBookUser();
 
+        phonBookUser.setFirstName("Administrator");
+        phonBookUser.setLastName("");
+
         phonBookUser.setUserName("admin");
         phonBookUser.setPassword("admin");
 
-        UserDetails userDetails = securityUserFactory.createUser(phonBookUser);
-        userDetailsManager.createUser(userDetails);
+        PhonBookUser phonBookUserWithSecurityConstraint = phonBookUserFactory.getPhonBookUserWithSecurityConstraint(phonBookUser);
+        phonBookUserRepository.save(phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phonBookUserWithSecurityConstraint));
+    }
+
+    @Autowired
+    public void setPhonBookUserFactory(PhonBookUserFactory phonBookUserFactory) {
+        this.phonBookUserFactory = phonBookUserFactory;
+    }
+
+    @Autowired
+    public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
+        this.phonBookUserRepository = phonBookUserRepository;
+    }
+
+    @Autowired
+    public void setPhonBookUserSecurityUserFactory(SecurityUserFactory<PhonBookUser> phonBookUserSecurityUserFactory) {
+        this.phonBookUserSecurityUserFactory = phonBookUserSecurityUserFactory;
     }
 }

@@ -20,9 +20,8 @@
 	</security:http>
 
     <security:authentication-manager erase-credentials="false">
-        <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="dataSource" />
-            <security:password-encoder ref="passwordEncoder"/>
+        <security:authentication-provider user-service-ref="bookUserDetailsService">
+            <!--<security:password-encoder ref="passwordEncoder"/>-->
         </security:authentication-provider>
     </security:authentication-manager>
 

@@ -8,9 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 /**
  * Created by Valerio on 30/07/2014.
  */
-public class SingUpControllerTest extends AbstractTest {
+public class SingUpControllerTest {
 
-    @Test
+//    @Test extends AbstractTest
     public void singUpTest() throws Exception {
         PhonBookUser phonBookUser = new PhonBookUser();
 
@@ -20,6 +20,6 @@ public class SingUpControllerTest extends AbstractTest {
         phonBookUser.setUserName("valerio.vaudi");
         phonBookUser.setPassword("admin");
 
-         mockMvc.perform(post("/signup").sessionAttr("signupForm", phonBookUser));
+        // mockMvc.perform(post("/signup").sessionAttr("signupForm", phonBookUser));
     }
 }

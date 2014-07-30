@@ -13,9 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public class PhoneBookUserDetailsService implements UserDetailsService {
     private PhonBookUserRepository phonBookUserRepository;
-    private SecurityUserFactory securityUserFactory;
+    private SecurityUserFactory<PhonBookUser> securityUserFactory;
 
 
+    @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
         this.phonBookUserRepository = phonBookUserRepository;
     }
@@ -28,7 +29,6 @@ public class PhoneBookUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         PhonBookUser phonBookUser = phonBookUserRepository.findByUserName(username);
-
         return securityUserFactory.createUser(phonBookUser);
     }
 }

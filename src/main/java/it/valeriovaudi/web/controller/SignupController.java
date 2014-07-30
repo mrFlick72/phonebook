@@ -33,8 +33,10 @@ public class SignupController {
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
+
         phonBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
         phonBookUserRepository.save(phonBookUser);
+
         SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phonBookUser));
         return "redirect:/index";
     }

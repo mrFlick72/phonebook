@@ -25,7 +25,8 @@ public class DefaultUserStarterSupport {
         phonBookUser.setPassword("admin");
 
         PhonBookUser phonBookUserWithSecurityConstraint = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
-        phonBookUserRepository.save(phonBookUserWithSecurityConstraint);
+        PhonBookUser save = phonBookUserRepository.save(phonBookUserWithSecurityConstraint);
+        System.out.println(save);
     }
 
 

@@ -22,12 +22,12 @@ public class SecurityUserFactoryImpl implements SecurityUserFactory<PhonBookUser
 
     @Override
     public Authentication getAutenticatedUser(PhonBookUser user) {
-        return new UsernamePasswordAuthenticationToken(createUser(user), passwordEncoder.encode(user.getPassword()) , Collections.singleton(createAuthority()));
+        return new UsernamePasswordAuthenticationToken(createUser(user), user.getPassword() , Collections.singleton(createAuthority()));
     }
 
     @Override
     public UserDetails createUser(PhonBookUser user) {
-        return new User(user.getUserName(), passwordEncoder.encode(user.getPassword()), Collections.singleton(createAuthority()));
+        return new User(user.getUserName(), user.getPassword(), Collections.singleton(createAuthority()));
 }
 
     @Override

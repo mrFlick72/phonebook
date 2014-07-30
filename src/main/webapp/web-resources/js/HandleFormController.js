@@ -10,7 +10,7 @@ function initDataPitcher(scope){
 myApp.controller('handleFormController', function ($scope, $http) {
     initDataPitcher($scope);
 
-    $http.get('/persone').
+    $http.get('/contacts').
         success(function (data) {
             $scope.persone = data;
         });
@@ -24,7 +24,7 @@ myApp.controller('handleFormController', function ($scope, $http) {
         $scope.contact = "";
         $http({
             method: 'GET',
-            url: '/persona/'+searchId
+            url: '/contact/'+searchId
         }).success(function (data) {
             $scope.contact = data;
             $("#popUpContactDialog").modal('show');
@@ -34,7 +34,7 @@ myApp.controller('handleFormController', function ($scope, $http) {
     $scope.submitForm = function () {
         $http({
             method: 'POST',
-            url: '/persona',
+            url: '/contact',
             data: $scope.persona
         }).success(function (data) {
             $scope.persona = "";

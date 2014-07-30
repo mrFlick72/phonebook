@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class AbstractTest {
 
-    protected static Logger logger = Logger.getLogger(PersonaControllerTest.class);
+    protected static Logger logger = Logger.getLogger(ContactControllerTest.class);
 
     @Autowired
     protected WebApplicationContext wac;

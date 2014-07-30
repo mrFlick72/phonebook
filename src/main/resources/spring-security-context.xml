@@ -29,4 +29,6 @@
     <bean id="passwordEncoder"
           class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
 
+    <bean id="bookUserDetailsService"
+          class="it.valeriovaudi.security.PhoneBookUserDetailsService"/>
 </beans>

@@ -1,7 +1,7 @@
 package it.valeriovaudi.support;
 
 import it.valeriovaudi.factory.SecurityUserFactory;
-import it.valeriovaudi.web.model.UserDTO;
+import it.valeriovaudi.web.model.PhonBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -27,12 +27,12 @@ public class DefaultUserStarterSupport {
 
     @PostConstruct
     private void initUsers(){
-        UserDTO userDTO = new UserDTO();
+        PhonBookUser phonBookUser = new PhonBookUser();
 
-        userDTO.setUserName("admin");
-        userDTO.setPassword("admin");
+        phonBookUser.setUserName("admin");
+        phonBookUser.setPassword("admin");
 
-        UserDetails user = securityUserFactory.createUser(userDTO);
-        userDetailsManager.createUser(user);
+        UserDetails userDetails = securityUserFactory.createUser(phonBookUser);
+        userDetailsManager.createUser(userDetails);
     }
 }

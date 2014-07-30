@@ -2,7 +2,8 @@ package it.valeriovaudi.web.controller;
 
 
 import it.valeriovaudi.factory.SecurityUserFactory;
-import it.valeriovaudi.web.model.UserDTO;
+import it.valeriovaudi.repository.PhonBookUserRepository;
+import it.valeriovaudi.web.model.PhonBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -19,29 +20,29 @@ public class SignupController {
 
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
-    private UserDetailsManager userDetailsManager;
-    private SecurityUserFactory securityUserFactory;
+    private PhonBookUserRepository phonBookUserRepository;
+
+    private SecurityUserFactory<PhonBookUser> securityUserFactory;
 
 	@RequestMapping(value = "signup")
 	public String signup(Model model) {
-		model.addAttribute("signupForm",new UserDTO());
+		model.addAttribute("signupForm",new PhonBookUser());
         return SIGNUP_VIEW_NAME;
 	}
 
     @RequestMapping(value = "signup",method = RequestMethod.POST)
-    public String signup(UserDTO user, Errors errors, RedirectAttributes ra) {
+    public String signup(PhonBookUser phonBookUser, Errors errors, RedirectAttributes ra) {
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
-        userDetailsManager.createUser(securityUserFactory.createUser(user));
-        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(user));
-
+        phonBookUserRepository.save(securityUserFactory.securityAccontWithPasswordEncoded(phonBookUser));
+        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phonBookUser));
         return "redirect:/index";
     }
 
     @Autowired
-    public void setUserDetailsManager(UserDetailsManager userDetailsManager) {
-        this.userDetailsManager = userDetailsManager;
+    public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
+        this.phonBookUserRepository = phonBookUserRepository;
     }
 
     @Autowired

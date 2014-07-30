@@ -5,7 +5,8 @@
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>it.valeriovaudi.web.model.Persona</class>
+        <class>it.valeriovaudi.web.model.Contact</class>
+        <class>it.valeriovaudi.web.model.PhonBookUser</class>
 
 <!--        <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

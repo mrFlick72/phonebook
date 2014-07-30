@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * Created by Valerio on 30/07/2014.
  */
 public class PhoneBookUserDetailsService implements UserDetailsService {
-
     private PhonBookUserRepository phonBookUserRepository;
     private SecurityUserFactory securityUserFactory;
 

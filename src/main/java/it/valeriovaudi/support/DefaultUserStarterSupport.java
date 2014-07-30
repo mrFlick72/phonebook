@@ -1,6 +1,5 @@
 package it.valeriovaudi.support;
 
-import it.valeriovaudi.factory.PhonBookUserFactory;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.PhonBookUser;
@@ -12,7 +11,6 @@ import javax.annotation.PostConstruct;
  * Created by Valerio on 26/07/2014.
  */
 public class DefaultUserStarterSupport {
-    private PhonBookUserFactory phonBookUserFactory;
     private PhonBookUserRepository phonBookUserRepository;
     private SecurityUserFactory<PhonBookUser> phonBookUserSecurityUserFactory;
 
@@ -26,14 +24,10 @@ public class DefaultUserStarterSupport {
         phonBookUser.setUserName("admin");
         phonBookUser.setPassword("admin");
 
-        PhonBookUser phonBookUserWithSecurityConstraint = phonBookUserFactory.getPhonBookUserWithSecurityConstraint(phonBookUser);
-        phonBookUserRepository.save(phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phonBookUserWithSecurityConstraint));
+        PhonBookUser phonBookUserWithSecurityConstraint = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
+        phonBookUserRepository.save(phonBookUserWithSecurityConstraint);
     }
 
-    @Autowired
-    public void setPhonBookUserFactory(PhonBookUserFactory phonBookUserFactory) {
-        this.phonBookUserFactory = phonBookUserFactory;
-    }
 
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {

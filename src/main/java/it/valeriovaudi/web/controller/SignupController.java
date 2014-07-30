@@ -1,7 +1,5 @@
 package it.valeriovaudi.web.controller;
 
-
-import it.valeriovaudi.factory.PhonBookUserFactory;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.PhonBookUser;
@@ -22,7 +20,6 @@ public class SignupController {
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
     private PhonBookUserRepository phonBookUserRepository;
-    private PhonBookUserFactory phonBookUserFactory;
     private SecurityUserFactory<PhonBookUser> securityUserFactory;
 
 	@RequestMapping(value = "signup")
@@ -36,7 +33,7 @@ public class SignupController {
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
-        phonBookUser = phonBookUserFactory.getPhonBookUserWithSecurityConstraint(phonBookUser);
+        phonBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
         phonBookUserRepository.save(phonBookUser);
         SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phonBookUser));
         return "redirect:/index";
@@ -52,8 +49,4 @@ public class SignupController {
         this.securityUserFactory = securityUserFactory;
     }
 
-    @Autowired
-    public void setPhonBookUserFactory(PhonBookUserFactory phonBookUserFactory) {
-        this.phonBookUserFactory = phonBookUserFactory;
-    }
 }

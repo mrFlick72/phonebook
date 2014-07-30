@@ -39,7 +39,7 @@ myApp.controller('handleFormController', function ($scope, $http) {
         }).success(function (data) {
             $scope.persona = "";
 
-            $http.get('/persone').
+            $http.get('/contacts').
                 success(function (data) {
                     $scope.persone = data;
                     $("#insertNewAccountDialogForm").modal('hide')

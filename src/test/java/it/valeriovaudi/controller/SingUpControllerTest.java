@@ -4,6 +4,8 @@ import it.valeriovaudi.web.model.PhonBookUser;
 import org.junit.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -26,6 +28,7 @@ public class SingUpControllerTest extends AbstractTest{
                         param("password",phonBookUser.getPassword()).
                         param("firstName",phonBookUser.getFirstName()).
                         param("lastName",phonBookUser.getLastName())).
-                andExpect(status().isFound());
+                andExpect(status().isFound()).
+                andExpect(redirectedUrl("/index"));
     }
 }

@@ -31,8 +31,6 @@ public class SecurityUserFactoryImpl implements SecurityUserFactory<PhonBookUser
 
     @Override
     public PhonBookUser securityAccontWithPasswordEncoded(PhonBookUser phonBookUser) {
-        phonBookUser.setEnabled(true);
-        phonBookUser.setAutority("ROLE_ADMIN");
         phonBookUser.setPassword(passwordEncoder.encode(phonBookUser.getPassword()));
         return phonBookUser;
     }

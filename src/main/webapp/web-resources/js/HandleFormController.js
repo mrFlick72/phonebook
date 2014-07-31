@@ -12,12 +12,12 @@ myApp.controller('handleFormController', function ($scope, $http) {
 
     $http.get('/contacts').
         success(function (data) {
-            $scope.persone = data;
+            $scope.contacts = data;
         });
 
     $scope.openDialog = function () {
         $("#insertNewAccountDialogForm").modal('show');
-        $scope.persona = "";
+        $scope.newcontact = "";
     };
 
     $scope.shwoContactDetails = function(searchId){
@@ -26,7 +26,7 @@ myApp.controller('handleFormController', function ($scope, $http) {
             method: 'GET',
             url: '/contact/'+searchId
         }).success(function (data) {
-            $scope.contact = data;
+            $scope.contactDetails = data;
             $("#popUpContactDialog").modal('show');
         });
     };
@@ -35,20 +35,20 @@ myApp.controller('handleFormController', function ($scope, $http) {
         $http({
             method: 'POST',
             url: '/contact',
-            data: $scope.persona
+            data: $scope.newContact
         }).success(function (data) {
-            $scope.persona = "";
+            $scope.contact = "";
 
             $http.get('/contacts').
                 success(function (data) {
-                    $scope.persone = data;
+                    $scope.contacts = data;
                     $("#insertNewAccountDialogForm").modal('hide')
                 });
         });
     };
 });
 
-myApp.controller('handleMenu', function ($scope, $http) {
+/*myApp.controller('handleMenu', function ($scope, $http) {
     initDataPitcher($scope);
 
     $scope.openDialog = function () {
@@ -56,5 +56,5 @@ myApp.controller('handleMenu', function ($scope, $http) {
 
        console.log("handleMenu")
     };
-});
+});*/
 

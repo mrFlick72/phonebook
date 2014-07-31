@@ -1,9 +1,9 @@
 CREATE TABLE contact(
       id INT IDENTITY NOT NULL PRIMARY KEY ,
-      nome VARCHAR(255),
-      cognome VARCHAR(255),
-      telefono VARCHAR (15),
-      nascita timestamp
+      firstName VARCHAR(255),
+      lastName VARCHAR(255),
+      telephoneNumber VARCHAR (15),
+      birth timestamp
 );
 
 create table phonBookUser(
@@ -12,8 +12,5 @@ create table phonBookUser(
       password varchar_ignorecase(500) not null,
 
       firstName varchar_ignorecase(500) not null,
-      lastName varchar_ignorecase(500) not null,
-      autority varchar_ignorecase(50) not null,
-
-      enabled boolean not null
+      lastName varchar_ignorecase(500) not null
 );

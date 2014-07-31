@@ -52,10 +52,10 @@ public class ContactControllerTest extends AbstractTest {
     public void addPersonaTest() throws Exception {
         Contact contact = new Contact();
 
-        contact.setNome("Valerio Secondo");
-        contact.setCognome("Vaudi");
-        contact.setTelefono("3392381584");
-        contact.setNascita(new Date());
+        contact.setFirstName("Valerio Secondo");
+        contact.setLastName("Vaudi");
+        contact.setTelephoneNumber("3392381584");
+        contact.setBirth(new Date());
 
         String location = mockMvc.perform(post("/contact").
                             accept(MediaType.APPLICATION_JSON).
@@ -78,9 +78,9 @@ public class ContactControllerTest extends AbstractTest {
         logger.info(contentAsString);
         logger.info(contactOut);
 
-        Assert.assertEquals(contact.getNome(), contactOut.getNome());
-        Assert.assertEquals(contact.getCognome(), contactOut.getCognome());
-        Assert.assertEquals(contact.getNascita(), contactOut.getNascita());
-        Assert.assertEquals(contact.getTelefono(), contactOut.getTelefono());
+        Assert.assertEquals(contact.getFirstName(), contactOut.getFirstName());
+        Assert.assertEquals(contact.getLastName(), contactOut.getLastName());
+        Assert.assertEquals(contact.getBirth(), contactOut.getBirth());
+        Assert.assertEquals(contact.getTelephoneNumber(), contactOut.getTelephoneNumber());
     }
 }

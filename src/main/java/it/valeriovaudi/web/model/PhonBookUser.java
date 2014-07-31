@@ -24,12 +24,6 @@ public class PhonBookUser {
     @Column
     private String lastName;
 
-    @Column
-    private String autority;
-
-    @Column
-    private boolean enabled;
-
     public Long getId() {
         return id;
     }
@@ -70,22 +64,6 @@ public class PhonBookUser {
         this.lastName = lastName;
     }
 
-    public String getAutority() {
-        return autority;
-    }
-
-    public void setAutority(String autority) {
-        this.autority = autority;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
     @Override
     public String toString() {
         return "PhonBookUser{" +
@@ -94,8 +72,6 @@ public class PhonBookUser {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", autority='" + autority + '\'' +
-                ", enabled=" + enabled +
                 '}';
     }
 }

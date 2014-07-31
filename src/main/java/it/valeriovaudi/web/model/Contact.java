@@ -16,17 +16,17 @@ public class Contact {
     private long id;
 
     @Column
-    private String nome;
+    private String firstName;
 
     @Column
-    private String cognome;
+    private String lastName;
 
     @Column
-    private String telefono;
+    private String telephoneNumber;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date nascita;
+    private Date birth;
 
     public long getId() {
         return id;
@@ -36,46 +36,46 @@ public class Contact {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getCognome() {
-        return cognome;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
-    public Date getNascita() {
-        return nascita;
+    public Date getBirth() {
+        return birth;
     }
 
-    public void setNascita(Date nascita) {
-        this.nascita = nascita;
+    public void setBirth(Date birth) {
+        this.birth = birth;
     }
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "Contact{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", nascita='" + nascita + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", birth=" + birth +
                 '}';
     }
 }

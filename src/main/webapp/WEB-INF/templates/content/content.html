@@ -10,25 +10,25 @@
                     <ng-form class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
-                                <label for="firstNameField" class="col-lg-4">First Name:</label>
+                                <label for="firstNameField" class="col-lg-4" th:text="#{firstName.label}"></label>
                                 <div class="col-lg-6">
                                     <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastNameField" class="col-lg-4">Last Name:</label>
+                                <label for="lastNameField" class="col-lg-4" th:text="#{lastName.label}"></label>
                                 <div class="col-lg-6">
                                     <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="birthField" class="col-lg-4">Birth:</label>
+                                <label for="birthField" class="col-lg-4" th:text="#{birth.label}"></label>
                                 <div class="col-lg-6">
-                                    <input id="birthField" class="form-control" type="text"  ng-model="newContact.birth" ui-date="dateOptions"/>
+                                    <input id="birthField" class="form-control" type="text" ng-model="newContact.birth" ui-date="dateOptions"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telephoneNumberField" class="col-lg-4">Telephone Number:</label>
+                                <label for="telephoneNumberField" class="col-lg-4" th:text="#{telephoneNumber.label}"></label>
                                 <div class="col-lg-6">
                                     <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
                                 </div>
@@ -50,19 +50,19 @@
                 </div>
                 <div class="modal-body container-fluid">
                     <div class="row">
-                        <span class="col-lg-4">First Name:</span>
+                        <span class="col-lg-4" th:text="#{firstName.label}">></span>
                         <span class="col-lg-8">{{contactDetails.firstName}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4">Last Name:</span>
+                        <span class="col-lg-4" th:text="#{lastName.label}">></span>
                         <span class="col-lg-8">{{contactDetails.lastName}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4">Birth:</span>
+                        <span class="col-lg-4" th:text="#{birth.label}"></span>
                         <span class="col-lg-8">{{contactDetails.birth  | date:dateFormFormatting}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4">Thelephone Number:</span>
+                        <span class="col-lg-4" th:text="#{telephoneNumber.label}">></span>
                         <span class="col-lg-8">{{contactDetails.telephoneNumber}}</span>
                     </div>
                 </div>
@@ -76,11 +76,11 @@
                 <!-- Table -->
                 <table class="table">
                     <thead>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Thelephone Number</th>
-                    <th>Birth</th>
-                    <th>Operations</th>
+                    <th th:text="#{firstName.label}"></th>
+                    <th th:text="#{lastName.label}"></th>
+                    <th th:text="#{thelephoneNumber.label}"></th>
+                    <th th:text="#{birth.label}"></th>
+                    <th th:text="#{operation.label}"></th>
                     </thead>
                     <tbody>
                     <tr ng-repeat="contact in contacts">

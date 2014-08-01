@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -93,4 +92,7 @@ public class ContactControllerTest extends AbstractTestWithSecurityContext {
         Assert.assertEquals(contact.getBirth(), contactOut.getBirth());
         Assert.assertEquals(contact.getTelephoneNumber(), contactOut.getTelephoneNumber());
     }
+
+    @Override
+    protected Object principalInit() throws Exception {return authenticate();}
 }

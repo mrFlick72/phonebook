@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.http.HttpSession;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
@@ -28,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath:application-context.xml","file:src/main/webapp/WEB-INF/dispatcher-servlet.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AbstractTestWithSecurityContext {
+public abstract class AbstractTestWithSecurityContext {
 
     protected  static String SEC_CONTEXT_ATTR = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -49,19 +50,19 @@ public class AbstractTestWithSecurityContext {
         objectMapper =  new ObjectMapper();
         this.mockMvc = webAppContextSetup(this.wac)
                 .addFilters(this.springSecurityFilterChain).build();
-        principal = authenticate();
+        principal = principalInit();
+    }
+
+    protected abstract Object principalInit() throws Exception;
+
+
+    protected Object authenticate(String userName,String password) throws Exception {
+        Object principal = mockMvc.perform(post("/j_spring_security_check").param("j_username", userName).param("j_password", password))
+                .andReturn().getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR);
+        return principal;
     }
 
     protected Object authenticate() throws Exception {
-        Object principal = mockMvc.perform(post("/j_spring_security_check").param("j_username", "admin").param("j_password", "admin"))
-                .andExpect(new ResultMatcher() {
-                    public void match(MvcResult mvcResult) throws Exception {
-                        HttpSession session = mvcResult.getRequest().getSession();
-                        SecurityContext securityContext = (SecurityContext) session.getAttribute(SEC_CONTEXT_ATTR);
-                        Assert.assertNotNull(securityContext);
-                    }
-                })
-                .andReturn().getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR);
-        return principal;
+        return authenticate("admin","admin");
     }
 }

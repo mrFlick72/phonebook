@@ -8,6 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table
+@NamedQueries(value = {@NamedQuery(name = "Contact.findAllContactByUser",query = "select c from Contact as c where c.phonBookUser.userName=:userName")})
 public class Contact {
 
     @Id
@@ -27,6 +28,10 @@ public class Contact {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date birth;
+
+    @JoinColumn(name = "phonBookUser")
+    @OneToOne
+    private PhonBookUser phonBookUser;
 
     public long getId() {
         return id;
@@ -68,6 +73,14 @@ public class Contact {
         this.birth = birth;
     }
 
+    public PhonBookUser getPhonBookUser() {
+        return phonBookUser;
+    }
+
+    public void setPhonBookUser(PhonBookUser phonBookUser) {
+        this.phonBookUser = phonBookUser;
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -76,6 +89,7 @@ public class Contact {
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", birth=" + birth +
+                ", phonBookUser=" + phonBookUser +
                 '}';
     }
 }

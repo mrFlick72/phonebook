@@ -3,7 +3,8 @@ CREATE TABLE contact(
       firstName VARCHAR(255),
       lastName VARCHAR(255),
       telephoneNumber VARCHAR (15),
-      birth timestamp
+      birth timestamp,
+      phonBookUser INT
 );
 
 create table phonBookUser(

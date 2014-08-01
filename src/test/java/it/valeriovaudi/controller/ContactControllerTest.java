@@ -4,14 +4,12 @@ import it.valeriovaudi.web.model.Contact;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.util.Date;
 
@@ -58,6 +56,7 @@ public class ContactControllerTest extends AbstractTestWithSecurityContext {
     }
 
     @Test
+    @DirtiesContext
     public void addPersonaTest() throws Exception {
         Contact contact = new Contact();
 
@@ -69,6 +68,7 @@ public class ContactControllerTest extends AbstractTestWithSecurityContext {
         String location = mockMvc.perform(post("/contact").
                             accept(MediaType.APPLICATION_JSON).
                             contentType(MediaType.APPLICATION_JSON).
+                            sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, principal).
                             content(objectMapper.writeValueAsBytes(contact))).
                             andExpect(status().isCreated()).
                             andReturn().
@@ -77,7 +77,8 @@ public class ContactControllerTest extends AbstractTestWithSecurityContext {
 
         logger.info(location);
 
-        MvcResult mvcResult = mockMvc.perform(get(location)).
+        MvcResult mvcResult = mockMvc.perform(get(location).
+                        sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, principal)).
                                 andExpect(status().isOk()).
                                 andReturn();
 

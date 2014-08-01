@@ -16,18 +16,22 @@ public class DefaultUserStarterSupport {
 
     @PostConstruct
     private void initUsers(){
+        initUser("Administrator","","admin","admin");
+        initUser("Valerio","Vaudi","admin1","admin");
+    }
+
+    private void initUser(String ... data){
         PhonBookUser phonBookUser = new PhonBookUser();
 
-        phonBookUser.setFirstName("Administrator");
-        phonBookUser.setLastName("");
+        phonBookUser.setFirstName(data[0]);
+        phonBookUser.setLastName(data[1]);
 
-        phonBookUser.setUserName("admin");
-        phonBookUser.setPassword("admin");
+        phonBookUser.setUserName(data[2]);
+        phonBookUser.setPassword(data[3]);
 
         PhonBookUser phonBookUserWithSecurityConstraint = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
         phonBookUserRepository.save(phonBookUserWithSecurityConstraint);
     }
-
 
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {

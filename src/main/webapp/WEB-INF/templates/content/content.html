@@ -10,27 +10,27 @@
                     <ng-form class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
-                                <label class="col-lg-2">First Name:</label>
-                                <div class="col-lg-4">
-                                    <input  id="nomeField" class="form-control" type="text" ng-model="newContact.firstName"/>
+                                <label for="firstNameField" class="col-lg-4">First Name:</label>
+                                <div class="col-lg-6">
+                                    <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="cognomeField" class="col-lg-2">Last Name:</label>
-                                <div class="col-lg-4">
-                                    <input  id="cognomeField" class="form-control" type="text" ng-model="newContact.lastName"/>
+                                <label for="lastNameField" class="col-lg-4">Last Name:</label>
+                                <div class="col-lg-6">
+                                    <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="nascitaField" class="col-lg-2">Birth:</label>
-                                <div class="col-lg-4">
-                                    <input id="nascitaField" class="form-control" type="text"  ng-model="newContact.birth" ui-date="dateOptions"/>
+                                <label for="birthField" class="col-lg-4">Birth:</label>
+                                <div class="col-lg-6">
+                                    <input id="birthField" class="form-control" type="text"  ng-model="newContact.birth" ui-date="dateOptions"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telefonoField" class="col-lg-2">Telephone Number:</label>
-                                <div class="col-lg-4">
-                                    <input id="telefonoField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
+                                <label for="telephoneNumberField" class="col-lg-4">Telephone Number:</label>
+                                <div class="col-lg-6">
+                                    <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
                                 </div>
                             </div>
                         </fieldset>

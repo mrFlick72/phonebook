@@ -4,9 +4,14 @@ import it.valeriovaudi.web.model.Contact;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpSession;
 import java.net.URI;
 import java.util.Date;
 
@@ -17,11 +22,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by Valerio on 24/07/2014.
  */
-public class ContactControllerTest extends AbstractTest {
+public class ContactControllerTest extends AbstractTestWithSecurityContext {
 
     @Test
     public void getAllpersoneTest() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/contacts")).andReturn();
+        MvcResult mvcResult = mockMvc.perform(get("/contacts").
+                                    sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,principal)).
+                                    andReturn();
 
         String contentAsString = mvcResult.getResponse().getContentAsString();
         logger.info(contentAsString);
@@ -31,13 +38,15 @@ public class ContactControllerTest extends AbstractTest {
             logger.info(contact);
         }
 
-        Assert.assertEquals(contacts.length,4);
+        Assert.assertEquals(contacts.length,3);
     }
 
     @Test
     public void getPersonaTest() throws Exception {
         URI uri = UriComponentsBuilder.fromPath("/contact/{contactId}").buildAndExpand(1).toUri();
-        MvcResult mvcResult = mockMvc.perform(get(uri)).andReturn();
+        MvcResult mvcResult = mockMvc.perform(get(uri).
+                                sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,principal)).
+                                    andReturn();
 
         String contentAsString = mvcResult.getResponse().getContentAsString();
         logger.info(contentAsString);

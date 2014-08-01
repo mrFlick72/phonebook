@@ -29,6 +29,7 @@ public class ContactController {
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
     public @ResponseBody List<Contact> getAllpersone(Principal principal){
+        System.out.println("principal: " + principal);
         List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(principal.getName());
         return contactList;
     }

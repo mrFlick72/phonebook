@@ -16,12 +16,19 @@ myApp.controller('handleFormController', function ($scope, $http) {
         });
 
     $scope.openDialog = function () {
+        $scope.newContactPopUpForm.$setPristine();
+        $scope.newContact = {
+            firstName : null,
+            lastName : null,
+            birth : null,
+            telephoneNumber : null
+        };
+
         $("#insertNewAccountDialogForm").modal('show');
-        $scope.newcontact = "";
     };
 
     $scope.shwoContactDetails = function(searchId){
-        $scope.contact = "";
+        $scope.contactDetails = "";
         $http({
             method: 'GET',
             url: '/contact/'+searchId
@@ -37,8 +44,6 @@ myApp.controller('handleFormController', function ($scope, $http) {
             url: '/contact',
             data: $scope.newContact
         }).success(function (data) {
-            $scope.contact = "";
-
             $http.get('/contacts').
                 success(function (data) {
                     $scope.contacts = data;
@@ -47,14 +52,3 @@ myApp.controller('handleFormController', function ($scope, $http) {
         });
     };
 });
-
-/*myApp.controller('handleMenu', function ($scope, $http) {
-    initDataPitcher($scope);
-
-    $scope.openDialog = function () {
-        $("#insertNewAccountDialogForm").modal('show')
-
-       console.log("handleMenu")
-    };
-});*/
-

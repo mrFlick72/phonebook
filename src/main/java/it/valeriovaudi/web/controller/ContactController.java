@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -27,20 +29,21 @@ public class ContactController {
     private PhonBookUserRepository phonBookUserRepository;
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
-    public @ResponseBody List<Contact> getAllpersone(Principal principal){
-        List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(principal.getName());
+    public @ResponseBody List<Contact> getContacts(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
         return contactList;
     }
 
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getPersona(@PathVariable("contactId") long contactId){
+    public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
         System.out.println(contact);
         return new ResponseEntity<Contact>(contact, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addPersona(@RequestBody Contact contact,Principal principal){
+    public ResponseEntity<Void> addContact(@RequestBody Contact contact,Principal principal){
         PhonBookUser phonBookUser = phonBookUserRepository.findByUserName(principal.getName());
         contact.setPhonBookUser(phonBookUser);
         Contact save = contactRepository.save(contact);

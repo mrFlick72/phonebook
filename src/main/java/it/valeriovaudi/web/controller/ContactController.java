@@ -3,12 +3,13 @@ package it.valeriovaudi.web.controller;
 import it.valeriovaudi.repository.ContactRepository;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.Contact;
-import it.valeriovaudi.web.model.PhonBookUser;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class ContactController {
     private PhonBookUserRepository phonBookUserRepository;
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
     public @ResponseBody List<Contact> getContacts(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
@@ -36,6 +38,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
     public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
         System.out.println(contact);
@@ -43,9 +46,10 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
     public ResponseEntity<Void> addContact(@RequestBody Contact contact,Principal principal){
-        PhonBookUser phonBookUser = phonBookUserRepository.findByUserName(principal.getName());
-        contact.setPhonBookUser(phonBookUser);
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(principal.getName());
+        contact.setPhoneBookUser(phoneBookUser);
         Contact save = contactRepository.save(contact);
         URI uri = UriComponentsBuilder.fromPath("/contact/{contactId}").buildAndExpand(save.getId()).toUri();
 

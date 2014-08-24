@@ -1,6 +1,6 @@
 package it.valeriovaudi.controller;
 
-import it.valeriovaudi.web.model.PhonBookUser;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,19 +14,19 @@ public class SingUpControllerTest extends AbstractTest{
 
     @Test
     public void singUpTest() throws Exception {
-        PhonBookUser phonBookUser = new PhonBookUser();
+        PhoneBookUser phoneBookUser = new PhoneBookUser();
 
-        phonBookUser.setFirstName("Valerio");
-        phonBookUser.setLastName("Vaudi");
+        phoneBookUser.setFirstName("Valerio");
+        phoneBookUser.setLastName("Vaudi");
 
-        phonBookUser.setUserName("valerio.vaudi");
-        phonBookUser.setPassword("admin");
+        phoneBookUser.setUserName("valerio.vaudi");
+        phoneBookUser.setPassword("admin");
 
         mockMvc.perform(post("/signup").
-                        param("userName",phonBookUser.getUserName()).
-                        param("password",phonBookUser.getPassword()).
-                        param("firstName",phonBookUser.getFirstName()).
-                        param("lastName",phonBookUser.getLastName())).
+                        param("userName", phoneBookUser.getUserName()).
+                        param("password", phoneBookUser.getPassword()).
+                        param("firstName", phoneBookUser.getFirstName()).
+                        param("lastName", phoneBookUser.getLastName())).
                 andExpect(status().isFound()).
                 andExpect(redirectedUrl("/index"));
     }

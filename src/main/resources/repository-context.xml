@@ -11,7 +11,7 @@
                            http://www.springframework.org/schema/jdbc
                            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <jpa:repositories base-package="it.valeriovaudi.repository"/>
+    <jpa:repositories base-package="it.valeriovaudi.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
 
     <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager"
@@ -19,6 +19,8 @@
 
     <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="classpath:/sql/*.sql" encoding="UTF-8" />
+        <jdbc:script location="classpath:org/springframework/batch/core/schema-drop-h2.sql" />
+        <jdbc:script location="classpath:org/springframework/batch/core/schema-h2.sql" />
     </jdbc:embedded-database>
 
     <bean id="entityManagerFactory"
@@ -27,4 +29,8 @@
           p:jpaVendorAdapter="#{new org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter()}">
     </bean>
 
+    <bean id="exceptionTranslationInterceptor"
+          class="org.springframework.dao.support.PersistenceExceptionTranslationInterceptor">
+
+    </bean>
 </beans>

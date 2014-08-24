@@ -2,7 +2,8 @@ package it.valeriovaudi.web.controller;
 
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
-import it.valeriovaudi.web.model.PhonBookUser;
+import it.valeriovaudi.security.PhoneBookSecurityRole;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,24 +20,24 @@ public class SignupController {
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
     private PhonBookUserRepository phonBookUserRepository;
-    private SecurityUserFactory<PhonBookUser> securityUserFactory;
+    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
 	@RequestMapping(value = "signup")
 	public String signup(Model model) {
-		model.addAttribute("signupForm",new PhonBookUser());
+		model.addAttribute("signupForm",new PhoneBookUser());
         return SIGNUP_VIEW_NAME;
 	}
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
-    public String signup(@ModelAttribute("signupForm") PhonBookUser phonBookUser, Errors errors, RedirectAttributes ra) {
+    public String signup(@ModelAttribute("signupForm") PhoneBookUser phoneBookUser, Errors errors, RedirectAttributes ra) {
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
+        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
+        phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
+        phonBookUserRepository.save(phoneBookUser);
 
-        phonBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phonBookUser);
-        phonBookUserRepository.save(phonBookUser);
-
-        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phonBookUser));
+        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));
         return "redirect:/index";
     }
 

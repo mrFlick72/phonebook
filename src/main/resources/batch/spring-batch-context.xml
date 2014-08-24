@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/batch
+                           http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+    <batch:job-repository data-source="dataSource" transaction-manager="dataSourceTransactionManager"/>
+
+    <bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <batch:job id="init">
+        <batch:step id="userInit" next="contactInit">
+            <batch:tasklet>
+                <batch:chunk reader="userReader"
+                             processor="userPostProcessor"
+                             writer="writer"
+                             commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+
+        <batch:step id="contactInit">
+            <batch:tasklet>
+                <batch:chunk reader="contactReader"
+                             writer="writer"
+                             commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+
+    <bean id="userReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader"
+          p:resource="classpath:batch/user.csv">
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property  name="lineTokenizer">
+                    <bean  class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"
+                           p:delimiter=","
+                           p:names="userName, password, firstName, lastName, securityRole"/>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean id="bookUserFieldSetMapper"
+                          class="it.valeriovaudi.batch.PhoneBookUserFieldSetMapper"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="contactReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader"
+          p:resource="classpath:batch/contacts.csv">
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property  name="lineTokenizer">
+                    <bean  class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"
+                           p:delimiter=","
+                           p:names="firstName, lastName, telephoneNumber, birth, phoneBookUser"/>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean id="bookUserFieldSetMapper"
+                          class="it.valeriovaudi.batch.ContactFieldSetMapper"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="userPostProcessor"
+          class="it.valeriovaudi.batch.UserItemProcessor"
+          p:phonBookUserSecurityUserFactory-ref="securityUserFactory"/>
+
+    <bean id="writer"
+          class="org.springframework.batch.item.database.JpaItemWriter"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
+
+    <bean id="simpleJobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+          p:jobRepository-ref="jobRepository"/>
+
+</beans>

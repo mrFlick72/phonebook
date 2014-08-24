@@ -1,5 +1,7 @@
 package it.valeriovaudi.web.model;
 
+import it.valeriovaudi.security.PhoneBookSecurityRole;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-public class PhonBookUser {
+public class PhoneBookUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,6 +25,10 @@ public class PhonBookUser {
 
     @Column
     private String lastName;
+
+    @Column
+    @Enumerated
+    private PhoneBookSecurityRole securityRole;
 
     public Long getId() {
         return id;
@@ -64,6 +70,14 @@ public class PhonBookUser {
         this.lastName = lastName;
     }
 
+    public PhoneBookSecurityRole getSecurityRole() {
+        return securityRole;
+    }
+
+    public void setSecurityRole(PhoneBookSecurityRole securityRole) {
+        this.securityRole = securityRole;
+    }
+
     @Override
     public String toString() {
         return "PhonBookUser{" +
@@ -72,6 +86,7 @@ public class PhonBookUser {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", securityRole=" + securityRole.getRole() +
                 '}';
     }
 }

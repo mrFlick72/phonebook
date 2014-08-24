@@ -1,6 +1,7 @@
 package it.valeriovaudi.factory;
 
-import it.valeriovaudi.web.model.PhonBookUser;
+import it.valeriovaudi.security.PhoneBookSecurityRole;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,28 +16,29 @@ import java.util.Collections;
 /**
  * Created by Valerio on 26/07/2014.
  */
-public class SecurityUserFactoryImpl implements SecurityUserFactory<PhonBookUser> {
+public class SecurityUserFactoryImpl implements SecurityUserFactory<PhoneBookUser> {
 
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Authentication getAutenticatedUser(PhonBookUser user) {
-        return new UsernamePasswordAuthenticationToken(createUser(user), user.getPassword() , Collections.singleton(createAuthority()));
+    public Authentication getAutenticatedUser(PhoneBookUser user) {
+        return new UsernamePasswordAuthenticationToken(createUser(user), user.getPassword() , Collections.singleton(createAuthority(user.getSecurityRole())));
     }
 
     @Override
-    public UserDetails createUser(PhonBookUser user) {
-        return new User(user.getUserName(), user.getPassword(), Collections.singleton(createAuthority()));
+    public UserDetails createUser(PhoneBookUser user) {
+        return new User(user.getUserName(), user.getPassword(), Collections.singleton(createAuthority(user.getSecurityRole())));
 }
 
     @Override
-    public PhonBookUser securityAccontWithPasswordEncoded(PhonBookUser phonBookUser) {
-        phonBookUser.setPassword(passwordEncoder.encode(phonBookUser.getPassword()));
-        return phonBookUser;
+    public PhoneBookUser securityAccontWithPasswordEncoded(PhoneBookUser phoneBookUser) {
+        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
+        phoneBookUser.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
+        return phoneBookUser;
     }
 
-    private GrantedAuthority createAuthority() {
-        return new SimpleGrantedAuthority("ROLE_ADMIN");
+    private GrantedAuthority createAuthority(PhoneBookSecurityRole role) {
+        return new SimpleGrantedAuthority(role.getRole());
     }
 
     @Autowired

@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @Entity
 @Table
-@NamedQueries(value = {@NamedQuery(name = "Contact.findAllContactByUser",query = "select c from Contact as c where c.phonBookUser.userName=:userName")})
+@NamedQueries(value = {@NamedQuery(name = "Contact.findAllContactByUser",query = "select c from Contact as c where c.phoneBookUser.userName=:userName")})
 public class Contact {
 
     @Id
@@ -29,9 +29,9 @@ public class Contact {
     @Temporal(TemporalType.TIMESTAMP)
     private Date birth;
 
-    @JoinColumn(name = "phonBookUser")
+    @JoinColumn(name = "phoneBookUser")
     @OneToOne
-    private PhonBookUser phonBookUser;
+    private PhoneBookUser phoneBookUser;
 
     public long getId() {
         return id;
@@ -73,12 +73,12 @@ public class Contact {
         this.birth = birth;
     }
 
-    public PhonBookUser getPhonBookUser() {
-        return phonBookUser;
+    public PhoneBookUser getPhoneBookUser() {
+        return phoneBookUser;
     }
 
-    public void setPhonBookUser(PhonBookUser phonBookUser) {
-        this.phonBookUser = phonBookUser;
+    public void setPhoneBookUser(PhoneBookUser phoneBookUser) {
+        this.phoneBookUser = phoneBookUser;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class Contact {
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", birth=" + birth +
-                ", phonBookUser=" + phonBookUser +
+                ", phoneBookUser=" + phoneBookUser +
                 '}';
     }
 }

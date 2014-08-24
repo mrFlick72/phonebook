@@ -1,6 +1,6 @@
 package it.valeriovaudi.factory;
 
-import it.valeriovaudi.web.model.PhonBookUser;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface SecurityUserFactory<T> {
 
-    Authentication getAutenticatedUser(PhonBookUser phonBookUserDTO);
+    Authentication getAutenticatedUser(PhoneBookUser phoneBookUserDTO);
 
-    UserDetails createUser(PhonBookUser phonBookUserDTO);
+    UserDetails createUser(PhoneBookUser phoneBookUserDTO);
 
     T securityAccontWithPasswordEncoded(T t);
 }

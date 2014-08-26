@@ -15,6 +15,8 @@ public class ContactFieldSetMapper implements FieldSetMapper<Contact> {
 
     private PhonBookUserRepository phonBookUserRepository;
 
+    private String datePattern;
+
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
         this.phonBookUserRepository = phonBookUserRepository;
@@ -29,9 +31,14 @@ public class ContactFieldSetMapper implements FieldSetMapper<Contact> {
 
         contact.setFirstName(fieldSet.readString(0));
         contact.setLastName(fieldSet.readString(1));
+        contact.setBirth(fieldSet.readDate(3,datePattern));
         contact.setTelephoneNumber(fieldSet.readString(2));
 
         contact.setPhoneBookUser(phoneBookUser);
         return contact;
+    }
+
+    public void setDatePattern(String datePattern) {
+        this.datePattern = datePattern;
     }
 }

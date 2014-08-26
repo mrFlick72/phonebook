@@ -64,7 +64,8 @@
                 </property>
                 <property name="fieldSetMapper">
                     <bean id="bookUserFieldSetMapper"
-                          class="it.valeriovaudi.batch.ContactFieldSetMapper"/>
+                          class="it.valeriovaudi.batch.ContactFieldSetMapper"
+                            p:datePattern="yyyy-MM-dd"/>
                 </property>
             </bean>
         </property>

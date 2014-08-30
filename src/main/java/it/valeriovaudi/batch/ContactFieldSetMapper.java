@@ -24,7 +24,6 @@ public class ContactFieldSetMapper implements FieldSetMapper<Contact> {
 
     @Override
     public Contact mapFieldSet(FieldSet fieldSet) throws BindException {
-        System.out.println(fieldSet);
         PhoneBookUser phoneBookUser = phonBookUserRepository.findOne(Long.valueOf(fieldSet.readString(4)));
 
         Contact contact = new Contact();

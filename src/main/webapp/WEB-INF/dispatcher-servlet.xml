@@ -41,7 +41,6 @@
         </property>
     </bean>
 
-
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver"
           p:templateEngine-ref="templateEngine"/>
 
@@ -59,7 +58,6 @@
 
     <bean id="mvcConversionService"
           class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
-
 
     <!--import the controller configuration-->
     <import resource="classpath:controller-config.xml"/>

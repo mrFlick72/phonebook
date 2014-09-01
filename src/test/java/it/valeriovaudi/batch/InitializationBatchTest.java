@@ -52,5 +52,10 @@ public class InitializationBatchTest {
 
         Assert.assertEquals(4,phoneBookUsers.size());
         Assert.assertEquals(10,contacts.size());
+
+        for (PhoneBookUser phoneBookUser : phoneBookUsers) {
+            System.out.println(phoneBookUser);
+        }
+
     }
 }

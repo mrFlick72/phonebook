@@ -32,7 +32,6 @@ public class SecurityUserFactoryImpl implements SecurityUserFactory<PhoneBookUse
 
     @Override
     public PhoneBookUser securityAccontWithPasswordEncoded(PhoneBookUser phoneBookUser) {
-        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
         phoneBookUser.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
         return phoneBookUser;
     }

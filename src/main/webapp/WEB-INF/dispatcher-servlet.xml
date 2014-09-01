@@ -33,7 +33,14 @@
 
     <bean id="templateEngine"
           class="org.thymeleaf.spring4.SpringTemplateEngine"
-          p:templateResolver-ref="templateResolver"/>
+          p:templateResolver-ref="templateResolver">
+        <property name="additionalDialects">
+            <set>
+                <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect"/>
+            </set>
+        </property>
+    </bean>
+
 
     <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver"
           p:templateEngine-ref="templateEngine"/>

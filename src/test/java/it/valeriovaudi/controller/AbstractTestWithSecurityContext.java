@@ -56,6 +56,6 @@ public abstract class AbstractTestWithSecurityContext {
     }
 
     protected Object authenticate() throws Exception {
-        return authenticate("admin","admin");
+        return authenticate("valerio.vaudi","valerio");
     }
 }

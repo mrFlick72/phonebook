@@ -5,8 +5,12 @@
     <head th:replace="fragments/head :: head(#{title})"></head>
     <body ng-controller="handleFormController">
         <div th:replace="fragments/menu :: menu">Menu</div>
-        <div class="container" sec:authorize="hasRole('ROLE_USER')" th:replace="user/content :: index"> </div>
-        <div class="container" sec:authorize="hasRole('ROLE_ADMIN')" th:replace="admin/content :: index"> </div>
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <div class="container" th:replace="user/content :: index"> </div>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="container" th:replace="admin/content :: index"> </div>
+        </div>
     </body>
 </html>
 

@@ -41,7 +41,6 @@ public class ContactController {
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
-        System.out.println(contact);
         return new ResponseEntity<Contact>(contact, HttpStatus.OK);
     }
 

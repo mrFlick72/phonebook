@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="elenco-telefonico"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"        >
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head(#{title})"></head>
-    <body ng-controller="handleFormController">
-        <div th:replace="fragments/menu :: menu">Menu</div>
+    <body th:attr="ng-controller=${controller}">
+    <div th:replace="fragments/menu :: menu">Menu</div>
+
         <div sec:authorize="hasRole('ROLE_USER')">
             <div th:replace="user/content :: index"> </div>
         </div>

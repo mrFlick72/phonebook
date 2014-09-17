@@ -13,6 +13,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -26,6 +27,12 @@ import java.util.List;
 @Controller
 public class ContactController {
 
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public void getUserPage(Model model){
+        model.addAttribute("controller","handleFormController");
+    }
+
+//    controller
     private ContactRepository contactRepository;
     private PhonBookUserRepository phonBookUserRepository;
 

@@ -32,7 +32,6 @@ public class ContactController {
         model.addAttribute("controller","handleFormController");
     }
 
-//    controller
     private ContactRepository contactRepository;
     private PhonBookUserRepository phonBookUserRepository;
 

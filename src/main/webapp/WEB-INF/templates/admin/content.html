@@ -7,12 +7,20 @@
             <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
         </ul>
 
+        <!--
+                             th:attr="ng-init='initAdministratorHomePage('+${phoneBoockUserName}+')'" >
+
+-->
+
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <div class="row">
+            <div class="tab-pane active" id="home" ng-controller="administrationController">
+                <div class="row" th:attr="ng-init='initAdministratorHomePage(admin)'">
                     <div class="col-lg-12">
-                        Profile content
+                        {{administrator.firstName}}
+                        {{administrator.lastName}}
+                        {{administrator.userName}}
+                        {{administrator.password}}
                     </div>
                 </div>
             </div>

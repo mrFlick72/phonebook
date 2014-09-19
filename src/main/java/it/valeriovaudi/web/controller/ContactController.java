@@ -26,32 +26,26 @@ import java.util.List;
  */
 @Controller
 public class ContactController {
-
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public void getUserPage(Model model){
-        model.addAttribute("controller","handleFormController");
-    }
-
     private ContactRepository contactRepository;
     private PhonBookUserRepository phonBookUserRepository;
 
-    @RequestMapping(value = "/contacts", method = RequestMethod.GET)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/contacts", method = RequestMethod.GET)
     public @ResponseBody List<Contact> getContacts(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
         return contactList;
     }
 
-    @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
     public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
         return new ResponseEntity<Contact>(contact, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addContact(@RequestBody Contact contact,Principal principal){
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(principal.getName());
         contact.setPhoneBookUser(phoneBookUser);

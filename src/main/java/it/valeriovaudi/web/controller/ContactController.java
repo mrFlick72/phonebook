@@ -40,7 +40,7 @@ public class ContactController {
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
     public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
-        return new ResponseEntity<Contact>(contact, HttpStatus.OK);
+        return new ResponseEntity<>(contact, HttpStatus.OK);
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
@@ -54,7 +54,7 @@ public class ContactController {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uri);
 
-        return new ResponseEntity<Void>(null, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(null, headers, HttpStatus.CREATED);
     }
 
     @Autowired

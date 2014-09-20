@@ -23,7 +23,7 @@ public class PhoneBoockUserController {
         this.phonBookUserRepository = phonBookUserRepository;
     }
 
-//    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.GET)
     public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
         PhoneBookUser byUserName = phonBookUserRepository.findByUserName(userName);

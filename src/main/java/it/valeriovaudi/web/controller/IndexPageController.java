@@ -29,6 +29,7 @@ public class IndexPageController {
                 break;
             }
 
+
             if(grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())){
                 model.addAttribute("controller","handleFormController");
                 break;

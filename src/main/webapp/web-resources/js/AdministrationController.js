@@ -1,8 +1,6 @@
 myApp.controller('administrationController', function ($scope, $http) {
     initDataPitcher($scope);
 
-    $scope.userName;
-
     $scope.initAdministratorHomePage = function(userName){
 
         console.log(userName);

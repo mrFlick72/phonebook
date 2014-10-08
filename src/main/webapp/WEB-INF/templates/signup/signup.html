@@ -24,7 +24,13 @@
             </div>
         </div>
 
-
+        <div class="form-group" th:classappend="${#fields.hasErrors('mail')}? 'has-error'">
+            <label for="mail" class="col-lg-2 control-label">E-Mail</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="mail" placeholder="E-Mail" th:field="*{mail}" />
+                <span class="help-block" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">Invalid E-Mail</span>
+            </div>
+        </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('userName')}? 'has-error'">
             <label for="userName" class="col-lg-2 control-label">User Name</label>
             <div class="col-lg-10">

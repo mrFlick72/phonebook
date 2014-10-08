@@ -27,6 +27,9 @@ public class PhoneBookUser {
     private String lastName;
 
     @Column
+    private String mail;
+
+    @Column
     @Enumerated
     private PhoneBookSecurityRole securityRole;
 
@@ -70,6 +73,14 @@ public class PhoneBookUser {
         this.lastName = lastName;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public PhoneBookSecurityRole getSecurityRole() {
         return securityRole;
     }
@@ -80,13 +91,14 @@ public class PhoneBookUser {
 
     @Override
     public String toString() {
-        return "PhonBookUser{" +
+        return "PhoneBookUser{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", securityRole=" + securityRole.getRole() +
+                ", email='" + mail + '\'' +
+                ", securityRole=" + securityRole +
                 '}';
     }
 }

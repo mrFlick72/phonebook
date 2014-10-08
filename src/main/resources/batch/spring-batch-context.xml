@@ -42,7 +42,7 @@
                 <property  name="lineTokenizer">
                     <bean  class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"
                            p:delimiter=","
-                           p:names="userName, password, firstName, lastName, securityRole"/>
+                           p:names="userName, password, firstName, lastName, mail, securityRole"/>
                 </property>
                 <property name="fieldSetMapper">
                     <bean id="bookUserFieldSetMapper"

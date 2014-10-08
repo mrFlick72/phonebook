@@ -19,7 +19,9 @@ public class PhoneBookUserFieldSetMapper implements FieldSetMapper<PhoneBookUser
 
         phoneBookUser.setUserName(fieldSet.readString(2));
         phoneBookUser.setPassword(fieldSet.readString(3));
-        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.valueOf(fieldSet.readString(4)));
+        phoneBookUser.setMail(fieldSet.readString(4));
+        
+        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.valueOf(fieldSet.readString(5)));
 
         return phoneBookUser;
     }

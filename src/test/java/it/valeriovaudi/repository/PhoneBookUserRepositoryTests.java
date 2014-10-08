@@ -28,6 +28,7 @@ public class PhoneBookUserRepositoryTests {
         phoneBookUser.setFirstName("Mike");
         phoneBookUser.setLastName("De Maggio");
         phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
+        phoneBookUser.setMail("mike.diMaggio@localhost");
         phoneBookUser.setUserName("mike72");
         phoneBookUser.setPassword("mike72");
 

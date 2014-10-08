@@ -15,6 +15,8 @@ create table phoneBookUser(
       firstName varchar_ignorecase(500) not null,
       lastName varchar_ignorecase(500) not null,
 
+      mail varchar_ignorecase(500) not null,
+
       username varchar_ignorecase(50) not null,
       password varchar_ignorecase(500) not null,
       securityRole varchar_ignorecase(50) not null

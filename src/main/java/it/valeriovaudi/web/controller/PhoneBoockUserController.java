@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by Valerio on 19/09/2014.
  */
@@ -27,8 +29,16 @@ public class PhoneBoockUserController {
     @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.GET)
     public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
         PhoneBookUser byUserName = phonBookUserRepository.findByUserName(userName);
-        System.out.println(byUserName);
         return byUserName;
     }
 
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/phoneBoockUsers", method = RequestMethod.GET)
+    public @ResponseBody List<PhoneBookUser> getPhoneBookUsers(){
+        List<PhoneBookUser> all = (List<PhoneBookUser>) phonBookUserRepository.findAll();
+
+        System.out.println(all);
+
+        return all;
+    }
 }

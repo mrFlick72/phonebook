@@ -8,4 +8,11 @@ myApp.controller('administrationController', function ($scope, $http) {
                 });
     }
 
+    $scope.initAdministratorUserList = function(){
+        $http.get('/phoneBoockUsers').
+            success(function (data) {
+                $scope.users = data;
+                console.log(data)
+            });
+    }
 });

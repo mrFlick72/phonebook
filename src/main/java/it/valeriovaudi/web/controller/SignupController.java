@@ -3,6 +3,7 @@ package it.valeriovaudi.web.controller;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.security.PhoneBookSecurityRole;
+import it.valeriovaudi.service.SignUpService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SignupController {
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
+    private SignUpService signUpService;
     private PhonBookUserRepository phonBookUserRepository;
     private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
@@ -33,11 +35,15 @@ public class SignupController {
         if (errors.hasErrors()) {
             return SIGNUP_VIEW_NAME;
         }
+
+        signUpService.phoneBookUserSingIn(phoneBookUser);
+        /*
+
         phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
         phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
         phonBookUserRepository.save(phoneBookUser);
 
-        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));
+        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));*/
         return "redirect:/index";
     }
 
@@ -51,4 +57,8 @@ public class SignupController {
         this.securityUserFactory = securityUserFactory;
     }
 
+    @Autowired
+    public void setSignUpService(SignUpService signUpService) {
+        this.signUpService = signUpService;
+    }
 }

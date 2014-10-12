@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-groovy="http://www.springframework.org/schema/integration/groovy"
+             xsi:schemaLocation="http://www.springframework.org/schema/integration
+                                 http://www.springframework.org/schema/integration/spring-integration.xsd
+                                 http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                   http://www.springframework.org/schema/integration/groovy
+                                   http://www.springframework.org/schema/integration/groovy/spring-integration-groovy.xsd">
+
+
+<gateway service-interface="it.valeriovaudi.service.SignUpService"
+             default-request-channel="singUpPhoneBoockUserMainRequestChannel"
+             default-reply-channel="singUpPhoneBoockUserMainResponseChannel"/>
+
+    <channel id="singUpPhoneBoockUserMainRequestChannel"/>
+
+    <chain input-channel="singUpPhoneBoockUserMainRequestChannel"
+            output-channel="singUpPhoneBoockUserMainResponseChannel">
+        <service-activator expression="@createNewUserService.saveNewUser(payload)"  requires-reply="true"/>
+    </chain>
+    
+    <publish-subscribe-channel id="singUpPhoneBoockUserMainResponseChannel"/>
+
+    <service-activator input-channel="singUpPhoneBoockUserMainResponseChannel">
+        <int-groovy:script>
+            org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(payload));
+        </int-groovy:script>
+    </service-activator>
+
+</beans:beans>

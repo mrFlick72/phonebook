@@ -37,13 +37,7 @@ public class SignupController {
         }
 
         signUpService.phoneBookUserSingIn(phoneBookUser);
-        /*
 
-        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
-        phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-        phonBookUserRepository.save(phoneBookUser);
-
-        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));*/
         return "redirect:/index";
     }
 

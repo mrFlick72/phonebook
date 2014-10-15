@@ -7,8 +7,8 @@
                                  http://www.springframework.org/schema/integration/spring-integration.xsd
                                  http://www.springframework.org/schema/beans
                                  http://www.springframework.org/schema/beans/spring-beans.xsd
-                                   http://www.springframework.org/schema/integration/groovy
-                                   http://www.springframework.org/schema/integration/groovy/spring-integration-groovy.xsd">
+                                 http://www.springframework.org/schema/integration/groovy
+                                 http://www.springframework.org/schema/integration/groovy/spring-integration-groovy.xsd">
 
 
 <gateway service-interface="it.valeriovaudi.service.SignUpService"

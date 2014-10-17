@@ -10,10 +10,9 @@
                                  http://www.springframework.org/schema/integration/groovy
                                  http://www.springframework.org/schema/integration/groovy/spring-integration-groovy.xsd">
 
-
-<gateway service-interface="it.valeriovaudi.service.SignUpService"
-             default-request-channel="singUpPhoneBoockUserMainRequestChannel"
-             default-reply-channel="singUpPhoneBoockUserMainResponseChannel"/>
+    <gateway service-interface="it.valeriovaudi.service.SignUpService"
+                 default-request-channel="singUpPhoneBoockUserMainRequestChannel"
+                 default-reply-channel="singUpPhoneBoockUserMainResponseChannel"/>
 
     <channel id="singUpPhoneBoockUserMainRequestChannel"/>
 

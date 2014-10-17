@@ -18,5 +18,6 @@
     <import resource="classpath:batch/spring-batch-context.xml"/>
 
     <import resource="classpath:starter-context.xml"/>
+    <import resource="classpath:support-context.xml"/>
     <import resource="classpath:integration/*.xml"/>
 </beans>

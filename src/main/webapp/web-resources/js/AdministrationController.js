@@ -1,18 +1,22 @@
-myApp.controller('administrationController', function ($scope, $http) {
+myApp.controller('administrationController', function ($scope, $http,$location) {
     initDataPitcher($scope);
 
     $scope.initAdministratorHomePage = function(user){
-        $http.get('/phoneBoockUser/'+user.userName).
+        $http.get('/phoneBoockUser/'+encodeURI(user.userName)).
                 success(function (data) {
                     $scope.administrator = data;
                 });
-    }
+    };
+
+    $scope.resetPassword=function(userName){
+        console.log('/phoneBoockUser/'+userName+"/password")
+        $http.put('/phoneBoockUser/'+userName+"/password");
+    };
 
     $scope.initAdministratorUserList = function(){
-        $http.get('/phoneBoockUsers').
+        $http.get('/phoneBoockUser').
             success(function (data) {
                 $scope.users = data;
-                console.log(data)
             });
     }
 });

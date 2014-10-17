@@ -1,9 +1,11 @@
 package it.valeriovaudi.batch;
 
+import com.icegreen.greenmail.util.GreenMail;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by Valerio on 22/08/2014.
@@ -11,6 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserItemProcessor implements ItemProcessor<PhoneBookUser,PhoneBookUser> {
 
     private SecurityUserFactory<PhoneBookUser> phonBookUserSecurityUserFactory;
+    private GreenMail greenMail;
+
+    @Value("#{embeddedMailServerStarter.greenMail}")
+    public void setGreenMail(GreenMail greenMail) {
+        this.greenMail = greenMail;
+    }
 
     @Autowired
     public void setPhonBookUserSecurityUserFactory(SecurityUserFactory<PhoneBookUser> phonBookUserSecurityUserFactory) {
@@ -19,7 +27,8 @@ public class UserItemProcessor implements ItemProcessor<PhoneBookUser,PhoneBookU
 
     @Override
     public PhoneBookUser process(PhoneBookUser phoneBookUser) throws Exception {
-        PhoneBookUser phoneBookUser1 = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-        return phoneBookUser1;
+        PhoneBookUser phoneBookUserAux = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
+        greenMail.setUser(phoneBookUserAux.getMail(),phoneBookUserAux.getUserName(),phoneBookUserAux.getPassword());
+        return phoneBookUserAux;
     }
 }

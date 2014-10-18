@@ -21,3 +21,14 @@ create table phoneBookUser(
       password varchar_ignorecase(500) not null,
       securityRole varchar_ignorecase(50) not null
 );
+
+create table nonce(
+      id INT IDENTITY NOT NULL PRIMARY KEY ,
+      nonce varchar_ignorecase(512) not null unique ,
+      userName varchar_ignorecase(500) not null,
+
+      start timestamp  not null,
+
+      stop timestamp  not null,
+      used INTEGER (1) not null,
+);

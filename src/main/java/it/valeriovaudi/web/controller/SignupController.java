@@ -2,11 +2,9 @@ package it.valeriovaudi.web.controller;
 
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
-import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.service.SignUpService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;

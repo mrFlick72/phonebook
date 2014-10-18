@@ -9,9 +9,13 @@
 
     <context:annotation-config/>
 
+    <context:component-scan base-package="it.valeriovaudi.service"/>
+
     <import resource="classpath:repository-context.xml"/>
     <import resource="classpath:spring-security-context.xml"/>
     <import resource="classpath:factory-context.xml"/>
+    <import resource="classpath:starter-context.xml"/>
+    <import resource="classpath:support-context.xml"/>
 
     <import resource="classpath:batch/spring-batch-context.xml"/>
 

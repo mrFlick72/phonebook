@@ -2,6 +2,7 @@ package it.valeriovaudi.web.controller;
 
 import com.icegreen.greenmail.util.GreenMail;
 import it.valeriovaudi.repository.PhonBookUserRepository;
+import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,10 +23,16 @@ import java.util.List;
 public class PhoneBoockUserController {
 
     private PhonBookUserRepository phonBookUserRepository;
+    private PasswordService passwordService;
 
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
         this.phonBookUserRepository = phonBookUserRepository;
+    }
+
+    @Autowired
+    public void setPasswordService(PasswordService passwordService) {
+        this.passwordService = passwordService;
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
@@ -47,10 +54,14 @@ public class PhoneBoockUserController {
 
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}/password", method = RequestMethod.PUT)
-    public HttpEntity<Boolean> resetPassword(@PathVariable(value = "userName") String userName){
+    @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
+    public HttpEntity<Boolean> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
 
         System.out.println(userName);
+        System.out.println(mail);
+
+        passwordService.resetPassword(userName,mail);
+
         return new HttpEntity<Boolean>(true);
     }
 }

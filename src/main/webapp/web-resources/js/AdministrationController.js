@@ -1,4 +1,4 @@
-myApp.controller('administrationController', function ($scope, $http,$location) {
+myApp.controller('administrationController', function ($scope, $http) {
     initDataPitcher($scope);
 
     $scope.initAdministratorHomePage = function(user){
@@ -8,9 +8,9 @@ myApp.controller('administrationController', function ($scope, $http,$location) 
                 });
     };
 
-    $scope.resetPassword=function(userName){
-        console.log('/phoneBoockUser/'+userName+"/password")
-        $http.put('/phoneBoockUser/'+userName+"/password");
+    $scope.resetPassword=function(userName,mail){
+        var url = ['/phoneBoockUser',userName,mail,'password'];
+        $http.put(url.join('/'));
     };
 
     $scope.initAdministratorUserList = function(){

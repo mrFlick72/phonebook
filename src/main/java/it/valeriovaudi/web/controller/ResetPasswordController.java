@@ -1,17 +1,13 @@
 package it.valeriovaudi.web.controller;
 
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
-import it.valeriovaudi.repository.PhonBookUserRepository;
-import it.valeriovaudi.repository.security.NonceRepository;
 import it.valeriovaudi.service.PasswordService;
-import it.valeriovaudi.web.model.PhoneBookUser;
-import it.valeriovaudi.web.model.security.Nonce;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * Created by Valerio on 18/10/2014.

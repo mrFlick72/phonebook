@@ -1,6 +1,5 @@
 package it.valeriovaudi.batch;
 
-import com.icegreen.greenmail.user.GreenMailUser;
 import com.icegreen.greenmail.util.GreenMail;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.web.model.PhoneBookUser;

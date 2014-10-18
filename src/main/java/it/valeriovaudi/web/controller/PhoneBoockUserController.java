@@ -1,11 +1,9 @@
 package it.valeriovaudi.web.controller;
 
-import com.icegreen.greenmail.util.GreenMail;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

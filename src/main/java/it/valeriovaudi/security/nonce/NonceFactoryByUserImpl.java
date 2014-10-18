@@ -1,6 +1,5 @@
 package it.valeriovaudi.security.nonce;
 
-import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import it.valeriovaudi.web.model.security.Nonce;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -20,9 +20,6 @@ public class ResetPasswordTest {
 
     @Test
     public void test() throws InterruptedException {
-
         passwordService.resetPassword("admin","admin@localhost");
-
-        Thread.sleep(100000000000000L);
     }
 }

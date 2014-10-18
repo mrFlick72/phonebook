@@ -23,14 +23,10 @@ public class ResetPasswordController {
     }
 
     @RequestMapping(value = "/resetPassword",method = RequestMethod.GET)
-    public void getUserPage(@RequestParam(value = "userName") String userName,
-                            @RequestParam(value = "nonce") String nonce,
+    public void getUserPage(@RequestParam(value = "nonce") String nonce,
                             Model model){
 
-        PhoneBookUser byUserName = phonBookUserRepository.findByUserName(userName);
-        Assert.notNull(byUserName);
-
-
+        System.out.println(nonce);
         model.addAttribute("controller","resetPasswordController");
     }
 

@@ -37,10 +37,6 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.POST)
     public void resetFormDataCollect(@RequestParam(value = "userName") String userName,
                                      @RequestParam(value = "mail") String mail) {
-
-        System.out.println(userName);
-        System.out.println(mail);
-
         passwordService.resetPassword(userName,mail);
     }
 }

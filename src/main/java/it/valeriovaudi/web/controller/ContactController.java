@@ -38,7 +38,7 @@ public class ContactController {
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getContact(@PathVariable("contactId") long contactId){
+    public ResponseEntity<Contact> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
         return new ResponseEntity<>(contact, HttpStatus.OK);
     }

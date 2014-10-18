@@ -36,30 +36,20 @@ public class PhoneBoockUserController {
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.GET)
     public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
-        PhoneBookUser byUserName = phonBookUserRepository.findByUserName(userName);
-        return byUserName;
+        return phonBookUserRepository.findByUserName(userName);
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser", method = RequestMethod.GET)
     public @ResponseBody List<PhoneBookUser> getPhoneBookUsers(){
-        List<PhoneBookUser> all = (List<PhoneBookUser>) phonBookUserRepository.findAll();
-
-        System.out.println(all);
-
-        return all;
+        return (List<PhoneBookUser>) phonBookUserRepository.findAll();
     }
 
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
     public HttpEntity<Boolean> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
-
-        System.out.println(userName);
-        System.out.println(mail);
-
         passwordService.resetPassword(userName,mail);
-
-        return new HttpEntity<Boolean>(true);
+        return new HttpEntity<>(true);
     }
 }

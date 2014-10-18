@@ -19,8 +19,6 @@ public class SignupController {
     private static final String SIGNUP_VIEW_NAME = "signup/signup";
 
     private SignUpService signUpService;
-    private PhonBookUserRepository phonBookUserRepository;
-    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
 	@RequestMapping(value = "signup")
 	public String signup(Model model) {
@@ -37,16 +35,6 @@ public class SignupController {
         signUpService.phoneBookUserSingIn(phoneBookUser);
 
         return "redirect:/index";
-    }
-
-    @Autowired
-    public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
-        this.phonBookUserRepository = phonBookUserRepository;
-    }
-
-    @Autowired
-    public void setSecurityUserFactory(SecurityUserFactory securityUserFactory) {
-        this.securityUserFactory = securityUserFactory;
     }
 
     @Autowired

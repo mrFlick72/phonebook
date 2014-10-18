@@ -4,23 +4,17 @@
     <head th:replace="fragments/head :: head(#{title})"></head>
     <body th:attr="ng-controller=${controller}">
 
-        <form action="resetPassword" method="post">
+        <form action="/resetPassword/reset" th:action="@{/resetPassword/reset}" method="post">
             <div class="row">
                 <div class="col-lg-2">
-
+                    New Password:
                 </div>
-                <div class="col-lg-4">
-
+                <div class="col-lg-10">
+                    <input name="newPassword" type="password" placeholder="insert the new password"/>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-2">
-
-                    </div>
-                    <div class="col-lg-4">
-
-                    </div>
-                </div>
+            </div>
+            <div class="row">
+                <button type="submit">submit data</button>
             </div>
         </form>
     </body>

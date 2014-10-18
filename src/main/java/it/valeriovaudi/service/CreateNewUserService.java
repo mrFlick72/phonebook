@@ -19,7 +19,6 @@ public class CreateNewUserService {
         phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
         phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
         PhoneBookUser save = phonBookUserRepository.save(phoneBookUser);
-
         return save;
     }
 

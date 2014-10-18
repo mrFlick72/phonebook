@@ -6,4 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by Valerio on 18/10/2014.
  */
-public interface NonceRepository extends CrudRepository<Nonce,Long> {}
+public interface NonceRepository extends CrudRepository<Nonce,Long> {
+
+    Nonce findByNonce(String nonce);
+}

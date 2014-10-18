@@ -32,7 +32,7 @@ public class NonceRepositoryTests {
     @Test
     public void insertTest(){
         Nonce nonce;
-        for(int i = 0 ; i < 9999L ; i++){
+        for(int i = 0 ; i < 1000L ; i++){
             nonce = nonceRepository.save(getNonce(true));
             System.out.println(nonce);
         }
@@ -42,6 +42,9 @@ public class NonceRepositoryTests {
             nonce = nonceRepository.save(getNonce(false));
             System.out.println(nonce);
 
+            Nonce byNonce = nonceRepository.findByNonce(nonce.getNonce());
+            System.out.println(byNonce);
+
 
             nonce = nonceRepository.save(getNonce(false));
             System.out.println(nonce);
@@ -49,6 +52,7 @@ public class NonceRepositoryTests {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
+
 
     }
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="elenco-telefonico"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head(#{title})"></head>
+    <body>
+        <form class="form-narrow form-horizontal" action="/resetPassword/resetFormDataCollect" th:action="@{/resetPassword/resetFormDataCollect}" method="post">
+            <fieldset>
+                <legend>Please insert the data for password recovery</legend>
+                <div class="row">
+                    <div class="form-group">
+                        <span class="col-lg-2">
+                            Mail:
+                        </span>
+                        <div class="col-lg-4">
+                            <input class="form-control" name="mail" type="email" placeholder="insert your mail"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <span class="col-lg-2">
+                            User Name:
+                        </span>
+                        <div class="col-lg-4">
+                            <input class="form-control" name="userName" type="text" placeholder="insert your user name"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button class="btn btn-default" type="submit" >submit data</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </body>
+</html>
+

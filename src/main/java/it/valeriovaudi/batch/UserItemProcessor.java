@@ -1,5 +1,6 @@
 package it.valeriovaudi.batch;
 
+import com.icegreen.greenmail.user.GreenMailUser;
 import com.icegreen.greenmail.util.GreenMail;
 import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.web.model.PhoneBookUser;
@@ -27,8 +28,9 @@ public class UserItemProcessor implements ItemProcessor<PhoneBookUser,PhoneBookU
 
     @Override
     public PhoneBookUser process(PhoneBookUser phoneBookUser) throws Exception {
+        greenMail.setUser(phoneBookUser.getMail(), phoneBookUser.getUserName(), phoneBookUser.getPassword());
         PhoneBookUser phoneBookUserAux = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-        greenMail.setUser(phoneBookUserAux.getMail(),phoneBookUserAux.getUserName(),phoneBookUserAux.getPassword());
+
         return phoneBookUserAux;
     }
 }

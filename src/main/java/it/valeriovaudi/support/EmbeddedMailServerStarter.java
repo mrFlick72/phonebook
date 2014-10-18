@@ -2,6 +2,7 @@ package it.valeriovaudi.support;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -10,6 +11,12 @@ import javax.annotation.PreDestroy;
  * Created by seminario on 9/13/14.
  */
 public class EmbeddedMailServerStarter {
+
+    private static Logger logger = Logger.getLogger(EmbeddedMailServerStarter.class);
+
+    public static final String ADMIN_MAIL = "admin@localhost";
+    public static final String ADMIN_USER = "admin";
+    public static final String ADMIN_PASSWORD = "admin";
 
     public static final int SMTP_PORT = 25;
     public static final int IMAP_PORT = 143;
@@ -26,8 +33,9 @@ public class EmbeddedMailServerStarter {
         ServerSetup pop3Setup = new ServerSetup(POP3_PORT,LOCAL_HOST_IP,ServerSetup.PROTOCOL_POP3);
 
         greenMail = new GreenMail(new ServerSetup[] {smtpSetup,imapSetup,pop3Setup});
-
         greenMail.start();
+
+        logger.info("start del server: " + greenMail);
     }
 
     public GreenMail getGreenMail() {

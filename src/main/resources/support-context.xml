@@ -4,6 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+    <bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl"
+          p:host="#{T(it.valeriovaudi.support.EmbeddedMailServerStarter).LOCAL_HOST_IP}"
+          p:port="#{T(it.valeriovaudi.support.EmbeddedMailServerStarter).SMTP_PORT}"
+          p:username="#{T(it.valeriovaudi.support.EmbeddedMailServerStarter).ADMIN_USER}"
+          p:password="#{T(it.valeriovaudi.support.EmbeddedMailServerStarter).ADMIN_PASSWORD}"/>
+
     <bean id="embeddedMailServerStarter"
           class="it.valeriovaudi.support.EmbeddedMailServerStarter"/>
 
@@ -13,6 +21,6 @@
 
     <bean id="nonceFactoryByUser"
           class="it.valeriovaudi.security.nonce.NonceFactoryByUserImpl"
-            p:nonceFactory-ref="createNonce"/>
+          p:nonceFactory-ref="createNonce"/>
 
 </beans>

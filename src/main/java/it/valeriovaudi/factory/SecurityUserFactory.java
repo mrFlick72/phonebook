@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface SecurityUserFactory<T> {
 
-    Authentication getAutenticatedUser(PhoneBookUser phoneBookUserDTO);
+    Authentication getAutenticatedUser(T t);
 
-    UserDetails createUser(PhoneBookUser phoneBookUserDTO);
+    UserDetails createUser(T t);
 
     T securityAccontWithPasswordEncoded(T t);
 }

@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Valerio on 19/09/2014.
  */
 @Controller
-public class PhoneBoockUserController {
+public class PhoneBookUserController {
 
     private PhonBookUserRepository phonBookUserRepository;
     private PasswordService passwordService;

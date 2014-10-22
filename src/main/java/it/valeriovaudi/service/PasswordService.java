@@ -3,10 +3,7 @@ package it.valeriovaudi.service;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.Header;
-import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.Payload;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Valerio on 17/10/2014.

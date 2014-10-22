@@ -1,7 +1,5 @@
 package it.valeriovaudi.web.controller;
 
-import it.valeriovaudi.factory.SecurityUserFactory;
-import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.SignUpService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;

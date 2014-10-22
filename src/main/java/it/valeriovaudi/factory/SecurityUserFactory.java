@@ -1,6 +1,5 @@
 package it.valeriovaudi.factory;
 
-import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 

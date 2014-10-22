@@ -39,15 +39,6 @@
     <mail:outbound-channel-adapter channel="sendMai4ResetPasswordMainRequestChannel"
                                    mail-sender="mailSender"/>
 
-    <!--Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
-
-    String userName = nonceRepositoryByNonce.getUserName();
-    PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-    phoneBookUser.setPassword(newPassword);
-    phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-
-    phonBookUserRepository.save(phoneBookUser);-->
-
     <channel id="restetPasswordServiceMainRequestChannel"/>
     <channel id="restetPasswordServiceMainResponseChannel"/>
 

@@ -1,11 +1,6 @@
 package it.valeriovaudi.web.controller;
 
-import it.valeriovaudi.factory.SecurityUserFactory;
-import it.valeriovaudi.repository.PhonBookUserRepository;
-import it.valeriovaudi.repository.security.NonceRepository;
 import it.valeriovaudi.service.PasswordService;
-import it.valeriovaudi.web.model.PhoneBookUser;
-import it.valeriovaudi.web.model.security.Nonce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,24 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class ResetPasswordController {
 
     private PasswordService passwordService;
-    private NonceRepository nonceRepository;
-    private PhonBookUserRepository phonBookUserRepository;
-    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
-
-    @Autowired
-    public void setNonceRepository(NonceRepository nonceRepository) {
-        this.nonceRepository = nonceRepository;
-    }
-
-    @Autowired
-    public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
-        this.phonBookUserRepository = phonBookUserRepository;
-    }
-
-    @Autowired
-    public void setSecurityUserFactory(SecurityUserFactory<PhoneBookUser> securityUserFactory) {
-        this.securityUserFactory = securityUserFactory;
-    }
 
     @Autowired
     public void setPasswordService(PasswordService passwordService) {
@@ -53,14 +30,6 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public void resetPassword(@ModelAttribute(value = "nonce") String nonce,
                               @RequestParam(value = "newPassword") String newPassword) {
-        /*Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
-
-        String userName = nonceRepositoryByNonce.getUserName();
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-        phoneBookUser.setPassword(newPassword);
-        phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-
-        phonBookUserRepository.save(phoneBookUser);*/
         passwordService.resetPassword(newPassword,nonce);
     }
 
@@ -70,6 +39,6 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.POST)
     public void resetFormDataCollect(@RequestParam(value = "userName") String userName,
                                      @RequestParam(value = "mail") String mail) {
-        passwordService.createNonce(userName,mail);
+        passwordService.createNonce(userName, mail);
     }
 }

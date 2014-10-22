@@ -5,8 +5,6 @@ import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-
 /**
  * Created by Valerio on 22/10/2014.
  */

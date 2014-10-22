@@ -45,8 +45,7 @@ public class ResetPasswordController {
     }
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.GET)
-    public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,
-                            Model model) {
+    public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,Model model) {
         model.addAttribute("nonce", nonce);
         model.addAttribute("controller", "resetPasswordController");
     }
@@ -54,14 +53,15 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public void resetPassword(@ModelAttribute(value = "nonce") String nonce,
                               @RequestParam(value = "newPassword") String newPassword) {
-        Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
+        /*Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
 
         String userName = nonceRepositoryByNonce.getUserName();
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
         phoneBookUser.setPassword(newPassword);
         phoneBookUser = securityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
 
-        phonBookUserRepository.save(phoneBookUser);
+        phonBookUserRepository.save(phoneBookUser);*/
+        passwordService.resetPassword(newPassword,nonce);
     }
 
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.GET)
@@ -70,6 +70,6 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.POST)
     public void resetFormDataCollect(@RequestParam(value = "userName") String userName,
                                      @RequestParam(value = "mail") String mail) {
-        passwordService.resetPassword(userName,mail);
+        passwordService.createNonce(userName,mail);
     }
 }

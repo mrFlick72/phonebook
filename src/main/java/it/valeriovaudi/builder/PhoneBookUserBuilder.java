@@ -1,5 +1,6 @@
 package it.valeriovaudi.builder;
 
+import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,12 +12,24 @@ import javax.persistence.Column;
  */
 public class PhoneBookUserBuilder {
     private PhoneBookUser phoneBookUser;
-
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
+    }
+
+    public PhoneBookUserBuilder() {
+        this.phoneBookUser = new PhoneBookUser();
+    }
+
+    public static PhoneBookUserBuilder newPhoneBookUserBuilder(){
+        return new PhoneBookUserBuilder();
+    }
+
+    public PhoneBookUserBuilder buildByPhoneBookUserBuilder(PhoneBookUser phoneBookUser){
+        this.phoneBookUser = phoneBookUser;
+        return this;
     }
 
     public PhoneBookUserBuilder buildId(Long id){
@@ -46,6 +59,11 @@ public class PhoneBookUserBuilder {
 
     public PhoneBookUserBuilder buildMail(String mail){
         this.phoneBookUser.setMail(mail);
+        return this;
+    }
+
+    public PhoneBookUserBuilder buildSecurityRole(PhoneBookSecurityRole securityRole){
+        this.phoneBookUser.setSecurityRole(securityRole);
         return this;
     }
 

@@ -18,7 +18,11 @@
 
     <chain input-channel="singUpPhoneBoockUserMainRequestChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">
-        <service-activator expression="@createNewUserService.saveNewUser(payload)"  requires-reply="true"/>
+        <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload)
+                                                            .buildPassword(payload.password)
+                                                            .buildSecurityRole(T(it.valeriovaudi.security.PhoneBookSecurityRole).USER)
+                                                            .buildPhoneBookUser()"  requires-reply="true"/>
+        <service-activator expression="@phonBookUserRepository.save(payload)" requires-reply="true"/>
     </chain>
     
     <publish-subscribe-channel id="singUpPhoneBoockUserMainResponseChannel"/>

@@ -23,10 +23,10 @@
     <chain id="createNonceChain"
             input-channel="createNonceServiceMainRequestChannel"
             output-channel="sendMai4ResetPasswordMainRequestChannel">
-        <service-activator expression="@phonBookUserRepository.findByUserName(payload)"/>
-        <service-activator expression="@nonceFactoryByUser.getNonce(payload)"/>
-        <service-activator expression="@nonceRepository.save(payload)"/>
-        <service-activator expression="T(java.lang.String).format('${mail.resetpassword.messageformat}' ,payload.nonce)"/>
+        <service-activator expression="@phonBookUserRepository.findByUserName(payload)" requires-reply="true"/>
+        <service-activator expression="@nonceFactoryByUser.getNonce(payload)" requires-reply="true"/>
+        <service-activator expression="@nonceRepository.save(payload)" requires-reply="true"/>
+        <service-activator expression="T(java.lang.String).format('${mail.resetpassword.messageformat}' ,payload.nonce)" requires-reply="true"/>
         <mail:header-enricher>
             <mail:from value="${mail.admin}"/>
             <mail:to expression="headers['mail']"/>
@@ -45,9 +45,9 @@
     <chain id="resetPasswordChain"
            input-channel="restetPasswordServiceMainRequestChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">
-        <service-activator expression="@nonceRepository.findByNonce(payload)"/>
-        <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)"/>
-        <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload).buildPassword(headers['password']).buildPhoneBookUser()"/>
+        <service-activator expression="@nonceRepository.findByNonce(payload)" requires-reply="true"/>
+        <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)" requires-reply="true"/>
+        <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload).buildPassword(headers['password']).buildPhoneBookUser()" requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.save(payload)" requires-reply="true"/>
     </chain>
 

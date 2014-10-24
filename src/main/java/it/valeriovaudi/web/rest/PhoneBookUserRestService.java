@@ -1,10 +1,12 @@
-package it.valeriovaudi.service;
+package it.valeriovaudi.web.rest;
 
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,17 +50,16 @@ public class PhoneBookUserRestService {
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
-    public HttpEntity<Boolean> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
+    public HttpEntity<Void> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
         passwordService.resetPassword(userName,mail);
-        return new HttpEntity<>(true);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}", method = RequestMethod.PUT)
-    public HttpEntity<Boolean> resetMail(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
+    public HttpEntity<Void> resetMail(@PathVariable(value = "userName") String userName, @PathVariable(value = "mail") String mail){
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
         phoneBookUser.setMail(mail);
-
-        return new HttpEntity<>(true);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

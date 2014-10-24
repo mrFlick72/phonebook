@@ -1,4 +1,4 @@
-package it.valeriovaudi.service;
+package it.valeriovaudi.web.rest;
 
 import it.valeriovaudi.repository.ContactRepository;
 import it.valeriovaudi.repository.PhonBookUserRepository;

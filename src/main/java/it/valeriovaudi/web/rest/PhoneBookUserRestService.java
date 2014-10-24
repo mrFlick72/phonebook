@@ -51,7 +51,7 @@ public class PhoneBookUserRestService {
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
     public HttpEntity<Void> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
-        passwordService.resetPassword(userName,mail);
+        passwordService.createNonce(userName,mail);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

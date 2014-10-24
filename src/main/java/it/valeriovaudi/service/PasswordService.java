@@ -11,8 +11,8 @@ import org.springframework.integration.annotation.Payload;
 
 public interface PasswordService {
 
-    @Gateway(requestChannel = "createNonceServiceMainRequestChannel")
-    void createNonce(@Payload String userName, @Header("mail") String mail);
+    @Gateway(requestChannel = "createNonceServiceMainRequestChannel", replyChannel = "createNonceServiceMainResponseChannel")
+    String createNonce(@Payload String userName, @Header("mail") String mail);
 
     @Gateway(requestChannel = "restetPasswordServiceMainRequestChannel",replyChannel = "singUpPhoneBoockUserMainResponseChannel")
     PhoneBookUser resetPassword(@Header(value = "password")String resetPassword, @Payload String nonce);

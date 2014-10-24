@@ -18,27 +18,31 @@
     <gateway id="resetPasswordService"
              service-interface="it.valeriovaudi.service.PasswordService"/>
 
+    <!--create nonce pipeline-->
     <channel id="createNonceServiceMainRequestChannel"/>
+    <publish-subscribe-channel id="createNonceServiceMainResponseChannel"/>
 
     <chain id="createNonceChain"
             input-channel="createNonceServiceMainRequestChannel"
-            output-channel="sendMai4ResetPasswordMainRequestChannel">
+            output-channel="createNonceServiceMainResponseChannel">
         <service-activator expression="@phonBookUserRepository.findByUserName(payload)" requires-reply="true"/>
         <service-activator expression="@nonceFactoryByUser.getNonce(payload)" requires-reply="true"/>
-        <service-activator expression="@nonceRepository.save(payload)" requires-reply="true"/>
-        <service-activator expression="T(java.lang.String).format('${mail.resetpassword.messageformat}' ,payload.nonce)" requires-reply="true"/>
+        <service-activator expression="@nonceRepository.save(payload).nonce" requires-reply="true"/>
+    </chain>
+
+
+    <chain id="createNonceSendMailChain"
+           input-channel="createNonceServiceMainResponseChannel">
+        <service-activator expression="T(java.lang.String).format('${mail.resetpassword.messageformat}' ,payload)" requires-reply="true"/>
         <mail:header-enricher>
             <mail:from value="${mail.admin}"/>
             <mail:to expression="headers['mail']"/>
             <mail:subject value="${mail.resetpassword.subject}"/>
         </mail:header-enricher>
+        <mail:outbound-channel-adapter mail-sender="mailSender"/>
     </chain>
 
-    <channel id="sendMai4ResetPasswordMainRequestChannel"/>
-
-    <mail:outbound-channel-adapter channel="sendMai4ResetPasswordMainRequestChannel"
-                                   mail-sender="mailSender"/>
-
+    <!--reset passwor pipeline-->
     <channel id="restetPasswordServiceMainRequestChannel"/>
     <channel id="restetPasswordServiceMainResponseChannel"/>
 

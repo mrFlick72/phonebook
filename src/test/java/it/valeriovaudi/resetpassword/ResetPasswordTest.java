@@ -20,7 +20,15 @@ public class ResetPasswordTest extends AbstractTest {
     private PasswordService passwordService;
 
     @Test
+    public void test() throws InterruptedException {
+        String nonce = passwordService.createNonce("admin", "admin@localhost");
+        logger.info(nonce);
+        passwordService.resetPassword("admin123",nonce);
+    }
+
+    @Test
     public void createNonceTest() throws InterruptedException {
-        passwordService.createNonce("admin","admin@localhost");
+        String nonce = passwordService.createNonce("admin", "admin@localhost");
+        logger.info(nonce);
     }
 }

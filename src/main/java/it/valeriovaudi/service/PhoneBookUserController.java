@@ -1,4 +1,4 @@
-package it.valeriovaudi.web.controller;
+package it.valeriovaudi.service;
 
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
@@ -50,6 +50,15 @@ public class PhoneBookUserController {
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
     public HttpEntity<Boolean> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
         passwordService.resetPassword(userName,mail);
+        return new HttpEntity<>(true);
+    }
+
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}", method = RequestMethod.PUT)
+    public HttpEntity<Boolean> resetMail(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
+        phoneBookUser.setMail(mail);
+
         return new HttpEntity<>(true);
     }
 }

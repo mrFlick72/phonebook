@@ -35,7 +35,7 @@ public class PhoneBookUserRepositoryTests extends AbstractTest {
 
         PhoneBookUser mike72 = phonBookUserRepository.findByUserName("mike72");
 
-        System.out.println(mike72);
+        logger.info(mike72);
         Assert.assertNotNull(mike72);
     }
 }

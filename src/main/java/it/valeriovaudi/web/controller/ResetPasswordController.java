@@ -1,5 +1,6 @@
 package it.valeriovaudi.web.controller;
 
+import it.valeriovaudi.integration.AcceptableNonceRouter;
 import it.valeriovaudi.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,15 +22,12 @@ public class ResetPasswordController {
         this.passwordService = passwordService;
     }
 
-    // todo insert the logic for reject ger request for nonce that are used or expired
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.GET)
     public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,Model model) {
-
         model.addAttribute("nonce", nonce);
         model.addAttribute("controller", "resetPasswordController");
     }
 
-    // todo insert the logic in the pipe line resetPassword for reject ger request for nonce that are used or expired
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public void resetPassword(@ModelAttribute(value = "nonce") String nonce,
                               @RequestParam(value = "newPassword") String newPassword) {

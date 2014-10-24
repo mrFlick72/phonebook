@@ -1,5 +1,6 @@
 package it.valeriovaudi.repository;
 
+import it.valeriovaudi.controller.AbstractTest;
 import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Assert;
@@ -13,9 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by Valerio on 22/08/2014.
  */
 
-@ContextConfiguration(locations = {"classpath:application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class PhoneBookUserRepositoryTests {
+public class PhoneBookUserRepositoryTests extends AbstractTest {
 
     @Autowired
     private PhonBookUserRepository phonBookUserRepository;

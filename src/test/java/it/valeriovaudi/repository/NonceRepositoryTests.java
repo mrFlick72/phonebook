@@ -1,10 +1,12 @@
 package it.valeriovaudi.repository;
 
+import it.valeriovaudi.controller.AbstractTest;
 import it.valeriovaudi.repository.security.NonceRepository;
 import it.valeriovaudi.security.nonce.NonceFactory;
 import it.valeriovaudi.security.nonce.NonceFactoryByUser;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import it.valeriovaudi.web.model.security.Nonce;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,8 @@ import java.util.Date;
 /**
  * Created by Valerio on 18/10/2014.
  */
-@ContextConfiguration(locations = {"classpath:application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class NonceRepositoryTests {
+
+public class NonceRepositoryTests extends AbstractTest {
 
     @Autowired
     private NonceRepository nonceRepository;
@@ -34,23 +35,22 @@ public class NonceRepositoryTests {
         Nonce nonce;
         for(int i = 0 ; i < 1000L ; i++){
             nonce = nonceRepository.save(getNonce(true));
-            System.out.println(nonce);
+            logger.info(nonce);
         }
 
         try{
-
             nonce = nonceRepository.save(getNonce(false));
-            System.out.println(nonce);
+            logger.info(nonce);
 
             Nonce byNonce = nonceRepository.findByNonce(nonce.getNonce());
-            System.out.println(byNonce);
+            logger.info(byNonce);
 
 
             nonce = nonceRepository.save(getNonce(false));
-            System.out.println(nonce);
+            logger.info(nonce);
 
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
 
 

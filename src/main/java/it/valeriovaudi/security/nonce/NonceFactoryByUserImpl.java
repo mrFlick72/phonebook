@@ -18,7 +18,8 @@ public class NonceFactoryByUserImpl implements NonceFactoryByUser {
         Nonce nonce = new Nonce();
 
         Date startDate = new Date();
-        Date stopDate = new Date();
+        long stopDateTime = startDate.getTime() + (24*60*60*1000);
+        Date stopDate = new Date(stopDateTime);
 
         nonce.setStart(startDate);
         nonce.setStop(stopDate);

@@ -69,4 +69,11 @@ public class PhoneBookUserBuilder {
         return phoneBookUser;
     }
 
+    @Override
+    public String toString() {
+        return "PhoneBookUserBuilder{" +
+                "phoneBookUser=" + phoneBookUser +
+                ", passwordEncoder=" + passwordEncoder +
+                '}';
+    }
 }

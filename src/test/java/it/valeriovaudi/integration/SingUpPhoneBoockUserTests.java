@@ -1,8 +1,10 @@
 package it.valeriovaudi.integration;
 
 import it.valeriovaudi.builder.PhoneBookUserBuilder;
+import it.valeriovaudi.controller.AbstractTest;
 import it.valeriovaudi.service.SignUpService;
 import it.valeriovaudi.web.model.PhoneBookUser;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +17,27 @@ import sun.security.util.Password;
  * Created by Valerio on 22/10/2014.
  */
 
-@ContextConfiguration(locations = {"classpath:application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class SingUpPhoneBoockUserTests {
+public class SingUpPhoneBoockUserTests extends AbstractTest{
 
 
     @Autowired
     private SignUpService signUpService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    PhoneBookUserBuilder phoneBookUserBuilder;
 
     @Test
     public void singUpPhoneBoockUserTest(){
-        PhoneBookUserBuilder phoneBookUserBuilder = PhoneBookUserBuilder.newPhoneBookUserBuilder();
-        phoneBookUserBuilder.setPasswordEncoder(passwordEncoder);
 
-        PhoneBookUser phoneBookUser = phoneBookUserBuilder.buildFirstName("Valerio").buildLastName("Vaudi").buildMail("valerio.vaudi@gmail.com").buildPassword("val").buildUserName("val").buildPhoneBookUser();
+        logger.info(phoneBookUserBuilder);
+        PhoneBookUser phoneBookUser = phoneBookUserBuilder.buildFirstName("Valerio")
+                                                           .buildLastName("Vaudi")
+                                                           .buildMail("valerio.vaudi@gmail.com")
+                                                           .buildPassword("val")
+                                                           .buildUserName("val")
+                                                           .buildPhoneBookUser();
+        logger.info(phoneBookUser);
+        Assert.assertNotNull(phoneBookUser);
 
         signUpService.phoneBookUserSingIn(phoneBookUser);
     }

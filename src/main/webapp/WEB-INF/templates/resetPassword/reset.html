@@ -7,15 +7,17 @@
         <form class="form-narrow form-horizontal" action="/resetPassword/reset" th:action="@{/resetPassword/reset}" method="post">
             <fieldset>
                 <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        New Password:
-                    </div>
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                        <input name="newPassword" type="password" placeholder="insert the new password"/>
+                    <div class="control-form">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            New Password:
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <input name="newPassword" type="password" placeholder="insert the new password"/>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <button type="submit">submit data</button>
+                    <input class="btn btn-default" type="submit" value="submit data"/>
                 </div>
             </fieldset>
         </form>

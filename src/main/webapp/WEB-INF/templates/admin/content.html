@@ -14,7 +14,7 @@
                  id="home"
                  th:attr="ng-init='initAdministratorHomePage({userName: \''+${phoneBoockUserName}+'\'})'" >
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         {{administrator.firstName}}
                         {{administrator.lastName}}
                         {{administrator.userName}}
@@ -26,7 +26,7 @@
                  id="users"
                  th:attr="ng-init='initAdministratorUserList()'">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <table class="table">
                             <thead>
                                 <th th:text="#{user.table.header.firstName.label}">First Name</th>
@@ -50,14 +50,14 @@
             </div>
             <div class="tab-pane" id="profile">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         Messages content
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="settings">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         Settings content
                     </div>
                 </div>

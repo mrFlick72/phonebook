@@ -10,26 +10,26 @@
                     <ng-form name="newContactPopUpForm" class="form-horizontal">
                         <fieldset>
                             <div class="form-group">
-                                <label for="firstNameField" class="col-lg-4" th:text="#{firstName.label(':')}"></label>
-                                <div class="col-lg-6">
+                                <label for="firstNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}"></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastNameField" class="col-lg-4" th:text="#{lastName.label(':')}"></label>
-                                <div class="col-lg-6">
+                                <label for="lastNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}"></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="birthField" class="col-lg-4" th:text="#{birth.label(':')}"></label>
-                                <div class="col-lg-6">
+                                <label for="birthField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}"></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <input id="birthField" class="form-control" type="text" ng-model="newContact.birth" ui-date="dateOptions"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telephoneNumberField" class="col-lg-4" th:text="#{telephoneNumber.label(':')}"></label>
-                                <div class="col-lg-6">
+                                <label for="telephoneNumberField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}"></label>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
                                 </div>
                             </div>
@@ -50,20 +50,20 @@
                 </div>
                 <div class="modal-body container-fluid">
                     <div class="row">
-                        <span class="col-lg-4" th:text="#{firstName.label(':')}">></span>
-                        <span class="col-lg-8">{{contactDetails.firstName}}</span>
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}">></span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.firstName}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4" th:text="#{lastName.label(':')}">></span>
-                        <span class="col-lg-8">{{contactDetails.lastName}}</span>
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}">></span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.lastName}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4" th:text="#{birth.label(':')}"></span>
-                        <span class="col-lg-8">{{contactDetails.birth  | date:dateFormFormatting}}</span>
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}"></span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.birth  | date:dateFormFormatting}}</span>
                     </div>
                     <div class="row">
-                        <span class="col-lg-4" th:text="#{telephoneNumber.label(':')}">></span>
-                        <span class="col-lg-8">{{contactDetails.telephoneNumber}}</span>
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}">></span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.telephoneNumber}}</span>
                     </div>
                 </div>
             </div><!-- /.modal-content -->

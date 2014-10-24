@@ -26,7 +26,7 @@ public abstract class AbstractTestWithSecurityContext {
 
     protected  static String SEC_CONTEXT_ATTR = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
-    protected static Logger logger = Logger.getLogger(ContactControllerTest.class);
+    protected static Logger logger = Logger.getLogger(ContactRestServiceTest.class);
     protected Object principal;
 
     @Autowired

@@ -1,4 +1,4 @@
-package it.valeriovaudi.web.controller;
+package it.valeriovaudi.service;
 
 import it.valeriovaudi.repository.ContactRepository;
 import it.valeriovaudi.repository.PhonBookUserRepository;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Valerio on 24/07/2014.
  */
 @Controller
-public class ContactController {
+public class ContactRestService {
     private ContactRepository contactRepository;
     private PhonBookUserRepository phonBookUserRepository;
 

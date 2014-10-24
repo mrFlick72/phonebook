@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by Valerio on 24/07/2014.
  */
-public class ContactControllerTest extends AbstractTestWithSecurityContext {
+public class ContactRestServiceTest extends AbstractTestWithSecurityContext {
 
     @Test
     public void getAllpersoneTest() throws Exception {

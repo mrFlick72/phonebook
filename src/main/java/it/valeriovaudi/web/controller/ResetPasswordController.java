@@ -23,19 +23,23 @@ public class ResetPasswordController {
     }
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.GET)
-    public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,Model model) {
+    public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,
+                                  Model model) {
         model.addAttribute("nonce", nonce);
     }
 
     @RequestMapping(value = "/resetPassword/resetPasswordSuccessful", method = RequestMethod.GET)
-    public void resetPasswordSuccessfulInit(){}
+    public void resetPasswordSuccessfulInit(@RequestParam("operation") String s){
+        System.out.println(s);}
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public String resetPassword(@ModelAttribute(value = "nonce") String nonce,
                                 @RequestParam(value = "newPassword") String newPassword,
+                                Model model,
                                 SessionStatus sessionStatus) {
         passwordService.resetPassword(newPassword,nonce);
         sessionStatus.setComplete();
+        model.addAttribute("operation","reset");
         return "resetPassword/resetPasswordSuccessful";
     }
 
@@ -44,9 +48,10 @@ public class ResetPasswordController {
 
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.POST)
     public String resetFormDataCollect(@RequestParam(value = "userName") String userName,
-                                       @RequestParam(value = "mail") String mail) {
+                                       @RequestParam(value = "mail") String mail,
+                                       Model model) {
         passwordService.createNonce(userName, mail);
-
-        return "redirect:index";
+        model.addAttribute("operation","nonce");
+        return "resetPassword/resetPasswordSuccessful";
     }
 }

@@ -7,9 +7,6 @@ import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by Valerio on 17/10/2014.
@@ -22,11 +19,7 @@ public class ResetPasswordTest extends AbstractTest {
     @Autowired
     private PhonBookUserRepository phonBookUserRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Test
-    @Transactional
     public void test() throws InterruptedException {
         String nonce = passwordService.createNonce("admin", "admin@localhost");
         Assert.assertNotNull(nonce);

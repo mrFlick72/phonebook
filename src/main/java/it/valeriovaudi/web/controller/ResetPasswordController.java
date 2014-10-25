@@ -2,10 +2,12 @@ package it.valeriovaudi.web.controller;
 
 import it.valeriovaudi.integration.AcceptableNonceRouter;
 import it.valeriovaudi.service.PasswordService;
+import org.h2.engine.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * Created by Valerio on 18/10/2014.
@@ -25,15 +27,18 @@ public class ResetPasswordController {
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.GET)
     public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,Model model) {
         model.addAttribute("nonce", nonce);
-        model.addAttribute("controller", "resetPasswordController");
     }
+
+    @RequestMapping(value = "/resetPassword/resetPasswordSuccessful", method = RequestMethod.GET)
+    public void resetPasswordSuccessfulInit(){}
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public String resetPassword(@ModelAttribute(value = "nonce") String nonce,
-                              @RequestParam(value = "newPassword") String newPassword) {
+                                @RequestParam(value = "newPassword") String newPassword,
+                                SessionStatus sessionStatus) {
         passwordService.resetPassword(newPassword,nonce);
-
-        return "redirect:index";
+        sessionStatus.setComplete();
+        return "resetPassword/resetPasswordSuccessful";
     }
 
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.GET)

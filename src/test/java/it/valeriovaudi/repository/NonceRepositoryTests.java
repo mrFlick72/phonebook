@@ -2,18 +2,11 @@ package it.valeriovaudi.repository;
 
 import it.valeriovaudi.controller.AbstractTest;
 import it.valeriovaudi.repository.security.NonceRepository;
-import it.valeriovaudi.security.nonce.NonceFactory;
 import it.valeriovaudi.security.nonce.NonceFactoryByUser;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import it.valeriovaudi.web.model.security.Nonce;
-import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.Date;
 
 /**
  * Created by Valerio on 18/10/2014.

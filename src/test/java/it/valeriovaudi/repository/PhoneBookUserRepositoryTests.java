@@ -5,10 +5,7 @@ import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by Valerio on 22/08/2014.

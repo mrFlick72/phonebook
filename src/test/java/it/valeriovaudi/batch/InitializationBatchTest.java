@@ -5,7 +5,6 @@ import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.Contact;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.*;

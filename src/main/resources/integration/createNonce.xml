@@ -42,7 +42,7 @@
         <mail:outbound-channel-adapter mail-sender="mailSender"/>
     </chain>
 
-    <!--reset passwor pipeline-->
+    <!--reset password pipeline-->
     <channel id="restetPasswordServiceMainRequestChannel"/>
     <channel id="restetPasswordServiceMainResponseChannel"/>
 

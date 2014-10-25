@@ -29,17 +29,21 @@ public class ResetPasswordController {
     }
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
-    public void resetPassword(@ModelAttribute(value = "nonce") String nonce,
+    public String resetPassword(@ModelAttribute(value = "nonce") String nonce,
                               @RequestParam(value = "newPassword") String newPassword) {
         passwordService.resetPassword(newPassword,nonce);
+
+        return "redirect:index";
     }
 
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.GET)
     public void resetFormDataCollectInit() {}
 
     @RequestMapping(value = "/resetPassword/resetFormDataCollect", method = RequestMethod.POST)
-    public void resetFormDataCollect(@RequestParam(value = "userName") String userName,
-                                     @RequestParam(value = "mail") String mail) {
+    public String resetFormDataCollect(@RequestParam(value = "userName") String userName,
+                                       @RequestParam(value = "mail") String mail) {
         passwordService.createNonce(userName, mail);
+
+        return "redirect:index";
     }
 }

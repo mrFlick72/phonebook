@@ -8,7 +8,7 @@ myApp.controller('administrationController', function ($scope, $http) {
                 });
     };
 
-    $scope.resetPassword=function(userName,mail){
+    $scope.resetPassword = function(userName,mail){
         var url = ['/phoneBoockUser',userName,mail,'password'];
         $http.put(url.join('/'));
     };

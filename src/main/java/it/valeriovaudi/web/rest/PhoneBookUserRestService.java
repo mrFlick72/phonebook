@@ -47,7 +47,6 @@ public class PhoneBookUserRestService {
         return (List<PhoneBookUser>) phonBookUserRepository.findAll();
     }
 
-
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}/password", method = RequestMethod.PUT)
     public HttpEntity<Void> resetPassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "mail") String mail){
@@ -55,11 +54,39 @@ public class PhoneBookUserRestService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+//    update methods
+
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/phoneBoockUser/{userName}/{firstName}", method = RequestMethod.PUT)
+    public HttpEntity<Void> changeFirstName(@PathVariable(value = "userName") String userName, @PathVariable(value = "firstName") String firstName){
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
+        phoneBookUser.setFirstName(firstName);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/phoneBoockUser/{userName}/{lastName}", method = RequestMethod.PUT)
+    public HttpEntity<Void> changeLastName(@PathVariable(value = "userName") String userName, @PathVariable(value = "lastName") String lastName){
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
+        phoneBookUser.setLastName(lastName);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/{mail}", method = RequestMethod.PUT)
-    public HttpEntity<Void> resetMail(@PathVariable(value = "userName") String userName, @PathVariable(value = "mail") String mail){
+    public HttpEntity<Void> changeMail(@PathVariable(value = "userName") String userName, @PathVariable(value = "mail") String mail){
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
         phoneBookUser.setMail(mail);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Secured(value = "IS_AUTHENTICATED_FULLY")
+    @RequestMapping(value = "/phoneBoockUser/{userName}/{password}", method = RequestMethod.PUT)
+    public HttpEntity<Void> changePassword(@PathVariable(value = "userName") String userName,@PathVariable(value = "password") String password){
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
+        phoneBookUser.setPassword(password);
+        phonBookUserRepository.save(phoneBookUser);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

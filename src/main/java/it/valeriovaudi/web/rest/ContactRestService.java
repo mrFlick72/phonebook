@@ -45,8 +45,9 @@ public class ContactRestService {
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addContact(@RequestBody Contact contact,Principal principal){
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(principal.getName());
+    public ResponseEntity<Void> addContact(@RequestBody Contact contact){
+
+        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         contact.setPhoneBookUser(phoneBookUser);
         Contact save = contactRepository.save(contact);
         URI uri = UriComponentsBuilder.fromPath("/contact/{contactId}").buildAndExpand(save.getId()).toUri();

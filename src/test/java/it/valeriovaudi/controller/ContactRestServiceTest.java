@@ -1,8 +1,10 @@
 package it.valeriovaudi.controller;
 
 import it.valeriovaudi.web.model.Contact;
+import it.valeriovaudi.web.rest.ContactRestService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.annotation.DirtiesContext;
@@ -20,6 +22,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Valerio on 24/07/2014.
  */
 public class ContactRestServiceTest extends AbstractTestWithSecurityContext {
+
+    @Autowired
+    private ContactRestService contactRestService;
 
     @Test
     public void getAllpersoneTest() throws Exception {

@@ -52,9 +52,6 @@ public class ContactRestService {
         Contact save = contactRepository.save(contact);
         URI uri = UriComponentsBuilder.
                         fromPath("/contact/{contactId}").
-                        scheme("http").
-                        host("localhost").
-                        port(8080).
                         buildAndExpand(save.getId()).
                         toUri();
 

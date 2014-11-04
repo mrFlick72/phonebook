@@ -54,9 +54,6 @@ public class PhoneBookUserRestService {
 
         URI uri = UriComponentsBuilder.
                         fromPath("resetPassword/reset").
-                        scheme("http").
-                        host("localhost").
-                        port(8080).
                         queryParam("nonce", nonce).
                         build().
                         toUri();

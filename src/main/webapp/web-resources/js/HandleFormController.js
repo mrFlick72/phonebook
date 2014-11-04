@@ -1,7 +1,7 @@
 myApp.controller('handleFormController', function ($scope, $http) {
     initDataPitcher($scope);
 
-    $http.get('/contacts').
+    $http.get('/contact').
         success(function (data) {
             $scope.contacts = data;
         });
@@ -35,7 +35,7 @@ myApp.controller('handleFormController', function ($scope, $http) {
             url: '/contact',
             data: $scope.newContact
         }).success(function (data) {
-            $http.get('/contacts').
+            $http.get('/contact').
                 success(function (data) {
                     $scope.contacts = data;
                     $("#insertNewAccountDialogForm").modal('hide')

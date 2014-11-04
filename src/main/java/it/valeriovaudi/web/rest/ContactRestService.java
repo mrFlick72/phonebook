@@ -29,7 +29,7 @@ public class ContactRestService {
     private PhonBookUserRepository phonBookUserRepository;
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/contacts", method = RequestMethod.GET)
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public @ResponseBody List<Contact> getContacts(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());

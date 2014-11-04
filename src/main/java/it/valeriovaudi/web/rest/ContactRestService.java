@@ -50,7 +50,13 @@ public class ContactRestService {
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         contact.setPhoneBookUser(phoneBookUser);
         Contact save = contactRepository.save(contact);
-        URI uri = UriComponentsBuilder.fromPath("/contact/{contactId}").buildAndExpand(save.getId()).toUri();
+        URI uri = UriComponentsBuilder.
+                        fromPath("/contact/{contactId}").
+                        scheme("http").
+                        host("localhost").
+                        port(8080).
+                        buildAndExpand(save.getId()).
+                        toUri();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uri);

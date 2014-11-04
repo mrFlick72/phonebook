@@ -28,7 +28,7 @@ public class ContactRestServiceTest extends AbstractTestWithSecurityContext {
 
     @Test
     public void getAllpersoneTest() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/contacts").
+        MvcResult mvcResult = mockMvc.perform(get("/contact").
                                     sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,principal)).
                                     andReturn();
 

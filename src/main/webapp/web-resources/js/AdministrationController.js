@@ -9,8 +9,8 @@ myApp.controller('administrationController', function ($scope, $http) {
     };
 
     $scope.resetPassword = function(userName,mail){
-        var url = ['/phoneBoockUser',userName,mail,'password'];
-        $http.post(url.join('/'));
+        var url = ['/phoneBoockUser',userName,'password'];
+        $http.post(url.join('/'),mail);
         $("#createNoncePopup").modal("show");
     };
 

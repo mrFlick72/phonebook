@@ -54,4 +54,9 @@ public class ResetPasswordController {
         model.addAttribute("operation","nonce");
         return "resetPassword/resetPasswordSuccessful";
     }
+
+    @ExceptionHandler(org.springframework.integration.handler.ReplyRequiredException.class)
+    public String exceptionManaged(){
+        return "/exception/exception";
+    }
 }

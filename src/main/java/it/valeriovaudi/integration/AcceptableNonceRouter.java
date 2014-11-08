@@ -1,6 +1,7 @@
 package it.valeriovaudi.integration;
 
 import it.valeriovaudi.web.model.security.Nonce;
+import org.springframework.integration.annotation.Filter;
 import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.Router;
 
@@ -12,11 +13,16 @@ import java.util.Date;
 @MessageEndpoint
 public class AcceptableNonceRouter {
 
-    @Router
+    @Filter
     public boolean accept(Nonce nonce){
+        System.out.println(nonce);
+
         boolean accept = false;
         if(nonce!= null){
-            accept = !(nonce.isUsed() || nonce.getStart().before(new Date()) || nonce.getStop().after(new Date()));
+            Date toDay = new Date();
+            accept = !(nonce.isUsed() || nonce.getStart().after(toDay) || nonce.getStop().before(toDay));
+
+            System.out.println(accept);
         }
         return accept;
     }

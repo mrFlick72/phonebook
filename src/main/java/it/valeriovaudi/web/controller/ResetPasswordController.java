@@ -42,7 +42,7 @@ public class ResetPasswordController {
                                   Model model) {
         String page="exception/exception";
         Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
-        if(!acceptableNonceRouter.accept(nonceRepositoryByNonce)){
+        if(acceptableNonceRouter.accept(nonceRepositoryByNonce)){
             model.addAttribute("nonce", nonce);
             page = "resetPassword/reset";
         }

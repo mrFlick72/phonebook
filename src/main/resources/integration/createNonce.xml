@@ -46,13 +46,31 @@
     <channel id="restetPasswordServiceMainRequestChannel"/>
     <channel id="restetPasswordServiceMainResponseChannel"/>
 
+    <!--find the nonce in the repository-->
+    <service-activator input-channel="restetPasswordServiceMainRequestChannel"
+                       output-channel="restetPasswordServiceToAcceptFiletrRequestChannel"
+                       expression="@nonceRepository.findByNonce(payload)"
+                       requires-reply="true"/>
+
+    <channel id="restetPasswordServiceToAcceptFiletrRequestChannel"/>
+    <channel id="restetPasswordServiceToAcceptFiletrResponseChannel"/>
+
+    <!--the router if nonce is acceptable continue in the pipeline, otherwise  discards the message-->
+    <filter id="resetPasswordChainAcceptFilter"
+            ref="acceptableNonceRouter"
+            input-channel="restetPasswordServiceToAcceptFiletrRequestChannel"
+            output-channel="restetPasswordServiceToAcceptFiletrResponseChannel"
+            throw-exception-on-rejection="true">
+    </filter>
+
+
     <chain id="resetPasswordChain"
-           input-channel="restetPasswordServiceMainRequestChannel"
+            input-channel="restetPasswordServiceToAcceptFiletrResponseChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">
-        <service-activator expression="@nonceRepository.findByNonce(payload)" requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)" requires-reply="true"/>
         <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload).buildPassword(headers['password']).buildPhoneBookUser()" requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.save(payload)" requires-reply="true"/>
     </chain>
+
 
 </beans:beans>

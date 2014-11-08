@@ -57,7 +57,7 @@
 
     <!--the router if nonce is acceptable continue in the pipeline, otherwise  discards the message-->
     <filter id="resetPasswordChainAcceptFilter"
-            ref="acceptableNonceRouter"
+            ref="acceptableNonceFilter"
             input-channel="restetPasswordServiceToAcceptFiletrRequestChannel"
             output-channel="restetPasswordServiceToAcceptFiletrResponseChannel"
             throw-exception-on-rejection="true">
@@ -67,6 +67,7 @@
     <chain id="resetPasswordChain"
             input-channel="restetPasswordServiceToAcceptFiletrResponseChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">
+        <service-activator ref="invalidateNonce"  requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)" requires-reply="true"/>
         <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload).buildPassword(headers['password']).buildPhoneBookUser()" requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.save(payload)" requires-reply="true"/>

@@ -1,6 +1,6 @@
 package it.valeriovaudi.web.controller;
 
-import it.valeriovaudi.integration.AcceptableNonceRouter;
+import it.valeriovaudi.integration.filter.AcceptableNonceFilter;
 import it.valeriovaudi.repository.security.NonceRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.security.Nonce;
@@ -20,11 +20,11 @@ public class ResetPasswordController {
 
     private PasswordService passwordService;
     private NonceRepository nonceRepository;
-    private AcceptableNonceRouter acceptableNonceRouter;
+    private AcceptableNonceFilter acceptableNonceFilter;
 
     @Autowired
-    public void setAcceptableNonceRouter(AcceptableNonceRouter acceptableNonceRouter) {
-        this.acceptableNonceRouter = acceptableNonceRouter;
+    public void setAcceptableNonceFilter(AcceptableNonceFilter acceptableNonceFilter) {
+        this.acceptableNonceFilter = acceptableNonceFilter;
     }
 
     @Autowired
@@ -42,7 +42,7 @@ public class ResetPasswordController {
                                   Model model) {
         String page="exception/exception";
         Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
-        if(acceptableNonceRouter.accept(nonceRepositoryByNonce)){
+        if(acceptableNonceFilter.accept(nonceRepositoryByNonce)){
             model.addAttribute("nonce", nonce);
             page = "resetPassword/reset";
         }

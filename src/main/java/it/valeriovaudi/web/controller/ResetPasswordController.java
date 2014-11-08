@@ -1,6 +1,9 @@
 package it.valeriovaudi.web.controller;
 
+import it.valeriovaudi.integration.AcceptableNonceRouter;
+import it.valeriovaudi.repository.security.NonceRepository;
 import it.valeriovaudi.service.PasswordService;
+import it.valeriovaudi.web.model.security.Nonce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +19,35 @@ import org.springframework.web.bind.support.SessionStatus;
 public class ResetPasswordController {
 
     private PasswordService passwordService;
+    private NonceRepository nonceRepository;
+    private AcceptableNonceRouter acceptableNonceRouter;
+
+    @Autowired
+    public void setAcceptableNonceRouter(AcceptableNonceRouter acceptableNonceRouter) {
+        this.acceptableNonceRouter = acceptableNonceRouter;
+    }
 
     @Autowired
     public void setPasswordService(PasswordService passwordService) {
         this.passwordService = passwordService;
     }
 
+    @Autowired
+    public void setNonceRepository(NonceRepository nonceRepository) {
+        this.nonceRepository = nonceRepository;
+    }
+
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.GET)
-    public void resetPasswordInit(@RequestParam(value = "nonce") String nonce,
+    public String resetPasswordInit(@RequestParam(value = "nonce") String nonce,
                                   Model model) {
-        model.addAttribute("nonce", nonce);
+        String page="exception/exception";
+        Nonce nonceRepositoryByNonce = nonceRepository.findByNonce(nonce);
+        if(!acceptableNonceRouter.accept(nonceRepositoryByNonce)){
+            model.addAttribute("nonce", nonce);
+            page = "resetPassword/reset";
+        }
+
+        return page;
     }
 
     @RequestMapping(value = "/resetPassword/resetPasswordSuccessful", method = RequestMethod.GET)

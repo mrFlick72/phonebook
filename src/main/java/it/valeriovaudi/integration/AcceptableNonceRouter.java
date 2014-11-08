@@ -14,6 +14,10 @@ public class AcceptableNonceRouter {
 
     @Router
     public boolean accept(Nonce nonce){
-        return !(nonce.isUsed() || nonce.getStart().before(new Date()) || nonce.getStop().after(new Date()));
+        boolean accept = false;
+        if(nonce!= null){
+            accept = !(nonce.isUsed() || nonce.getStart().before(new Date()) || nonce.getStop().after(new Date()));
+        }
+        return accept;
     }
 }

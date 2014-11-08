@@ -31,8 +31,7 @@ public class ContactRestService {
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public @ResponseBody List<Contact> getContacts(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        List<Contact> contactList = (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
-        return contactList;
+        return (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")

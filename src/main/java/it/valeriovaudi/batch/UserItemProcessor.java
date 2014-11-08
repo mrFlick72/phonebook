@@ -28,8 +28,6 @@ public class UserItemProcessor implements ItemProcessor<PhoneBookUser,PhoneBookU
     @Override
     public PhoneBookUser process(PhoneBookUser phoneBookUser) throws Exception {
         greenMail.setUser(phoneBookUser.getMail(), phoneBookUser.getUserName(), phoneBookUser.getPassword());
-        PhoneBookUser phoneBookUserAux = phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
-
-        return phoneBookUserAux;
+        return phonBookUserSecurityUserFactory.securityAccontWithPasswordEncoded(phoneBookUser);
     }
 }

@@ -52,7 +52,8 @@ public class ResetPasswordController {
 
     @RequestMapping(value = "/resetPassword/resetPasswordSuccessful", method = RequestMethod.GET)
     public void resetPasswordSuccessfulInit(@RequestParam("operation") String s){
-        System.out.println(s);}
+
+    }
 
     @RequestMapping(value = "/resetPassword/reset", method = RequestMethod.POST)
     public String resetPassword(@ModelAttribute(value = "nonce") String nonce,

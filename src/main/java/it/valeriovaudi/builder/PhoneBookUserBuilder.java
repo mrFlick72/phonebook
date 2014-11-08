@@ -12,17 +12,17 @@ public class PhoneBookUserBuilder {
     private PhoneBookUser phoneBookUser;
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
     public PhoneBookUserBuilder() {
         this.phoneBookUser = new PhoneBookUser();
     }
 
     public static PhoneBookUserBuilder newPhoneBookUserBuilder(){
         return new PhoneBookUserBuilder();
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     public PhoneBookUserBuilder buildByPhoneBookUserBuilder(PhoneBookUser phoneBookUser){

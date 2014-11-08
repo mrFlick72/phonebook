@@ -3,7 +3,6 @@ package it.valeriovaudi.integration.filter;
 import it.valeriovaudi.web.model.security.Nonce;
 import org.springframework.integration.annotation.Filter;
 import org.springframework.integration.annotation.MessageEndpoint;
-import org.springframework.integration.annotation.Router;
 
 import java.util.Date;
 

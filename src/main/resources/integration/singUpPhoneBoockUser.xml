@@ -17,7 +17,7 @@
 
     <channel id="singUpPhoneBoockUserMainRequestChannel"/>
 
-    <chain input-channel="singUpPhoneBoockUserMainRequestChannel"
+    <chain id="signUpChain" input-channel="singUpPhoneBoockUserMainRequestChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">
         <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload)
                                                             .buildPassword(payload.password)
@@ -28,7 +28,7 @@
     
     <publish-subscribe-channel id="singUpPhoneBoockUserMainResponseChannel"/>
 
-    <service-activator input-channel="singUpPhoneBoockUserMainResponseChannel">
+    <service-activator id="logInServiceActivator" input-channel="singUpPhoneBoockUserMainResponseChannel">
         <int-groovy:script>
             org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(payload));
         </int-groovy:script>

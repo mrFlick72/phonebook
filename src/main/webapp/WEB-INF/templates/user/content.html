@@ -7,36 +7,50 @@
                     <h3 th:text="#{insertNewContactDialogForm.header}">Modal Header</h3>
                 </div>
                 <div class="modal-body">
-                    <ng-form name="newContactPopUpForm" class="form-horizontal">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="firstNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}"></label>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
+                    <div class="container-fluid">
+                        <form name="newContactPopUpForm" class="form-horizontal">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="firstNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}"></label>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="lastNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="birthField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}"></label>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <input id="birthField" class="form-control" type="text" ng-model="newContact.birth" ui-date="dateOptions"/>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="birthField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input id="birthField" class="form-control" type="text" ng-model="newContact.birth" ui-date="dateOptions"/>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="telephoneNumberField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}"></label>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="telephoneNumberField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
+                                        </div>
+                                    </div>
                                 </div>
+                            </fieldset>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="submit" value="submit data" ng-click="submitForm()" class="btn btn-default"/>
                             </div>
-                        </fieldset>
-                    </ng-form>
-                    <input type="submit" value="submit data" ng-click="submitForm()" class="btn btn-default"/>
+                        </div>
                     </div>
+                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

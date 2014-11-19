@@ -1,18 +1,17 @@
 package it.valeriovaudi.controller;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import it.valeriovaudi.builder.PhoneBookUserBuilder;
 import it.valeriovaudi.repository.PhonBookUserRepository;
-import it.valeriovaudi.web.model.Contact;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.web.util.UriComponentsBuilder;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by Valerio on 19/11/2014.

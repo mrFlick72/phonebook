@@ -1,7 +1,6 @@
 package it.valeriovaudi.web.rest;
 
 import it.valeriovaudi.builder.PhoneBookUserBuilder;
-import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import sun.security.util.Password;
 
 import java.net.URI;
 import java.util.List;

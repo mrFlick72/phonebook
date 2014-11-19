@@ -34,18 +34,15 @@ public class IndexPageController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("phoneBoockUserName",  authentication.getName());
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-            if(grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())){
-                model.addAttribute("controller","administrationController");
+            if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())) {
+                model.addAttribute("controller", "administrationController");
                 break;
             }
 
-            if(grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())){
-                model.addAttribute("controller","handleFormController");
+            if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())) {
+                model.addAttribute("controller", "handleFormController");
                 break;
             }
         }
-
-/*        model.addAttribute("content", "settings");
-        model.addAttribute("navigation",  "user/settings");*/
     }
 }

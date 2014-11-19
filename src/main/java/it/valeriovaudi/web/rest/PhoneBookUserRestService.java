@@ -1,5 +1,7 @@
 package it.valeriovaudi.web.rest;
 
+import it.valeriovaudi.builder.PhoneBookUserBuilder;
+import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
@@ -9,9 +11,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import sun.security.util.Password;
 
 import java.net.URI;
 import java.util.List;
@@ -24,6 +29,20 @@ public class PhoneBookUserRestService {
 
     private PhonBookUserRepository phonBookUserRepository;
     private PasswordService passwordService;
+
+    private PasswordEncoder passwordEncoder;
+
+    private PhoneBookUserBuilder phoneBookUserBuilder;
+
+    @Autowired
+    public void setPhoneBookUserBuilder(PhoneBookUserBuilder phoneBookUserBuilder) {
+        this.phoneBookUserBuilder = phoneBookUserBuilder;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
@@ -65,36 +84,17 @@ public class PhoneBookUserRestService {
     }
 
 //    update methods
+    @Transactional
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}/firstName", method = RequestMethod.PUT)
-    public HttpEntity<Void> changeFirstName(@PathVariable(value = "userName") String userName, @RequestBody String firstName){
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-        phoneBookUser.setFirstName(firstName);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.PUT)
+    public HttpEntity<Void> updatePhonBoockUser(@PathVariable(value = "userName") String userName, @RequestBody PhoneBookUser phoneBookUser){
+        PhoneBookUser phoneBookUserAux = phonBookUserRepository.findByUserName(userName);
 
-    @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}/lastName", method = RequestMethod.PUT)
-    public HttpEntity<Void> changeLastName(@PathVariable(value = "userName") String userName, @RequestBody  String lastName){
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-        phoneBookUser.setLastName(lastName);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+        phoneBookUserAux.setFirstName(phoneBookUser.getFirstName());
+        phoneBookUserAux.setLastName(phoneBookUser.getLastName());
+        phoneBookUserAux.setMail(phoneBookUser.getMail());
+        phoneBookUserAux.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
 
-    @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}/mail", method = RequestMethod.PUT)
-    public HttpEntity<Void> changeMail(@PathVariable(value = "userName") String userName, @RequestBody  String mail){
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-        phoneBookUser.setMail(mail);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}/password", method = RequestMethod.PUT)
-    public HttpEntity<Void> changePassword(@PathVariable(value = "userName") String userName,@RequestBody  String password){
-        PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(userName);
-        phoneBookUser.setPassword(password);
-        phonBookUserRepository.save(phoneBookUser);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -3,11 +3,14 @@ package it.valeriovaudi.controller;
 import it.valeriovaudi.builder.PhoneBookUserBuilder;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.PhoneBookUser;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -18,37 +21,44 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
 
-    @Autowired
-    PhoneBookUserBuilder phoneBookUserBuilder;
+    private static final String LAST_NAME = "Di Mauro";
+    private static final String TEST_USER_NAME = "jhoan.maggio";
+    private static final String TEST_PASSWORD = "jhoan";
 
     @Autowired
-    PhonBookUserRepository phonBookUserRepository;
+    private PhoneBookUserBuilder phoneBookUserBuilder;
+
+    @Autowired
+    private PhonBookUserRepository phonBookUserRepository;
 
     @Test
     public void updatePhonBoockUserTest() throws Exception {
 
-        PhoneBookUser mrFlickete = phonBookUserRepository.findByUserName("mrFlickete");
-        mrFlickete.setLastName("Di Mauro");
+        PhoneBookUser mrFlickete = phonBookUserRepository.findByUserName("jhoan.maggio");
+        mrFlickete.setLastName(LAST_NAME);
 
-        mockMvc.perform(put("/phoneBoockUser/mrFlickete").
+        UriComponents uriComponents = UriComponentsBuilder.fromPath("/phoneBoockUser/{userName}/data").buildAndExpand(TEST_USER_NAME).encode();
+
+        mockMvc.perform(put(uriComponents.toUri()).
                 sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, principal).
                 contentType(MediaType.APPLICATION_JSON).
-                        content(objectMapper.writeValueAsBytes(mrFlickete))).
-                            andExpect(status().
-                                    isNoContent());
+                content(objectMapper.writeValueAsBytes(mrFlickete))).
+                andExpect(status().isNoContent());
 
-        MvcResult mvcResult = mockMvc.perform(get("/phoneBoockUser/mrFlickete").
+        MvcResult mvcResult = mockMvc.perform(get(uriComponents.toUri()).
                                         sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, principal)).
                                         andReturn();
 
 
         String contentAsString = mvcResult.getResponse().getContentAsString();
         PhoneBookUser phoneBookUser = objectMapper.readValue(contentAsString, PhoneBookUser.class);
+
         logger.info(phoneBookUser);
+        Assert.assertEquals(LAST_NAME,phoneBookUser.getLastName());
     }
 
     @Override
     protected Object principalInit() throws Exception {
-        return authenticate();
+        return authenticate(TEST_USER_NAME,TEST_PASSWORD);
     }
 }

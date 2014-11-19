@@ -30,13 +30,6 @@ public class PhoneBookUserRestService {
 
     private PasswordEncoder passwordEncoder;
 
-    private PhoneBookUserBuilder phoneBookUserBuilder;
-
-    @Autowired
-    public void setPhoneBookUserBuilder(PhoneBookUserBuilder phoneBookUserBuilder) {
-        this.phoneBookUserBuilder = phoneBookUserBuilder;
-    }
-
     @Autowired
     public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -53,7 +46,7 @@ public class PhoneBookUserRestService {
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/phoneBoockUser/{userName}/data", method = RequestMethod.GET)
     public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
         return phonBookUserRepository.findByUserName(userName);
     }
@@ -84,7 +77,7 @@ public class PhoneBookUserRestService {
 //    update methods
     @Transactional
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/phoneBoockUser/{userName}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/phoneBoockUser/{userName}/data", method = RequestMethod.PUT)
     public HttpEntity<Void> updatePhonBoockUser(@PathVariable(value = "userName") String userName, @RequestBody PhoneBookUser phoneBookUser){
         PhoneBookUser phoneBookUserAux = phonBookUserRepository.findByUserName(userName);
 

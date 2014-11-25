@@ -26,9 +26,6 @@ public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
     private static final String TEST_PASSWORD = "jhoan";
 
     @Autowired
-    private PhoneBookUserBuilder phoneBookUserBuilder;
-
-    @Autowired
     private PhonBookUserRepository phonBookUserRepository;
 
     @Test

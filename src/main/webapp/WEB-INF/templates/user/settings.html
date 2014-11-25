@@ -1,5 +1,9 @@
-<section th:fragment="settings" ng-controller="settingsController">
-    <div class="container">
+<section th:fragment="settings"
+         xmlns:th="http://www.thymeleaf.org" ng-controller="settingsController">
+    <div class="container"
+         th:with="userNameAux=${#httpServletRequest.getUserPrincipal().getName()}"
+         th:attr="ng-init='initUserSettingsPage(\''+${userNameAux}+'\')'" >
+
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <form class="form-horizontal">

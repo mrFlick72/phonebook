@@ -10,8 +10,11 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
 
+
     private static final String LAST_NAME = "Di Mauro";
     private static final String TEST_USER_NAME = "jhoan.maggio";
     private static final String TEST_PASSWORD = "jhoan";
@@ -40,9 +44,6 @@ public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
     private PhonBookUserRepository phonBookUserRepository;
     @Autowired
     private PhoneBookUserRestService phoneBookUserRestService;
-
-    @Autowired
-    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
     @Test
     public void updatePhonBoockUserTest() throws Exception {
@@ -73,11 +74,8 @@ public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
     @Test
     @DirtiesContext
     public void updatePhonBoockUserTestByControllerClass() throws Exception {
-        PhoneBookUser phoneBookUser = new PhoneBookUser();
-        phoneBookUser.setPassword("valerio");
-        phoneBookUser.setUserName("mrFlickete");
-        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
-        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));
+        authenticateForMethod();
+
         PhoneBookUser mrFlickete = phonBookUserRepository.findByUserName("jhoan.maggio");
         mrFlickete.setLastName(LAST_NAME);
 

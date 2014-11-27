@@ -1,10 +1,17 @@
 package it.valeriovaudi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.valeriovaudi.factory.SecurityUserFactory;
+import it.valeriovaudi.security.PhoneBookSecurityRole;
+import it.valeriovaudi.web.model.PhoneBookUser;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,6 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.net.Authenticator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -31,6 +40,12 @@ public abstract class AbstractTestWithSecurityContext {
 
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
+
+    @Autowired
+    @Qualifier("authenticationManager")
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
     @Autowired
     protected WebApplicationContext wac;
@@ -53,6 +68,17 @@ public abstract class AbstractTestWithSecurityContext {
         Object principal = mockMvc.perform(post("/j_spring_security_check").param("j_username", userName).param("j_password", password))
                 .andReturn().getRequest().getSession().getAttribute(SEC_CONTEXT_ATTR);
         return principal;
+    }
+
+    protected Authentication authenticateForMethod(){
+        PhoneBookUser phoneBookUser = new PhoneBookUser();
+        phoneBookUser.setPassword("valerio");
+        phoneBookUser.setUserName("mrFlickete");
+        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
+        Authentication authenticate = authenticationManager.authenticate(securityUserFactory.getAutenticatedUser(phoneBookUser));
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+
+        return authenticate;
     }
 
     protected Object authenticate() throws Exception {

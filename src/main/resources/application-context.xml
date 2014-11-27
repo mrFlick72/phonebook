@@ -9,8 +9,8 @@
 
     <context:annotation-config/>
 
-    <import resource="classpath:repository-context.xml"/>
     <import resource="classpath:spring-security-context.xml"/>
+    <import resource="classpath:repository-context.xml"/>
     <import resource="classpath:factory-context.xml"/>
     <import resource="classpath:builder-context.xml"/>
 

@@ -26,7 +26,7 @@
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
 	</security:http>
 
-    <security:authentication-manager erase-credentials="false">
+    <security:authentication-manager erase-credentials="false" alias="authenticationManager">
         <security:authentication-provider user-service-ref="bookUserDetailsService">
             <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>

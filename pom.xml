@@ -64,7 +64,7 @@
           <artifactId>cglib</artifactId>
           <version>2.2</version>
       </dependency>
-      
+
       <dependency>
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-web</artifactId>
@@ -132,6 +132,14 @@
           <artifactId>spring-aop</artifactId>
       </dependency>
 
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aspects</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-instrument</artifactId>
+      </dependency>
       <dependency>
           <groupId>org.springframework.batch</groupId>
           <artifactId>spring-batch-core</artifactId>

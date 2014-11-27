@@ -1,16 +1,27 @@
 package it.valeriovaudi.controller;
 
 import it.valeriovaudi.builder.PhoneBookUserBuilder;
+import it.valeriovaudi.factory.SecurityUserFactory;
 import it.valeriovaudi.repository.PhonBookUserRepository;
+import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.web.model.PhoneBookUser;
+import it.valeriovaudi.web.rest.PhoneBookUserRestService;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.Authenticator;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -27,6 +38,11 @@ public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
 
     @Autowired
     private PhonBookUserRepository phonBookUserRepository;
+    @Autowired
+    private PhoneBookUserRestService phoneBookUserRestService;
+
+    @Autowired
+    private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
     @Test
     public void updatePhonBoockUserTest() throws Exception {
@@ -52,6 +68,22 @@ public class PhoneBoockUserRestTest extends AbstractTestWithSecurityContext {
 
         logger.info(phoneBookUser);
         Assert.assertEquals(LAST_NAME,phoneBookUser.getLastName());
+    }
+
+    @Test
+    @DirtiesContext
+    public void updatePhonBoockUserTestByControllerClass() throws Exception {
+        PhoneBookUser phoneBookUser = new PhoneBookUser();
+        phoneBookUser.setPassword("valerio");
+        phoneBookUser.setUserName("mrFlickete");
+        phoneBookUser.setSecurityRole(PhoneBookSecurityRole.USER);
+        SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(phoneBookUser));
+        PhoneBookUser mrFlickete = phonBookUserRepository.findByUserName("jhoan.maggio");
+        mrFlickete.setLastName(LAST_NAME);
+
+        phoneBookUserRestService.updatePhonBoockUser("jhoan.maggio",mrFlickete);
+
+        logger.info(phonBookUserRepository.findByUserName("jhoan.maggio"));
     }
 
     @Override

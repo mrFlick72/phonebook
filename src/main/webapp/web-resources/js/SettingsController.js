@@ -4,6 +4,8 @@ myApp.controller('settingsController', function ($scope, $http) {
         $http.get(['/phoneBoockUser',userName,'data'].join('/')).
             success(function (data) {
                 $scope.phoneBoockUser = data;
+
+                $scope.phoneBoockUser.password='';
             });
     };
 

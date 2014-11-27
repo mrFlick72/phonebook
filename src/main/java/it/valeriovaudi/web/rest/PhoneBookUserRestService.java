@@ -5,6 +5,8 @@ import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ import java.util.List;
  * Created by Valerio on 19/09/2014.
  */
 @Controller
+@Transactional
 public class PhoneBookUserRestService {
 
     private PhonBookUserRepository phonBookUserRepository;
@@ -45,12 +48,14 @@ public class PhoneBookUserRestService {
         this.passwordService = passwordService;
     }
 
+    @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/data", method = RequestMethod.GET)
     public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
         return phonBookUserRepository.findByUserName(userName);
     }
 
+    @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser", method = RequestMethod.GET)
     public @ResponseBody List<PhoneBookUser> getPhoneBookUsers(){
@@ -75,7 +80,6 @@ public class PhoneBookUserRestService {
     }
 
 //    update methods
-    @Transactional
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/data", method = RequestMethod.PUT)
     public HttpEntity<Void> updatePhonBoockUser(@PathVariable(value = "userName") String userName, @RequestBody PhoneBookUser phoneBookUser){
@@ -84,9 +88,9 @@ public class PhoneBookUserRestService {
         phoneBookUserAux.setFirstName(phoneBookUser.getFirstName());
         phoneBookUserAux.setLastName(phoneBookUser.getLastName());
         phoneBookUserAux.setMail(phoneBookUser.getMail());
-        phoneBookUserAux.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
-
-
+        if(phoneBookUser.getPassword()!=null && !phoneBookUser.getPassword().trim().equals("")){
+            phoneBookUserAux.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
+        }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,10 +24,12 @@ import java.util.List;
  * Created by Valerio on 24/07/2014.
  */
 @Controller
+@Transactional
 public class ContactRestService {
     private ContactRepository contactRepository;
     private PhonBookUserRepository phonBookUserRepository;
 
+    @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public @ResponseBody List<Contact> getContacts(){
@@ -34,6 +37,7 @@ public class ContactRestService {
         return (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
     }
 
+    @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
     public ResponseEntity<Contact> getContact(@PathVariable("contactId") long contactId){

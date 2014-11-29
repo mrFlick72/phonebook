@@ -1,6 +1,7 @@
 package it.valeriovaudi.web.rest;
 
 import it.valeriovaudi.repository.PhonBookUserRepository;
+import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.service.PasswordService;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by Valerio on 19/09/2014.
@@ -56,7 +62,15 @@ public class PhoneBookUserRestService {
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser", method = RequestMethod.GET)
     public @ResponseBody List<PhoneBookUser> getPhoneBookUsers(){
-        return (List<PhoneBookUser>) phonBookUserRepository.findAll();
+        List<PhoneBookUser> phoneBookUsers;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getAuthorities().stream().filter((grantedAuthority) -> grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())).count()!=0){
+            phoneBookUsers = (List<PhoneBookUser>) phonBookUserRepository.findAll();
+        } else {
+            phoneBookUsers =  phonBookUserRepository.findAllUser();
+        }
+
+        return phoneBookUsers;
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")

@@ -9,6 +9,9 @@ import javax.persistence.*;
  */
 @Entity
 @Table
+@NamedQueries(value = {
+        @NamedQuery(name = "PhoneBookUser.findAllUser", query = "select user from PhoneBookUser user where user.securityRole=it.valeriovaudi.security.PhoneBookSecurityRole.USER")
+})
 public class PhoneBookUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

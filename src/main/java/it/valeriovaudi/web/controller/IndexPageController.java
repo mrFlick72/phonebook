@@ -49,7 +49,8 @@ public class IndexPageController {
                                                 } else if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())) {
                                                     controllerName = "handleFormController";
                                                 }
-                                                return controllerName;}).
+                                                return controllerName;
+                                            }).
                                             collect(Collectors.toList()).get(0);
         model.addAttribute("controller", jsController);
     }

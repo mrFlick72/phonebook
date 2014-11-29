@@ -4,6 +4,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>it.valeriovaudi.web.model.Contact</class>
+        <class>it.valeriovaudi.web.model.security.Nonce</class>
         <class>it.valeriovaudi.web.model.PhoneBookUser</class>
     </persistence-unit>
 </persistence>

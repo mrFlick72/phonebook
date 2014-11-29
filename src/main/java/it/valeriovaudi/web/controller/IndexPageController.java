@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.Serializable;
+import java.util.Optional;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 /**
  * Created by Valerio on 19/09/2014.
  */
@@ -33,16 +40,17 @@ public class IndexPageController {
     public void getUserPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("phoneBoockUserName",  authentication.getName());
-        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-            if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())) {
-                model.addAttribute("controller", "administrationController");
-                break;
-            }
-
-            if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())) {
-                model.addAttribute("controller", "handleFormController");
-                break;
-            }
-        }
+        String jsController =  authentication.getAuthorities().
+                                            stream().
+                                            map((grantedAuthority) -> {
+                                                String controllerName = "";
+                                                if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())) {
+                                                    controllerName = "administrationController";
+                                                } else if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())) {
+                                                    controllerName = "handleFormController";
+                                                }
+                                                return controllerName;}).
+                                            collect(Collectors.toList()).get(0);
+        model.addAttribute("controller", jsController);
     }
 }

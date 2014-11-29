@@ -15,7 +15,7 @@
     <io.spring.platform.version>1.0.1.RELEASE</io.spring.platform.version>
     <org.spring.integration.version>4.0.3.RELEASE</org.spring.integration.version>
 
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.8</jdk.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <tomcat.server.deploy>localhost:8080</tomcat.server.deploy>
@@ -275,6 +275,8 @@
     </dependencyManagement>
 
     <build>
+        <finalName>phonebook</finalName>
+
          <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

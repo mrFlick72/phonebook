@@ -14,7 +14,6 @@ public class PhoneBookUserDetailsService implements UserDetailsService {
     private PhonBookUserRepository phonBookUserRepository;
     private SecurityUserFactory<PhoneBookUser> securityUserFactory;
 
-
     @Autowired
     public void setPhonBookUserRepository(PhonBookUserRepository phonBookUserRepository) {
         this.phonBookUserRepository = phonBookUserRepository;

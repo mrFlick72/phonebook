@@ -44,9 +44,11 @@ public class IndexPageController {
                                             stream().
                                             map((grantedAuthority) -> {
                                                 String controllerName = "";
-                                                if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())) {
+                                                if (grantedAuthority.getAuthority().
+                                                        equals(PhoneBookSecurityRole.ADMIN.getRole())) {
                                                     controllerName = "administrationController";
-                                                } else if (grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.USER.getRole())) {
+                                                } else if (grantedAuthority.getAuthority().
+                                                        equals(PhoneBookSecurityRole.USER.getRole())) {
                                                     controllerName = "handleFormController";
                                                 }
                                                 return controllerName;

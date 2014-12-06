@@ -12,20 +12,20 @@ CREATE TABLE contact(
 
 create table phoneBookUser(
       id INT IDENTITY NOT NULL PRIMARY KEY ,
-      firstName varchar_ignorecase(500) not null,
-      lastName varchar_ignorecase(500) not null,
+      firstName varchar(500) not null,
+      lastName varchar(500) not null,
 
-      mail varchar_ignorecase(500) not null,
+      mail varchar(500) not null,
 
-      username varchar_ignorecase(50) not null,
-      password varchar_ignorecase(500) not null,
-      securityRole varchar_ignorecase(50) not null
+      username varchar(50) not null,
+      password varchar(500) not null,
+      securityRole varchar(50) not null
 );
 
 create table nonce(
       id INT IDENTITY NOT NULL PRIMARY KEY ,
-      nonce varchar_ignorecase(512) not null unique ,
-      userName varchar_ignorecase(500) not null,
+      nonce varchar(512) not null unique ,
+      userName varchar(500) not null,
 
       start timestamp  not null,
 

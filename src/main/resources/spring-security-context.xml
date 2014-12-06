@@ -15,7 +15,6 @@
 		<security:logout logout-url="/logout" logout-success-url="/signin" invalidate-session="true"/>
 
         <security:intercept-url pattern="/" access="permitAll" />
-        <security:intercept-url pattern="/favicon.ico" access="permitAll" />
         <security:intercept-url pattern="/resources/**" access="permitAll" />
 
 		<security:intercept-url pattern="/signin" access="permitAll" />

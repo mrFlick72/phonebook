@@ -30,7 +30,8 @@
 
     <service-activator id="logInServiceActivator" input-channel="singUpPhoneBoockUserMainResponseChannel">
         <int-groovy:script>
-            org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(payload));
+            import org.springframework.security.core.context.SecurityContextHolder
+            SecurityContextHolder.getContext().setAuthentication(securityUserFactory.getAutenticatedUser(payload));
         </int-groovy:script>
     </service-activator>
 

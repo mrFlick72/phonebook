@@ -23,9 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class ContactRestServiceTest extends AbstractTestWithSecurityContext {
 
-    @Autowired
-    private ContactRestService contactRestService;
-
     @Test
     public void getAllpersoneTest() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/contact").

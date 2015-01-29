@@ -15,7 +15,7 @@
              default-request-channel="singUpPhoneBoockUserMainRequestChannel"
              default-reply-channel="singUpPhoneBoockUserMainResponseChannel"/>
 
-    <channel id="singUpPhoneBoockUserMainRequestChannel"/>
+    <!--<channel id="singUpPhoneBoockUserMainRequestChannel"/>-->
 
     <chain id="signUpChain" input-channel="singUpPhoneBoockUserMainRequestChannel"
             output-channel="singUpPhoneBoockUserMainResponseChannel">

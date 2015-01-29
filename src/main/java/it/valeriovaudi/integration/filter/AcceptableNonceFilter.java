@@ -12,7 +12,7 @@ import java.util.Date;
 @MessageEndpoint
 public class AcceptableNonceFilter {
 
-    @Filter
+    @Filter(throwExceptionOnRejection = "true")
     public boolean accept(Nonce nonce){
         boolean accept = false;
         if(nonce!= null){
@@ -21,4 +21,5 @@ public class AcceptableNonceFilter {
         }
         return accept;
     }
+
 }

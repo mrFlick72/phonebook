@@ -19,7 +19,7 @@
              service-interface="it.valeriovaudi.service.PasswordService"/>
 
     <!--create nonce pipeline-->
-    <channel id="createNonceServiceMainRequestChannel"/>
+    <!--<channel id="createNonceServiceMainRequestChannel"/>-->
     <publish-subscribe-channel id="createNonceServiceMainResponseChannel"/>
 
     <chain id="createNonceChain"
@@ -43,7 +43,7 @@
     </chain>
 
     <!--reset password pipeline-->
-    <channel id="restetPasswordServiceMainRequestChannel"/>
+    <!--<channel id="restetPasswordServiceMainRequestChannel"/>-->
 
     <chain id="resetPasswordChain"
             input-channel="restetPasswordServiceMainRequestChannel"
@@ -51,7 +51,7 @@
         <!--find the nonce in the repository-->
         <service-activator  expression="@nonceRepository.findByNonce(payload)" requires-reply="true"/>
         <!--the router if nonce is acceptable continue in the pipeline, otherwise  discards the message-->
-        <filter ref="acceptableNonceFilter"  throw-exception-on-rejection="true"/>
+        <filter ref="acceptableNonceFilter"/>
 
         <service-activator ref="invalidateNonce"  requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)" requires-reply="true"/>

@@ -42,7 +42,7 @@ public class ContactRestService {
     @RequestMapping(value = "/contact/{contactId}", method = RequestMethod.GET)
     public ResponseEntity<Contact> getContact(@PathVariable("contactId") long contactId){
         Contact contact = contactRepository.findOne(contactId);
-        return new ResponseEntity<>(contact, HttpStatus.OK);
+        return ResponseEntity.ok().body(contact);
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
@@ -57,10 +57,7 @@ public class ContactRestService {
                         buildAndExpand(save.getId()).
                         toUri();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uri);
-
-        return new ResponseEntity<>(null, headers, HttpStatus.CREATED);
+        return ResponseEntity.created(uri).build();
     }
 
     @Autowired

@@ -81,10 +81,7 @@ public class PhoneBookUserRestService {
                         build().
                         toUri();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(uri);
-
-        return new ResponseEntity<>(null, headers, HttpStatus.CREATED);
+        return ResponseEntity.created(uri).build();
     }
 
 //    update methods
@@ -99,6 +96,6 @@ public class PhoneBookUserRestService {
         if(phoneBookUser.getPassword()!=null && !phoneBookUser.getPassword().trim().equals("")){
             phoneBookUserAux.setPassword(passwordEncoder.encode(phoneBookUser.getPassword()));
         }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }

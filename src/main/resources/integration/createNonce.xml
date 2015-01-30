@@ -16,7 +16,21 @@
     <context:property-placeholder location="classpath:mail.properties"/>
 
     <gateway id="resetPasswordService"
-             service-interface="it.valeriovaudi.service.PasswordService"/>
+             service-interface="it.valeriovaudi.service.PasswordService">
+        <method name="createNonce"
+                request-channel="createNonceServiceMainRequestChannel"
+                reply-channel="createNonceServiceMainResponseChannel"
+                payload-expression="#args[0]" >
+            <header name="mail" expression="#args[1]"/>
+        </method>
+
+        <method name="resetPassword"
+                request-channel="restetPasswordServiceMainRequestChannel"
+                reply-channel="singUpPhoneBoockUserMainResponseChannel"
+                payload-expression="#args[1]">
+            <header name="password" expression="#args[0]"/>
+        </method>
+    </gateway>
 
     <!--create nonce pipeline-->
     <!--<channel id="createNonceServiceMainRequestChannel"/>-->

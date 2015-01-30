@@ -46,7 +46,7 @@ public class ContactRestService {
     }
 
     @Secured(value = "IS_AUTHENTICATED_FULLY")
-    @RequestMapping(value = "/contact", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/contact", method = RequestMethod.POST)
     public ResponseEntity<Void> addContact(@RequestBody Contact contact){
 
         PhoneBookUser phoneBookUser = phonBookUserRepository.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());

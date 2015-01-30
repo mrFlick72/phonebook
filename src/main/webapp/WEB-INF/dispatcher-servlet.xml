@@ -16,7 +16,7 @@
 
     <context:annotation-config/>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven/>
 
     <mvc:annotation-driven conversion-service="mvcConversionService" />
     <mvc:resources mapping="/resources/**" location="web-resources/" />

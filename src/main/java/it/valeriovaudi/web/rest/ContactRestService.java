@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by Valerio on 24/07/2014.
  */
-@Controller
+@RestController
 @Transactional
 public class ContactRestService {
     private ContactRepository contactRepository;
@@ -32,7 +32,7 @@ public class ContactRestService {
     @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/contact", method = RequestMethod.GET)
-    public @ResponseBody List<Contact> getContacts(){
+    public List<Contact> getContacts(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (List<Contact>) contactRepository.findAllContactByUser(authentication.getName());
     }

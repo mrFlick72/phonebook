@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by Valerio on 19/09/2014.
  */
-@Controller
+@RestController
 @Transactional
 public class PhoneBookUserRestService {
 
@@ -51,14 +51,14 @@ public class PhoneBookUserRestService {
     @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser/{userName}/data", method = RequestMethod.GET)
-    public @ResponseBody PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
+    public PhoneBookUser getPhoneBookUser(@PathVariable(value = "userName") String userName){
         return phonBookUserRepository.findByUserName(userName);
     }
 
     @Transactional(readOnly = true)
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/phoneBoockUser", method = RequestMethod.GET)
-    public @ResponseBody List<PhoneBookUser> getPhoneBookUsers(){
+    public List<PhoneBookUser> getPhoneBookUsers(){
         List<PhoneBookUser> phoneBookUsers;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication.getAuthorities().stream().filter((grantedAuthority) -> grantedAuthority.getAuthority().equals(PhoneBookSecurityRole.ADMIN.getRole())).count()!=0){

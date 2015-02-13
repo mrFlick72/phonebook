@@ -47,7 +47,6 @@ public class PhoneBoockExporterTests extends AbstractTestWithSecurityContext {
         mockMvc.perform(get(uri).
                 sessionAttr(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, principal));
 
-        Thread.sleep(20000L);
         greenMail.waitForIncomingEmail(1);
         boolean partSize = ((MimeMultipart) greenMail.getReceivedMessages()[0].getContent()).getBodyPart(0).getSize() > 0;
         Assert.assertTrue(partSize);

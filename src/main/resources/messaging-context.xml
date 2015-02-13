@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="activeMQConnectionFactory"
+          class="org.apache.activemq.spring.ActiveMQConnectionFactory"
+          p:brokerURL="vm://localhos"/>
+
+    <bean id="connectionFactory"
+          class="org.springframework.jms.connection.CachingConnectionFactory"
+          p:targetConnectionFactory-ref="activeMQConnectionFactory"
+          p:sessionCacheSize="10"/>
+
+    <bean id="jmsTemplate"
+                class="org.springframework.jms.core.JmsTemplate"
+                p:connectionFactory-ref="connectionFactory"/>
+
+
+    <bean id="sendQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="sendDestination"/>
+    </bean>
+
+    <bean id="reciveQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="reciveDestination"/>
+    </bean>
+</beans>

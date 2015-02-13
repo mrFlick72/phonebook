@@ -11,7 +11,9 @@
   <name>phonebook</name>
 
   <properties>
-    <hibernate.version>4.3.5.Final</hibernate.version>
+      <poi.version>3.10.1</poi.version>
+
+      <hibernate.version>4.3.5.Final</hibernate.version>
     <io.spring.platform.version>1.1.1.RELEASE</io.spring.platform.version>
     <org.spring.integration.version>4.1.2.RELEASE</org.spring.integration.version>
 
@@ -29,6 +31,21 @@
           <version>3.0.1</version>
           <scope>provided</scope>
       </dependency>
+
+      <!--Apache Common-->
+      <dependency>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+          <version>3.2.1</version>
+      </dependency>
+
+      <!--Apache ActiveMQ-->
+      <dependency>
+          <groupId>org.apache.activemq</groupId>
+          <artifactId>activemq-all</artifactId>
+          <version>5.9.0</version>
+      </dependency>
+
 
       <!--Mail Server Dempendency-->
       <dependency>
@@ -71,6 +88,11 @@
       <dependency>
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-core</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework.integration</groupId>
+          <artifactId>spring-integration-jms</artifactId>
       </dependency>
 
       <!--Thymeleaf-->
@@ -231,6 +253,24 @@
       <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-c3p0</artifactId>
+      </dependency>
+
+      <!--IText-->
+      <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>itextpdf</artifactId>
+          <version>5.5.4</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-ooxml</artifactId>
+          <version>${poi.version}</version>
       </dependency>
 
       <dependency>

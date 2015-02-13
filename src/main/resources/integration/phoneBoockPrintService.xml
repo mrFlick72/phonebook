@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
+             xmlns:mail="http://www.springframework.org/schema/integration/mail"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                                  http://www.springframework.org/schema/integration
+                                  http://www.springframework.org/schema/integration/spring-integration.xsd
+                                  http://www.springframework.org/schema/integration/jms
+                                  http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+                                    http://www.springframework.org/schema/integration/mail
+                                    http://www.springframework.org/schema/integration/mail/spring-integration-mail.xsd">
+
+    <int-jms:message-driven-channel-adapter
+            destination="sendQueue"
+            channel="boockPrintServiceChain"/>
+
+    <chain input-channel="boockPrintServiceChain"
+           output-channel="boockPrintServiceDocumentTypeRouter">
+        <header-enricher>
+            <header name="user" expression="@phonBookUserRepository.findByUserName(payload['userName'])"/>
+            <header name="contentType" expression="payload['contentType']"/>
+        </header-enricher>
+        <transformer expression="payload['userName']"/>
+        <service-activator expression="@contactRepository.findAllContactByUser(payload).iterator()"/>
+        <transformer expression="T(org.apache.commons.collections.IteratorUtils).toList(payload)"/>
+    </chain>
+
+    <router input-channel="boockPrintServiceDocumentTypeRouter"
+            expression="headers['contentType']">
+        <mapping value="pdf" channel="boockPrintServiceDocumentHowPdf"/>
+        <mapping value="docx" channel="boockPrintServiceDocumentHowWord"/>
+    </router>
+
+    <service-activator input-channel="boockPrintServiceDocumentHowPdf"
+                       output-channel="boockPrintServiceSendMailChain"
+                       expression="@pdfCreatePhoneBoockDoc.createPhoneBoockDoc(payload)"/>
+
+    <service-activator input-channel="boockPrintServiceDocumentHowWord"
+                       output-channel="boockPrintServiceSendMailChain"
+                       expression="@wordCreatePhoneBoockDoc.createPhoneBoockDoc(payload)"/>
+
+    <chain input-channel="boockPrintServiceSendMailChain">
+        <mail:header-enricher>
+            <mail:from value="${mail.admin}"/>
+            <mail:to expression="headers['user'].mail"/>
+            <mail:subject value="${mail.createphoneBookDocument.subject}"/>
+        </mail:header-enricher>
+        <transformer ref="mailMessageTrasformer"/>
+        <mail:outbound-channel-adapter mail-sender="mailSender" />
+    </chain>
+
+</beans:beans>

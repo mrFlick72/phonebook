@@ -6,20 +6,15 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import it.valeriovaudi.web.model.Contact;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 
-import javax.jms.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Valerio on 08/02/2015.
+ * Created by Valerio on 14/02/2015.
  */
-public class CreatePhoneBoockDocImpl implements CreatePhoneBoockDoc {
+public class CreatePhoneBoockDocPdfImpl implements CreatePhoneBoockDoc {
 
     @Override
     public byte[] createPhoneBoockDoc(List<Contact> contactList) {

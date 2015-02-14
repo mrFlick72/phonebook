@@ -233,6 +233,11 @@
       </dependency>
 
       <dependency>
+          <groupId>org.springframework.integration</groupId>
+          <artifactId>spring-integration-java-dsl</artifactId>
+      </dependency>
+
+      <dependency>
           <groupId>org.codehaus.groovy</groupId>
           <artifactId>groovy-all</artifactId>
           <version>2.3.0</version>
@@ -330,8 +335,32 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>java-dsl-integration</id>
+            <properties>
+                <springProfile>java-config</springProfile>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>classic-xml</id>
+            <properties>
+                <springProfile>classic-xml</springProfile>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>phonebook</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 
          <plugins>
             <plugin>
@@ -341,6 +370,32 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
+
+             <!-- Facilitates downloading source and javadoc in Eclipse -->
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-resources-plugin</artifactId>
+                 <version>2.3</version>
+                 <configuration>
+                     <!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+                     <encoding>UTF-8</encoding>
+                 </configuration>
+             </plugin>
+
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-war-plugin</artifactId>
+                 <version>2.4</version>
+                 <configuration>
+                     <webResources>
+                         <resource>
+                             <filtering>true</filtering>
+                             <directory>src/main/webapp</directory>
+                         </resource>
+                     </webResources>
+                 </configuration>
+             </plugin>
+
             <!-- Plugin to run and test through maven -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

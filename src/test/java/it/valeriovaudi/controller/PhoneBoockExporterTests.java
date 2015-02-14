@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.mail.BodyPart;
@@ -19,6 +20,7 @@ import java.net.URI;
 /**
  * Created by Valerio on 08/02/2015.
  */
+@ActiveProfiles("java-config")
 public class PhoneBoockExporterTests extends AbstractTestWithSecurityContext {
 
 

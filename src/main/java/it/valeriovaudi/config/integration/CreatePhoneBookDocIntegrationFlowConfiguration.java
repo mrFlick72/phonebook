@@ -116,8 +116,7 @@ public class CreatePhoneBookDocIntegrationFlowConfiguration {
 
     @Bean
     public IntegrationFlow createPhoneBookDocIntegrationFlow() {
-        return f -> {
-            f.channel("boockPrintServiceChain")
+        return f -> f.channel("boockPrintServiceChain")
                     .enrichHeaders(headerEnricherSpec -> {
                         headerEnricherSpec.headerExpression("user", "@phonBookUserRepository.findByUserName(payload['userName'])");
                         headerEnricherSpec.headerExpression("contentType", "payload['contentType']");
@@ -136,6 +135,5 @@ public class CreatePhoneBookDocIntegrationFlowConfiguration {
                             .from(environment.getProperty("mail.admin"))
                             .subject(environment.getProperty("mail.createphoneBookDocument.subject")))
                 .handle(Mail.outboundAdapter("localhost"));
-        };
     }
 }

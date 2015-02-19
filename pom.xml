@@ -11,9 +11,9 @@
   <name>phonebook</name>
 
   <properties>
-      <poi.version>3.10.1</poi.version>
+    <poi.version>3.10.1</poi.version>
 
-      <hibernate.version>4.3.5.Final</hibernate.version>
+    <hibernate.version>4.3.5.Final</hibernate.version>
     <io.spring.platform.version>1.1.1.RELEASE</io.spring.platform.version>
     <org.spring.integration.version>4.1.2.RELEASE</org.spring.integration.version>
 

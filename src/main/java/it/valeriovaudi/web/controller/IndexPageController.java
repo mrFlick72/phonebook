@@ -36,7 +36,7 @@ public class IndexPageController {
         model.addAttribute("phoneBoockUserName", authentication.getName());
         String jsController =  authentication.getAuthorities().
                                             stream().
-                                            map((grantedAuthority) -> {
+                                            map(grantedAuthority -> {
                                                 String controllerName = "";
                                                 if (grantedAuthority.getAuthority().
                                                         equals(PhoneBookSecurityRole.ADMIN.getRole())) {
@@ -47,7 +47,8 @@ public class IndexPageController {
                                                 }
                                                 return controllerName;
                                             }).
-                                            collect(Collectors.toList()).get(0);
+                                            findFirst().
+                                            get();
         model.addAttribute("controller", jsController);
     }
 }

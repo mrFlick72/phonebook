@@ -1,9 +1,6 @@
 package it.valeriovaudi.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import com.icegreen.greenmail.util.GreenMail;
-import com.icegreen.greenmail.util.GreenMailUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +9,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.mail.BodyPart;
-import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.net.URI;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 /**
  * Created by Valerio on 08/02/2015.

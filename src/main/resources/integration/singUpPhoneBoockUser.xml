@@ -17,8 +17,9 @@
 
     <!--<channel id="singUpPhoneBoockUserMainRequestChannel"/>-->
 
-    <chain id="signUpChain" input-channel="singUpPhoneBoockUserMainRequestChannel"
-            output-channel="singUpPhoneBoockUserMainResponseChannel">
+    <chain id="signUpChain"
+           input-channel="singUpPhoneBoockUserMainRequestChannel"
+           output-channel="singUpPhoneBoockUserMainResponseChannel">
         <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload)
                                                             .buildPassword(payload.password)
                                                             .buildSecurityRole(T(it.valeriovaudi.security.PhoneBookSecurityRole).USER)

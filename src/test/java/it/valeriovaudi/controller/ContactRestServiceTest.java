@@ -1,10 +1,8 @@
 package it.valeriovaudi.controller;
 
 import it.valeriovaudi.web.model.Contact;
-import it.valeriovaudi.web.rest.ContactRestService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.annotation.DirtiesContext;

@@ -7,11 +7,6 @@ import it.valeriovaudi.web.model.PhoneBookUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.integration.core.MessagingTemplate;
-import org.springframework.messaging.MessageChannel;
-
-import java.util.HashMap;
 
 /**
  * Created by Valerio on 22/10/2014.

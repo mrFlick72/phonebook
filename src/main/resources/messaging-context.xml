@@ -14,8 +14,8 @@
           p:sessionCacheSize="10"/>
 
     <bean id="jmsTemplate"
-                class="org.springframework.jms.core.JmsTemplate"
-                p:connectionFactory-ref="connectionFactory"/>
+          class="org.springframework.jms.core.JmsTemplate"
+          p:connectionFactory-ref="connectionFactory"/>
 
 
     <bean id="sendQueue" class="org.apache.activemq.command.ActiveMQQueue">

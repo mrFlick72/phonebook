@@ -33,20 +33,20 @@ public class IndexPageController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("phoneBoockUserName", authentication.getName());
         String jsController =  authentication.getAuthorities().
-                                            stream().
-                                            map(grantedAuthority -> {
-                                                String controllerName = "";
-                                                if (grantedAuthority.getAuthority().
-                                                        equals(PhoneBookSecurityRole.ADMIN.getRole())) {
-                                                    controllerName = "administrationController";
-                                                } else if (grantedAuthority.getAuthority().
-                                                        equals(PhoneBookSecurityRole.USER.getRole())) {
-                                                    controllerName = "handleFormController";
-                                                }
-                                                return controllerName;
-                                            }).
-                                            findFirst().
-                                            get();
+                stream().
+                map(grantedAuthority -> {
+                    String controllerName = "";
+                    if (grantedAuthority.getAuthority().
+                            equals(PhoneBookSecurityRole.ADMIN.getRole())) {
+                        controllerName = "administrationController";
+                    } else if (grantedAuthority.getAuthority().
+                            equals(PhoneBookSecurityRole.USER.getRole())) {
+                        controllerName = "handleFormController";
+                    }
+                    return controllerName;
+                }).
+                findFirst().
+                get();
         model.addAttribute("controller", jsController);
     }
 }

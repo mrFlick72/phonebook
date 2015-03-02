@@ -1,7 +1,7 @@
 myApp.controller('settingsController', function ($scope, $http) {
 
     $scope.initUserSettingsPage = function(userName){
-        $http.get(['/phoneBoockUser',userName,'data'].join('/')).
+        $http.get(['/${build.finalName}','phoneBoockUser',userName,'data'].join('/')).
             success(function (data) {
                 $scope.phoneBoockUser = data;
 
@@ -12,7 +12,7 @@ myApp.controller('settingsController', function ($scope, $http) {
     $scope.submitForm = function () {
         $http({
             method: 'PUT',
-            url: ['/phoneBoockUser',$scope.phoneBoockUser.userName,'data'].join('/'),
+            url: ['/${build.finalName}','phoneBoockUser',$scope.phoneBoockUser.userName,'data'].join('/'),
             data: $scope.phoneBoockUser
         });
     };

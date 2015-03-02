@@ -9,16 +9,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Menu</a>
+                    <a class="navbar-brand" th:href="@{/index}">Menu</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="active"><a href="/index">Home</a></li>
+                        <li class="active"><a th:href="@{/index}">Home</a></li>
                         <li sec:authorize="hasRole('ROLE_USER')"><a href="#" ng-click="openDialog()" th:text="#{insertNewContactDialogForm.menu.item}">Create a new contact</a></li>
                         <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/settings}"  th:text="#{settings.menu.item}">Settings</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/logout" th:text="#{menu.logout}">log out</a></li>
+                        <li><a th:href="@{/logout}" th:text="#{menu.logout}">log out</a></li>
                     </ul><!--/.navbar-collapse -->
                 </div><!--/.nav-collapse -->
             </div>

@@ -4,8 +4,6 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="fragments/head :: head(#{title})"></head>
     <body th:attr="ng-controller=${controller}">
-        <script th:src="@{/resources/jQuery/jquery-2.1.1.js}"></script>
-        <script th:src="@{/resources/bootstrap-3.2.0-dist/js/bootstrap.min.js}"></script>
 
         <div th:replace="fragments/menu :: menu">Menu</div>
         <div sec:authorize="hasRole('ROLE_USER')">
@@ -14,6 +12,8 @@
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <div th:replace="admin/content :: index"> </div>
         </div>
+
+        <script th:src="@{/resources/bootstrap/3.3.2/js/bootstrap.min.js}"></script>
     </body>
 </html>
 

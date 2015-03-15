@@ -1,34 +1,64 @@
-<section th:fragment="index">
-    <div class="container"
-         th:attr="ng-init='initAdministratorUserList()'">
-        <!--send mail with create nonce popup-->
-        <div class="modal fade" id="createNoncePopup" role="dialog" data-toggle="modal" data-backdrop="">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <a class="close" data-dismiss="modal">&times;</a>
-                        <h3>Create nonce</h3>
-                    </div>
-                    <div class="modal-body container-fluid">
-                        <div class="row">
-                            <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="#{mailWithNonce4password}"></span>
-                        </div>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+<html>
+    <head>
+        <!--
+     The head content is only for prototyping propouse.
+     During the web-app usage will be replaced by the actual head
+ -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <table class="table">
-                    <thead>
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.3/jquery.min.js"></script>
+
+        <script src="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" ref="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.css"/>
+
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.jsdelivr.net/webjars/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.jsdelivr.net/webjars/respond/1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+        <link rel="stylesheet" href="../../../web-resources/css/core.css"/>
+
+        <title>Mockup di Sing In</title>
+    </head>
+    <body>
+    <section th:fragment="index">
+        <div class="container"
+             th:attr="ng-init='initAdministratorUserList()'">
+            <!--send mail with create nonce popup-->
+            <div class="modal fade" id="createNoncePopup" role="dialog" data-toggle="modal" data-backdrop="">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a class="close" data-dismiss="modal">&times;</a>
+                            <h3>Create nonce</h3>
+                        </div>
+                        <div class="modal-body container-fluid">
+                            <div class="row">
+                                <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="#{mailWithNonce4password}"></span>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table">
+                        <thead>
                         <th th:text="#{user.table.header.firstName.label}">First Name</th>
                         <th th:text="#{user.table.header.lastName.label}">Last Name</th>
                         <th th:text="#{user.table.header.userName.label}">User Name</th>
                         <th th:text="#{user.table.header.mail.label}">Mail</th>
                         <th th:text="#{user.table.header.password.label}">Password</th>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr ng-repeat="user in users">
                             <td>{{user.firstName}}</td>
                             <td>{{user.lastName}}</td>
@@ -36,9 +66,25 @@
                             <td>{{user.mail}}</td>
                             <td><input class="btn btn-default" value="Reset password" ng-click="resetPassword(user.userName,user.mail)"/></td>
                         </tr>
-                    </tbody>
-                </table>
+                        <tr th:remove="all">
+                            <td>{{user.firstName}}</td>
+                            <td>{{user.lastName}}</td>
+                            <td>{{user.userName}}</td>
+                            <td>{{user.mail}}</td>
+                            <td><input class="btn btn-default" value="Reset password" ng-click="resetPassword(user.userName,user.mail)"/></td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>{{user.firstName}}</td>
+                            <td>{{user.lastName}}</td>
+                            <td>{{user.userName}}</td>
+                            <td>{{user.mail}}</td>
+                            <td><input class="btn btn-default" value="Reset password" ng-click="resetPassword(user.userName,user.mail)"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    </body>
+</html>

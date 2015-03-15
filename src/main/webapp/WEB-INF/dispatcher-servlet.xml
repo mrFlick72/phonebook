@@ -20,10 +20,8 @@
 
     <mvc:annotation-driven conversion-service="mvcConversionService" />
     <mvc:resources mapping="/resources/**" location="web-resources/, classpath:/META-INF/resources/webjars/" />
-    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />-->
 
-
-    <mvc:resources mapping="/favicon.ico" location="web-resources/favicon.ico" />
+    <mvc:resources mapping="/favicon.ico" location="web-resources/img/favicon.jpg" />
 
     <mvc:interceptors>
         <bean id="localeChangeInterceptor"

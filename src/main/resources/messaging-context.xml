@@ -6,7 +6,7 @@
 
     <bean id="activeMQConnectionFactory"
           class="org.apache.activemq.spring.ActiveMQConnectionFactory"
-          p:brokerURL="vm://localhos"/>
+          p:brokerURL="vm://localhost"/>
 
     <bean id="connectionFactory"
           class="org.springframework.jms.connection.CachingConnectionFactory"

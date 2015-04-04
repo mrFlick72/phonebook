@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="elenco-telefonico"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head th:replace="fragments/head :: head(#{title})">
         <!--
     The head content is only for prototyping propouse.
@@ -29,7 +29,9 @@
         <title>Exception Mock Up</title>
     </head>
     <body>
-        <nav class="container" th:fragment="menu">
+        <nav class="container"
+             th:fragment="menu"
+             th:with="userNameAux=${#httpServletRequest.getUserPrincipal().getName()}">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="navbar navbar-inverse" role="navigation" >
@@ -46,6 +48,14 @@
                             <ul class="nav navbar-nav navbar-left">
                                 <li class="active"><a th:href="@{/index}">Home</a></li>
                                 <li sec:authorize="hasRole('ROLE_USER')"><a href="#" ng-click="openDialog()" th:text="#{insertNewContactDialogForm.menu.item}">Create a new contact</a></li>
+                                <li class="dropdown"
+                                    ng-controller="reportController">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{report.menu.item}">Report<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li th:attr="ng-click='printReport(\'__${userNameAux}__\',\'pdf\')'"><a href="#"><img th:src="@{/resources/img/pdf.jpg}"/>PDF</a></li>
+                                        <li th:attr="ng-click='printReport(\'__${userNameAux}__\',\'docx\')'"><a href="#"><img th:src="@{/resources/img/word.jpg}"/>WORD</a></li>
+                                    </ul>
+                                </li>
                                 <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/settings}"  th:text="#{settings.menu.item}">Settings</a></li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">

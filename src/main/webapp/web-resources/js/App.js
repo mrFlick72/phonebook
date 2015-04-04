@@ -1,4 +1,4 @@
-var myApp = angular.module('elenco-telefonico',['ui.utils','ui.date']);
+angular.module('elenco-telefonico',['ui.utils','ui.date']);
 
 function initDataPitcher(scope){
     scope.dateOptions = {

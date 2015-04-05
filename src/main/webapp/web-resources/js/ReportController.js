@@ -4,5 +4,6 @@ angular.module('elenco-telefonico')
             var url = ['/${build.finalName}/createPhoneBoocDocumentByMail',user,reportType,'service'].join("/");
             $http.get(url);
 
+            $("#printReportPopUp").modal("show");
         };
     });

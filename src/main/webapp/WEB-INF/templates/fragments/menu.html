@@ -65,6 +65,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="printReportPopUp" role="dialog" data-toggle="modal" data-backdrop="">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a class="close" data-dismiss="modal">&times;</a>
+                            <h5 th:text="#{printReportPopUp.header}">Modal Header</h5>
+                        </div>
+                        <div class="modal-body container-fluid" th:text="#{printReportPopUp.body}">
+                            Modeal Body
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </nav>
     </body>
 </html>

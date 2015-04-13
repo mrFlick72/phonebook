@@ -69,7 +69,7 @@
 
         <service-activator ref="invalidateNonce"  requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.findByUserName(payload.userName)" requires-reply="true"/>
-        <service-activator expression="@phoneBookUserBuilder.buildByPhoneBookUserBuilder(payload).buildPassword(headers['password']).buildPhoneBookUser()" requires-reply="true"/>
+        <service-activator expression="T(it.valeriovaudi.builder.PhoneBookUserBuilder).newPhoneBookUserBuilderByPhoneBookUser(payload).buildPassword(headers['password']).buildPhoneBookUser()" requires-reply="true"/>
         <service-activator expression="@phonBookUserRepository.save(payload)" requires-reply="true"/>
     </chain>
 

@@ -1,5 +1,6 @@
 package it.valeriovaudi.batch;
 
+import it.valeriovaudi.controller.AbstractTest;
 import it.valeriovaudi.repository.ContactRepository;
 import it.valeriovaudi.repository.PhonBookUserRepository;
 import it.valeriovaudi.web.model.Contact;
@@ -23,14 +24,7 @@ import java.util.List;
 /**
  * Created by Valerio on 22/08/2014.
  */
-@ContextConfiguration(locations = {"classpath:batch/application-context.xml"})
-@RunWith(SpringJUnit4ClassRunner.class)
-public class InitializationBatchTest {
-    @Autowired
-    JobLauncher jobLauncher;
-
-    @Autowired
-    Job job;
+public class InitializationBatchTest extends AbstractTest {
 
     @Autowired
     ContactRepository contactRepository;
@@ -40,14 +34,7 @@ public class InitializationBatchTest {
 
     @Test
     @DirtiesContext
-    public void initTest() throws JobParametersInvalidException,
-                                  JobExecutionAlreadyRunningException,
-                                  JobRestartException,
-                                  JobInstanceAlreadyCompleteException {
-        JobParameters toDay = new JobParametersBuilder().addDate("toDay", new Date()).toJobParameters();
-        JobExecution run = jobLauncher.run(job, toDay);
-        Assert.assertEquals(run.getExitStatus(),ExitStatus.COMPLETED);
-
+    public void initTest() {
         List<PhoneBookUser> phoneBookUsers = (List<PhoneBookUser>) phonBookUserRepository.findAll();
         List<Contact> contacts = (List<Contact>) contactRepository.findAll();
 

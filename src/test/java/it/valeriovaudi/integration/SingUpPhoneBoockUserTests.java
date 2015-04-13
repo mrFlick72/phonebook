@@ -14,26 +14,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class SingUpPhoneBoockUserTests extends AbstractTest{
 
-
     @Autowired
     private SignUpService signUpService;
-
-    @Autowired
-    PhoneBookUserBuilder phoneBookUserBuilder;
 
     @Test
     public void singUpPhoneBoockUserTest(){
 
-        logger.info(phoneBookUserBuilder);
-        PhoneBookUser phoneBookUser = phoneBookUserBuilder.buildFirstName("Valerio")
-                                                           .buildLastName("Vaudi")
-                                                           .buildMail("valerio.vaudi@gmail.com")
-                                                           .buildPassword("val")
-                                                           .buildUserName("val")
-                                                           .buildPhoneBookUser();
+        logger.info(PhoneBookUserBuilder.newPhoneBookUserBuilder());
+        PhoneBookUser phoneBookUser = PhoneBookUserBuilder.newPhoneBookUserBuilder()
+                .buildFirstName("Valerio")
+                .buildLastName("Vaudi")
+                .buildMail("valerio.vaudi@gmail.com")
+                .buildPassword("val")
+                .buildUserName("val")
+                .buildPhoneBookUser();
         logger.info(phoneBookUser);
         Assert.assertNotNull(phoneBookUser);
 
         signUpService.phoneBookUserSingIn(phoneBookUser);
+
+        phoneBookUser = PhoneBookUserBuilder.newPhoneBookUserBuilder()
+                .buildFirstName("Valerio")
+                .buildLastName("Vaudi")
+                .buildMail("valerio.vaudi@gmail.com")
+                .buildPassword("val")
+                .buildUserName("val")
+                .buildPhoneBookUser();
+
+        signUpService.phoneBookUserSingIn(phoneBookUser);
+
     }
 }

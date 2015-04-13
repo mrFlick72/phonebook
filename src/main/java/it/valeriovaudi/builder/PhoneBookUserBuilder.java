@@ -3,31 +3,36 @@ package it.valeriovaudi.builder;
 import it.valeriovaudi.security.PhoneBookSecurityRole;
 import it.valeriovaudi.web.model.PhoneBookUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Created by Valerio on 22/10/2014.
  */
+@Configurable
 public class PhoneBookUserBuilder {
-    private PhoneBookUser phoneBookUser;
+    protected PhoneBookUser phoneBookUser;
     private PasswordEncoder passwordEncoder;
 
-    public PhoneBookUserBuilder() {
-        this.phoneBookUser = new PhoneBookUser();
+    public static PhoneBookUserBuilder newPhoneBookUserBuilder(){
+        PhoneBookUserBuilder phoneBookUserBuilder = new PhoneBookUserBuilder();
+        phoneBookUserBuilder.setPhoneBookUser(new PhoneBookUser());
+        return phoneBookUserBuilder;
     }
 
-    public static PhoneBookUserBuilder newPhoneBookUserBuilder(){
-        return new PhoneBookUserBuilder();
+    public static PhoneBookUserBuilder newPhoneBookUserBuilderByPhoneBookUser(PhoneBookUser phoneBookUser){
+        PhoneBookUserBuilder phoneBookUserBuilder = new PhoneBookUserBuilder();
+        phoneBookUserBuilder.setPhoneBookUser(phoneBookUser);
+        return phoneBookUserBuilder;
     }
 
     @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+    private void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public PhoneBookUserBuilder buildByPhoneBookUserBuilder(PhoneBookUser phoneBookUser){
+    private void setPhoneBookUser(PhoneBookUser phoneBookUser) {
         this.phoneBookUser = phoneBookUser;
-        return this;
     }
 
     public PhoneBookUserBuilder buildId(Long id){
@@ -67,13 +72,5 @@ public class PhoneBookUserBuilder {
 
     public PhoneBookUser buildPhoneBookUser(){
         return phoneBookUser;
-    }
-
-    @Override
-    public String toString() {
-        return "PhoneBookUserBuilder{" +
-                "phoneBookUser=" + phoneBookUser +
-                ", passwordEncoder=" + passwordEncoder +
-                '}';
     }
 }

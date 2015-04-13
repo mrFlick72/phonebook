@@ -9,10 +9,12 @@
 
     <context:annotation-config/>
 
+    <context:spring-configured/>
+    <context:load-time-weaver/>
+
     <import resource="classpath:spring-security-context.xml"/>
     <import resource="classpath:repository-context.xml"/>
     <import resource="classpath:factory-context.xml"/>
-    <import resource="classpath:builder-context.xml"/>
 
     <import resource="classpath:service-context.xml"/>
 
@@ -21,6 +23,5 @@
 
     <import resource="classpath:starter-context.xml"/>
     <import resource="classpath:support-context.xml"/>
-    <context:component-scan base-package="it.valeriovaudi.config"/>
     <import resource="classpath:integration/*.xml"/>
 </beans>

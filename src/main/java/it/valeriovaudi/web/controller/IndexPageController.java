@@ -33,15 +33,15 @@ public class IndexPageController {
     @Secured(value = "IS_AUTHENTICATED_FULLY")
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public void getUserPage(Model model){
-        final Map<PhoneBookSecurityRole,String> role2COntroller = new HashMap<>();
-        role2COntroller.put(PhoneBookSecurityRole.ADMIN,"administrationController");
-        role2COntroller.put(PhoneBookSecurityRole.USER,"handleFormController");
+        final Map<String,String> role2Controller = new HashMap<>();
+        role2Controller.put(PhoneBookSecurityRole.ADMIN.getRole(),"administrationController");
+        role2Controller.put(PhoneBookSecurityRole.USER.getRole(), "handleFormController");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("phoneBoockUserName", authentication.getName());
         String jsController =  authentication.getAuthorities().
                 stream().
-                map(grantedAuthority -> role2COntroller.get(grantedAuthority.getAuthority())).
+                map(grantedAuthority -> role2Controller.get(grantedAuthority.getAuthority())).
                 findFirst().
                 get();
         model.addAttribute("controller", jsController);

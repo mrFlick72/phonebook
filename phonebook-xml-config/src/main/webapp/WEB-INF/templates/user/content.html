@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="elenco-telefonico"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head(#{title})">
+    <!--
+The head content is only for prototyping propouse.
+During the web-app usage will be replaced by the actual head
+-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" ref="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.css"/>
+
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.jsdelivr.net/webjars/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/respond/1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../web-resources/css/core.css"/>
+    <title>Reset data collect Mock Up</title>
+</head>
+<body>
+<section th:fragment="index">
+    <div class="modal fade" id="insertNewAccountDialogForm" role="dialog" data-toggle="modal" data-backdrop="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 th:text="#{insertNewContactDialogForm.header}">Modal Header</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form name="newContactPopUpForm" class="form-horizontal">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="firstNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input  id="firstNameField" class="form-control" type="text" ng-model="newContact.firstName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="lastNameField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input  id="lastNameField" class="form-control" type="text" ng-model="newContact.lastName"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="birthField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input id="birthField" class="form-control" type="text" ng-model="newContact.birth" ui-date="dateOptions"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label for="telephoneNumberField" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}"></label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input id="telephoneNumberField" class="form-control" type="text" ng-model="newContact.telephoneNumber" ui-mask="{{'999/9999999'}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <input type="submit" value="submit data" ng-click="submitForm()" class="btn btn-default"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="popUpContactDialog" role="dialog" data-toggle="modal" data-backdrop="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 th:text="#{popUpContactDialog.header}">Modal Header</h3>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{firstName.label(':')}">First Name</span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.firstName}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{lastName.label(':')}">Last Name</span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.lastName}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{birth.label(':')}">Birth Date</span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.birth  | date:dateFormFormatting}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4" th:text="#{telephoneNumber.label(':')}">Telephone</span>
+                        <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">{{contactDetails.telephoneNumber}}</span>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th th:text="#{firstName.label('')}">First Name</th>
+                            <th th:text="#{lastName.label('')}">Last Name</th>
+                            <th th:text="#{telephoneNumber.label('')}">Birth Date</th>
+                            <th th:text="#{birth.label('')}">Telephone</th>
+                            <th th:text="#{operation.label('')}">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="contact in contacts">
+                        <td>{{contact.firstName}}</td>
+                        <td>{{contact.lastName}}</td>
+                        <td>{{contact.telephoneNumber}}</td>
+                        <td>{{contact.birth  | date:dateFormFormatting}}</td>
+                        <td><input class="btn btn-default" value="Details" ng-click="shwoContactDetails(contact.id)"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/head :: head(#{signup.title})">
+    <!--
+        The head content is only for prototyping propouse.
+        During the web-app usage will be replaced by the actual head
+    -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.js"></script>
+    <link rel="stylesheet" ref="http://cdn.jsdelivr.net/webjars/jquery-ui/1.11.3/jquery-ui.min.css"/>
+
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.jsdelivr.net/webjars/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/respond/1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="../../../web-resources/css/core.css"/>
+
+    <title>Mockup di Sing Up</title>
+</head>
+<body>
+<form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}">
+    <!-- /* Show general error message when form contains errors */ -->
+    <th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
+        <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">Alert</div>
+    </th:block>
+    <fieldset>
+        <legend>Please Sign Up</legend>
+        <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error'">
+            <label for="firstName" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">First Name</label>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <input type="text" class="form-control" id="firstName" placeholder="First Name" th:field="*{firstName}" />
+                <span class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Invalid First Name</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error'">
+            <label for="lastName" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Last Name</label>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <input type="text" class="form-control" id="lastName" placeholder="User Name" th:field="*{lastName}" />
+                <span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{userName}">Invalid First Name</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('mail')}? 'has-error'">
+            <label for="mail" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">E-Mail</label>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <input type="text" class="form-control" id="mail" placeholder="E-Mail" th:field="*{mail}" />
+                <span class="help-block" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">Invalid E-Mail</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('userName')}? 'has-error'">
+            <label for="userName" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">User Name</label>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <input type="text" class="form-control" id="userName" placeholder="User Name" th:field="*{userName}" />
+                <span class="help-block" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Incorrect user Name</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+            <label for="password" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">Password</label>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
+                <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <button type="submit" class="btn btn-default">Sign up</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <p>Already have an account? <a href="signin" th:href="@{/signin}">Sign In</a></p>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>

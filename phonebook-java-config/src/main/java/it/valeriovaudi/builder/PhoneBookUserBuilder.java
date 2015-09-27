@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Created by Valerio on 22/10/2014.
- * todo da migrare alla parte in xml
  */
 @Configurable
 public class PhoneBookUserBuilder {

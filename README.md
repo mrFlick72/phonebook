@@ -33,3 +33,14 @@ approch of Spring 4 with ResponseEntity builder approch for the ws response of t
 was implemented through a spring integration pipeline. With those services I can show how implement the same things either in xml and javaConfig with the new way, Spring Integration JavaDSL using java8 lambda expression.
 For the prepopolation of db, embedded mail server and system/mail utilities I had implemented a Batch, implemented in Spring Batch, that starting from a csv retrive all the information about a user and register the user in mail server and the phonebook system.
 </p>
+
+<h1>Running instructions</h1>
+<p>
+ In this show-case I used the Spring load-waving time together with Spring configured abstraction.
+ With this two component through @Configurable, I can inject a Spring bean in a non Spring bean. 
+ The PhoneBookUserBuilder is a stateful object and for this reason I have create a new builder for any new user. 
+ The technique resolve a quite hard problem. Since that the builder is a statefull object we can't think it as a singleton and even the prototype scope don't help.
+ Actually we needed of an istruments that perform a dependency injection of the password encoder for all new created builder. The techniwue used resolve it problem and
+ I can inject the itself spring been that I configured for spring security. for this reason we have add the -javaagent:path of a copy of the jar\spring-instrument.jar 
+ in the start up command of tomcat or any other web/application server in which we deploy the phonebook application
+</p>
